@@ -24,14 +24,14 @@ You can initilize the client by passing a hash to it, or by passing a block.
 
 ```ruby
 client = Bambora::Client.new(
-  api_key: ENV.feth('BAMBORA_API_KEY'),
+  api_key: ENV.fetch('BAMBORA_API_KEY'),
   merchant_id: ENV.fetch('BAMBORA_MERCHANT_ID'),
 )
 ```
 
 ```ruby
 client = Bambora::Client.new do |c|
-  c.api_key = ENV.feth('BAMBORA_API_KEY')
+  c.api_key = ENV.fetch('BAMBORA_API_KEY')
   c.merchant_id = ENV.fetch('BAMBORA_MERCHANT_ID')
 end
 ```
@@ -42,9 +42,10 @@ You can also initilze a client with a sub-merchant-id:
 
 ```ruby
 client = Bambora::Client.new(
-  api_key: ENV.feth('BAMBORA_API_KEY'),
+  api_key: ENV.fetch('BAMBORA_API_KEY'),
   merchant_id: ENV.fetch('BAMBORA_MERCHANT_ID'),
   sub_merchant_id: 'submerchantid'
+)
 ```
 
 ## Development
