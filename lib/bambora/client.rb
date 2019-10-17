@@ -11,10 +11,14 @@ module Bambora
       yield(self) if block_given?
     end
 
+    def_delegators :connection, :get, :post, :patch, :put, :delete, :request
+
     # Summary: Payment profiles store confidential payment information. Transactions can be processed against profiles.
     # Docs: https://dev.na.bambora.com/docs/guides/payment_profiles/
     # Endpoint: https://api.na.bambora.com/v1/profiles
-    def profiles; end
+    def profile
+      @profile ||= Bambora::Profile.new(self)
+    end
 
     # Summary: Create and modify payments.
     # Note: The link below links to all apis includding profiles and tokenization. There aren't great docs explaining the
