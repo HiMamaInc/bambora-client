@@ -36,8 +36,6 @@ client = Bambora::Client.new do |c|
 end
 ```
 
-### Sub-Merchant ID
-
 You can also initilze a client with a sub-merchant-id:
 
 ```ruby
@@ -46,6 +44,32 @@ client = Bambora::Client.new(
   merchant_id: ENV.fetch('BAMBORA_MERCHANT_ID'),
   sub_merchant_id: 'submerchantid',
 )
+```
+
+### Profiles
+
+#### Create a Profile
+
+```ruby
+client.profile.create(
+  {
+    'language': 'en',
+    'comments': 'hello',
+    'card':{
+      'name': 'Jane Fonda',
+      'number": '4030000Smith010001234',
+      'expiry_month': '12',
+      'expiry_year': '23',
+      'cvd': '123',
+    },
+  },
+)
+```
+
+## Delete a Profile
+
+```ruby
+client.profile.delete(1234)
 ```
 
 ## Development

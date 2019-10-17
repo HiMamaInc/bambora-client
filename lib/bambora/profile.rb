@@ -8,7 +8,7 @@ class Bambora::Profile
   end
 
   def create(card_data)
-    client.post(path: path, body: card_data.to_s)
+    client.post(path: path, body: card_data.to_json.to_s)
   end
 
   def delete(remote_id)

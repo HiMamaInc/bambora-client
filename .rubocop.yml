@@ -87,6 +87,7 @@ Style/TernaryParentheses:
 Metrics/BlockLength:
   Exclude:
     - '*.gemspec'
+    - 'spec/*/**/*_spec.rb'
 
 Style/SingleLineBlockParams:
   Description: 'Enforces the names of some block params.'

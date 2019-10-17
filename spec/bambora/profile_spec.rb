@@ -6,6 +6,7 @@ describe Bambora::Profile do
   let(:api_key) { 'fakekey' }
   let(:merchant_id) { 1 }
   let(:base_url) { 'https://sandbox-api.na.bambora.com' }
+  let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5' } }
 
   subject { Bambora::Client.new(api_key: api_key, merchant_id: merchant_id) }
 
@@ -13,10 +14,28 @@ describe Bambora::Profile do
 
   describe '#create' do
     before { stub_request(:post, "#{base_url}/v1/profiles") }
+    let(:data) do
+      {
+        language: 'en',
+        comments: 'hello',
+        card: {
+          name: 'Jane Fonda',
+          number: '4030000010001234',
+          expiry_month: '12',
+          expiry_year: '23',
+          cvd: '123',
+        },
+      }
+    end
 
     it 'posts to the bambora api' do
-      subject.profile.create({})
-      expect(a_request(:post, "#{base_url}/v1/profiles")).to have_been_made.once
+      subject.profile.create(data)
+      expect(
+        a_request(:post, "#{base_url}/v1/profiles").with(
+          body: data.to_json.to_s,
+          headers: headers,
+        ),
+      ).to have_been_made.once
     end
   end
 
@@ -26,7 +45,11 @@ describe Bambora::Profile do
 
     it 'posts to the bambora api' do
       subject.profile.delete(1)
-      expect(a_request(:delete, "#{base_url}/v1/profiles/#{id}")).to have_been_made.once
+      expect(
+        a_request(:delete, "#{base_url}/v1/profiles/#{id}").with(
+          headers: headers,
+        ),
+      ).to have_been_made.once
     end
   end
 end
