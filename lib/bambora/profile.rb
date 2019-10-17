@@ -1,23 +1,19 @@
 # frozen_string_literal: true
 
-class Bambora::Profile
-  attr_reader :client
+module Bambora
+  class Profile < Domain
+    def initialize(client)
+      super
 
-  def initialize(client)
-    @client = client
-  end
+      @path = '/v1/profiles'
+    end
 
-  def create(card_data)
-    client.post(path: path, body: card_data.to_json.to_s)
-  end
+    def create(card_data)
+      request(method: :post, path: @path, body: card_data)
+    end
 
-  def delete(remote_id)
-    client.delete(path: "#{path}/#{remote_id}")
-  end
-
-  private
-
-  def path
-    '/v1/profiles'
+    def delete(remote_id)
+      request(method: :delete, path: "#{@path}/#{remote_id}")
+    end
   end
 end
