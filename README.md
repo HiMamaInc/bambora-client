@@ -44,7 +44,7 @@ You can also initilze a client with a sub-merchant-id:
 client = Bambora::Client.new(
   api_key: ENV.fetch('BAMBORA_API_KEY'),
   merchant_id: ENV.fetch('BAMBORA_MERCHANT_ID'),
-  sub_merchant_id: 'submerchantid'
+  sub_merchant_id: 'submerchantid',
 )
 ```
 
