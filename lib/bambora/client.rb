@@ -38,7 +38,7 @@ class Bambora::Client
   protected
 
   def connection
-    @connection ||= Excon.new(ENV.fetch('BAMBORA_API_URL'), headers: headers, client_cert: ca_cert_path)
+    @connection ||= Excon.new(ENV.fetch('BAMBORA_API_URL'), headers: headers)
   end
 
   def headers
@@ -47,9 +47,5 @@ class Bambora::Client
 
   def passcode
     Base64.encode64("#{merchant_id}:#{api_key}").delete("\n")
-  end
-
-  def ca_cert_path
-    Rails.root.join('app', 'services', 'bambora', 'resources', ENV.fetch('BAMBORA_CA_CERT_NAME'))
   end
 end
