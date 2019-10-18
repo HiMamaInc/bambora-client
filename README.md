@@ -56,20 +56,54 @@ client.profile.create(
     'language': 'en',
     'comments': 'hello',
     'card':{
-      'name': 'Jane Fonda',
-      'number": '4030000Smith010001234',
+      'name': 'Hup Podling',
+      'number': '4030000Smith010001234',
       'expiry_month': '12',
       'expiry_year': '23',
       'cvd': '123',
     },
   },
 )
+# => {
+#       code: 1,
+#       message: 'Hup...want...buy.',
+#       customer_code: 'aaa111",
+#       validation: {
+#         id: '',
+#         approved: 1,
+#         message_id: 1,
+#         message: '',
+#         auth_code: '',
+#         trans_date: '',
+#         order_number: '',
+#         type: '',
+#         amount: 0,
+#         cvd_id: 123,
+#       },
+#    }
 ```
 
 ## Delete a Profile
 
 ```ruby
 client.profile.delete(1234)
+# => {
+#       code: 1,
+#       message: 'Hup...want...buy.',
+#       customer_code: 'aaa111",
+#       validation: {
+#         id: '',
+#         approved: 1,
+#         message_id: 1,
+#         message: '',
+#         auth_code: '',
+#         trans_date: '',
+#         order_number: '',
+#         type: '',
+#         amount: 0,
+#         cvd_id: 123,
+#       },
+#    }
 ```
 
 ## Development
