@@ -8,14 +8,14 @@ module Bambora
     let(:merchant_id) { 1 }
     let(:base_url) { 'https://sandbox-api.na.bambora.com' }
     let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5' } }
-    let(:response_body) { { response: 'body' } }
+    let(:response_body) { { response: 'body', with: { objects: 'yay!' }, and: [{ arrays: 'wow!' }] } }
     let(:client) { Bambora::Client.new(api_key: api_key, merchant_id: merchant_id) }
 
     subject { Bambora::JSONRequest.new(client) }
 
     before { allow(ENV).to receive(:fetch).with('BAMBORA_API_URL').and_return(base_url) }
 
-    describe '#create' do
+    describe '#request' do
       before do
         stub_request(:get, base_url).with(headers: headers).to_return(body: response_body.to_json.to_s)
       end

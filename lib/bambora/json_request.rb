@@ -18,15 +18,19 @@ module Bambora
     private
 
     def parse_response(resp)
-      symbolize_keys(JSON.parse(resp.body))
+      deep_transform_keys_in_object(JSON.parse(resp.body), &:to_sym)
     end
 
-    def symbolize_keys(obj)
-      return obj unless obj.is_a?(Hash)
-
-      obj.each_with_object({}) do |(k, v), hash|
-        hash[k.to_sym] = symbolize_keys(v)
-        hash
+    def deep_transform_keys_in_object(object, &block)
+      case object
+        when Hash
+          object.each_with_object({}) do |(key, value), result|
+            result[yield(key)] = deep_transform_keys_in_object(value, &block)
+          end
+        when Array
+          object.map { |e| deep_transform_keys_in_object(e, &block) }
+        else
+          object
       end
     end
   end
