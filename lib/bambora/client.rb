@@ -14,16 +14,13 @@ module Bambora
 
     def_delegators :connection, :request
 
-    # Summary: Payment profiles store confidential payment information. Transactions can be processed against profiles.
-    # Docs: https://dev.na.bambora.com/docs/guides/payment_profiles/
-    # Endpoint: https://api.na.bambora.com/v1/profiles
     def profile
-      @profile ||= Bambora::Profile.new(self)
+      @profile ||= Bambora::V1::Profile.new(self)
     end
 
     # Summary: Create and modify payments.
-    # Note: The link below links to all apis includding profiles and tokenization. There aren't great docs explaining the
-    #       /payments endpoints alone.
+    # Note: The link below links to all apis includding profiles and tokenization. There aren't great docs explaining
+    #       the /payments endpoints alone.
     # Docs: https://dev.na.bambora.com/docs/references/payment_APIs/
     #       https://dev.na.bambora.com/docs/references/payment_SDKs/take_payments/?shell#
     # Endpoint: https://api.na.bambora.com/v1/payments

@@ -1,6 +1,7 @@
 # Bambora
 
-The official Bambora Ruby library is not thread-safe. This means you will run into errors when using it with Sidekiq or Puma. This gem is a thread-safe client for the Bambora and Beanstream APIs.
+The official Bambora Ruby library is not thread-safe. This means you will run into errors when using it with Sidekiq or
+Puma. This gem is a thread-safe client for the Bambora and Beanstream APIs.
 
 ## Installation
 
@@ -48,7 +49,11 @@ client = Bambora::Client.new(
 
 ### Profiles
 
+*Summary*: Payment profiles store confidential payment information. Transactions can be processed against profiles.
+*Bambora Docs*: https://dev.na.bambora.com/docs/guides/payment_profiles/
+
 #### Create a Profile
+
 
 ```ruby
 client.profile.create(

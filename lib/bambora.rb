@@ -3,7 +3,7 @@
 require 'bambora/client'
 require 'bambora/headers'
 require 'bambora/json_request'
-require 'bambora/profile'
+require 'bambora/v1/profile'
 require 'bambora/version'
 
 module Bambora
