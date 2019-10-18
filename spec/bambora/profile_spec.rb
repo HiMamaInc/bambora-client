@@ -6,8 +6,9 @@ module Bambora
   describe Profile do
     let(:api_key) { 'fakekey' }
     let(:merchant_id) { 1 }
+    let(:sub_merchant_id) { 2 }
     let(:base_url) { 'https://sandbox-api.na.bambora.com' }
-    let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5' } }
+    let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5', 'Sub-Merchant-ID' => sub_merchant_id } }
     let(:response_body) do
       {
         code: 1,
@@ -28,7 +29,7 @@ module Bambora
       }
     end
 
-    subject { Bambora::Client.new(api_key: api_key, merchant_id: merchant_id) }
+    subject { Bambora::Client.new(api_key: api_key, merchant_id: merchant_id, sub_merchant_id: sub_merchant_id) }
 
     before { allow(ENV).to receive(:fetch).with('BAMBORA_API_URL').and_return(base_url) }
 
