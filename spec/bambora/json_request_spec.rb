@@ -16,13 +16,30 @@ module Bambora
     before { allow(ENV).to receive(:fetch).with('BAMBORA_API_URL').and_return(base_url) }
 
     describe '#request' do
-      before do
-        stub_request(:get, base_url).with(headers: headers).to_return(body: response_body.to_json.to_s)
+      context 'server responds with a 2xx status' do
+        before do
+          stub_request(:get, base_url).with(headers: headers).to_return(body: response_body.to_json.to_s)
+        end
+
+        it 'parses the response' do
+          resp = subject.request(method: :get, path: '/')
+          expect(resp).to eq response_body
+        end
       end
 
-      it 'parses the response' do
-        resp = subject.request(method: :get, path: '/')
-        expect(resp).to eq response_body
+      context 'server responds with a non 2xx status' do
+        before do
+          stub_request(:get, base_url).with(headers: headers).to_return(body: 'Something went wrong!', status: 500)
+        end
+
+        it 'raises an error' do
+          expect { subject.request(method: :get, path: '/') }.to(
+            raise_error(
+              Bambora::ServerError,
+              'The remote server responded with a status of 500: Something went wrong!',
+            ),
+          )
+        end
       end
     end
   end

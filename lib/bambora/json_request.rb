@@ -10,9 +10,10 @@ module Bambora
     end
 
     def request(method:, path:, params: {}, body: {})
-      parse_response(
-        client.request(method: method, path: path, params: params, body: body.to_json.to_s),
-      )
+      resp = client.request(method: method, path: path, params: params, body: body.to_json.to_s)
+      return parse_response(resp) if resp.status <= 300
+
+      raise Bambora::ServerError, "The remote server responded with a status of #{resp.status}: #{resp.body}"
     end
 
     private

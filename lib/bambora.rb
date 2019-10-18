@@ -8,4 +8,5 @@ require 'bambora/version'
 
 module Bambora
   class Error < StandardError; end
+  class ServerError < StandardError; end
 end
