@@ -2,6 +2,7 @@
 
 module Bambora
   class Client
+    extend Forwardable
     attr_accessor :merchant_id, :sub_merchant_id, :api_key
 
     def initialize(options = {})
