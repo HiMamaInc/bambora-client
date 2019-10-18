@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'A thread-safe client for the Bambora/Beanstream API.'
   spec.description   = 'The official beanstream-ruby gem is not thread-safe. This thread-safe client works in '\
                          'environments like Sidekiq and Puma.'
-  spec.homepage      = 'https://github.com/HiMamaInc/bambora'
+  spec.homepage      = 'https://github.com/HiMamaInc/bambora-client'
   spec.license       = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -21,8 +21,8 @@ Gem::Specification.new do |spec|
     spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
 
     spec.metadata['homepage_uri'] = spec.homepage
-    spec.metadata['source_code_uri'] = 'https://github.com/HiMamaInc/bambora'
-    spec.metadata['changelog_uri'] = 'https://github.com/HiMamaInc/bambora/releases'
+    spec.metadata['source_code_uri'] = 'https://github.com/HiMamaInc/bambora-client'
+    spec.metadata['changelog_uri'] = 'https://github.com/HiMamaInc/bambora-client/releases'
   else
     raise 'RubyGems 2.0 or newer is required to protect against ' \
       'public gem pushes.'
