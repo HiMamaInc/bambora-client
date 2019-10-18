@@ -7,7 +7,7 @@ The official Bambora Ruby library is not thread-safe. This means you will run in
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'bambora'
+gem 'bambora-client'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install bambora
+    $ gem install bambora-client
 
 ## Usage
 

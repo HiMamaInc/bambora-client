@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'bambora/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'bambora'
+  spec.name          = 'bambora-client'
   spec.version       = Bambora::VERSION
   spec.authors       = ['Cassidy K']
   spec.email         = ['hello@cassidy.codes', 'tech@himama.com']
