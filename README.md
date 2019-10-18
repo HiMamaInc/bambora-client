@@ -1,6 +1,6 @@
 # Bambora
 
-The officiall Bambora Ruby library is not thread-safe. This means you will run into errors when using it with Sidekiq or Puma. This gem is a thread-safe client for the Bambora and Beanstream APIs.
+The official Bambora Ruby library is not thread-safe. This means you will run into errors when using it with Sidekiq or Puma. This gem is a thread-safe client for the Bambora and Beanstream APIs.
 
 ## Installation
 
