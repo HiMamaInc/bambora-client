@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Bambora
-  class Domain
+  class JSONRequest
     attr_reader :client
 
     def initialize(client)

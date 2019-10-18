@@ -11,7 +11,7 @@ module Bambora
       yield(self) if block_given?
     end
 
-    def_delegators :connection, :get, :post, :patch, :put, :delete, :request
+    def_delegators :connection, :request
 
     # Summary: Payment profiles store confidential payment information. Transactions can be processed against profiles.
     # Docs: https://dev.na.bambora.com/docs/guides/payment_profiles/

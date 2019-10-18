@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Bambora
-  class Profile < Domain
+  class Profile < JSONRequest
     def initialize(client)
       super
 
