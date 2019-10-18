@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bambora (0.1.0)
+    bambora-client (0.1.0)
       excon (~> 0.67.0)
 
 GEM
@@ -43,7 +43,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bambora!
+  bambora-client!
   bundler (~> 1.17)
   rake (~> 10.0)
   rspec (~> 3.0)
