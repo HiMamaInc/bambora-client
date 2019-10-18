@@ -13,8 +13,8 @@ module Bambora
         request(method: :post, path: @path, body: card_data)
       end
 
-      def delete(remote_id)
-        request(method: :delete, path: "#{@path}/#{remote_id}")
+      def delete(customer_code:)
+        request(method: :delete, path: "#{@path}/#{customer_code}")
       end
     end
   end

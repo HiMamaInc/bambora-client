@@ -68,13 +68,15 @@ module Bambora
       end
 
       describe '#delete' do
-        let(:id) { 1 }
-        before { stub_request(:delete, "#{base_url}/v1/profiles/#{id}").to_return(body: response_body.to_json.to_s) }
+        let(:customer_code) { 'asdf1234' }
+        before do
+          stub_request(:delete, "#{base_url}/v1/profiles/#{customer_code}").to_return(body: response_body.to_json.to_s)
+        end
 
         it 'posts to the bambora api' do
-          subject.profile.delete(1)
+          subject.profile.delete(customer_code: customer_code)
           expect(
-            a_request(:delete, "#{base_url}/v1/profiles/#{id}").with(
+            a_request(:delete, "#{base_url}/v1/profiles/#{customer_code}").with(
               headers: headers,
             ),
           ).to have_been_made.once
