@@ -23,7 +23,6 @@ Or install it yourself as:
 
 ```bash
 gem install bambora-client
-
 ```
 
 ## Usage
@@ -68,7 +67,7 @@ client.profile.create(
     'comments': 'hello',
     'card':{
       'name': 'Hup Podling',
-      'number': '4030000Smith010001234',
+      'number': '4030000010001234',
       'expiry_month': '12',
       'expiry_year': '23',
       'cvd': '123',
