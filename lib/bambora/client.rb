@@ -6,6 +6,11 @@ module Bambora
     attr_accessor :merchant_id, :sub_merchant_id, :api_key
 
     def initialize(options = {})
+      unless options[:version].nil?
+        raise Bambora::Error, 'Only V1 endpoints are supported at this time.' if options[:version].upcase != 'V1'
+
+      end
+
       options.each do |key, value|
         instance_variable_set("@#{key}", value)
       end

@@ -17,6 +17,7 @@ module Bambora
         subject { Bambora::Client.new(version: 'V2') }
 
         it 'returns a raises an error' do
+          expect { subject }.to(raise_error(Bambora::Error, 'Only V1 endpoints are supported at this time.'))
         end
       end
     end
