@@ -2,23 +2,30 @@
 
 module Bambora
   class Client
+    extend Forwardable
     attr_accessor :merchant_id, :sub_merchant_id, :api_key
 
     def initialize(options = {})
+      unless options[:version].nil?
+        raise Bambora::Error, 'Only V1 endpoints are supported at this time.' if options[:version].upcase != 'V1'
+
+      end
+
       options.each do |key, value|
         instance_variable_set("@#{key}", value)
       end
       yield(self) if block_given?
     end
 
-    # Summary: Payment profiles store confidential payment information. Transactions can be processed against profiles.
-    # Docs: https://dev.na.bambora.com/docs/guides/payment_profiles/
-    # Endpoint: https://api.na.bambora.com/v1/profiles
-    def profiles; end
+    def_delegators :connection, :request
+
+    def profile
+      @profile ||= Bambora::V1::Profile.new(self)
+    end
 
     # Summary: Create and modify payments.
-    # Note: The link below links to all apis includding profiles and tokenization. There aren't great docs explaining the
-    #       /payments endpoints alone.
+    # Note: The link below links to all apis includding profiles and tokenization. There aren't great docs explaining
+    #       the /payments endpoints alone.
     # Docs: https://dev.na.bambora.com/docs/references/payment_APIs/
     #       https://dev.na.bambora.com/docs/references/payment_SDKs/take_payments/?shell#
     # Endpoint: https://api.na.bambora.com/v1/payments
