@@ -28,17 +28,16 @@ module Bambora
       end
 
       context 'server responds with a non 2xx status' do
+        let(:status) { 500 }
+        let(:body) { 'Mouldy mildew, mother of mouthmuck, dangle and strangle and death.' }
+
         before do
-          stub_request(:get, base_url).with(headers: headers).to_return(body: 'Something went wrong!', status: 500)
+          stub_request(:get, base_url).with(headers: headers).to_return(body: body, status: status)
         end
 
         it 'raises an error' do
-          expect { subject.request(method: :get, path: '/') }.to(
-            raise_error(
-              Bambora::ServerError,
-              'The remote server responded with a status of 500: Something went wrong!',
-            ),
-          )
+          resp = subject.request(method: :get, path: '/')
+          expect(resp).to eq(status: status, body: body)
         end
       end
     end

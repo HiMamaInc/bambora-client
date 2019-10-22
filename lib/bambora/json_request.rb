@@ -11,9 +11,9 @@ module Bambora
 
     def request(method:, path:, params: {}, body: {})
       resp = client.request(method: method, path: path, params: params, body: body.to_json.to_s)
-      return parse_response(resp) if resp.status <= 300
-
-      raise Bambora::ServerError, "The remote server responded with a status of #{resp.status}: #{resp.body}"
+      parse_response(resp)
+    rescue JSON::ParserError
+      error_response(resp)
     end
 
     private
@@ -33,6 +33,10 @@ module Bambora
         else
           object
       end
+    end
+
+    def error_response(resp)
+      { status: resp.status, body: resp.body }
     end
   end
 end
