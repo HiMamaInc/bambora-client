@@ -14,6 +14,9 @@ module Bambora
       options.each do |key, value|
         instance_variable_set("@#{key}", value)
       end
+
+      @base_url = 'https://api.na.bambora.com'
+
       yield(self) if block_given?
     end
 
@@ -46,7 +49,7 @@ module Bambora
     protected
 
     def connection
-      @connection ||= Excon.new(ENV.fetch('BAMBORA_API_URL'), headers: headers)
+      @connection ||= Excon.new(@base_url, headers: headers)
     end
 
     def headers
