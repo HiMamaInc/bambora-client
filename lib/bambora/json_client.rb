@@ -2,13 +2,15 @@
 
 module Bambora
   class JSONClient < Bambora::Client
-    def request(method:, path: '', params: {}, body: {})
+    def request(method:, path: '', params: {}, body: {}, headers: {})
       resp = connection.request(
         method: method,
         path: path,
         params: params,
-        body: body.to_json.to_s
+        body: body.to_json.to_s,
+        headers: { 'Content-Type' => 'application/json' }.merge(headers),
       )
+
       parse_response(resp)
     rescue JSON::ParserError
       error_response(resp)
