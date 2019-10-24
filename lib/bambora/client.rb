@@ -3,6 +3,7 @@
 require 'base64'
 require 'excon'
 
+require 'bambora/headers'
 require 'bambora/v1/profile'
 
 module Bambora
