@@ -3,12 +3,11 @@
 module Bambora
   class Client
     extend Forwardable
-    attr_accessor :merchant_id, :sub_merchant_id, :api_key
+    attr_accessor :base_url, :merchant_id, :sub_merchant_id, :api_key
 
     def initialize(options = {})
       unless options[:version].nil?
         raise Bambora::Error, 'Only V1 endpoints are supported at this time.' if options[:version].upcase != 'V1'
-
       end
 
       options.each do |key, value|
@@ -46,7 +45,7 @@ module Bambora
     protected
 
     def connection
-      @connection ||= Excon.new(ENV.fetch('BAMBORA_API_URL'), headers: headers)
+      @connection ||= Excon.new(base_url, headers: headers)
     end
 
     def headers

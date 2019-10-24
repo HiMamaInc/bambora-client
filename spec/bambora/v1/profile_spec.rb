@@ -30,9 +30,14 @@ module Bambora
         }
       end
 
-      subject { Bambora::Client.new(api_key: api_key, merchant_id: merchant_id, sub_merchant_id: sub_merchant_id) }
-
-      before { allow(ENV).to receive(:fetch).with('BAMBORA_API_URL').and_return(base_url) }
+      subject do
+        Bambora::Client.new(
+          base_url: base_url,
+          api_key: api_key,
+          merchant_id: merchant_id,
+          sub_merchant_id: sub_merchant_id,
+        )
+      end
 
       describe '#create' do
         let(:data) do
