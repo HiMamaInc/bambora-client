@@ -21,9 +21,5 @@ module Bambora
         end
       end
     end
-
-    describe '#batchpayment_reports' do
-      pending
-    end
   end
 end

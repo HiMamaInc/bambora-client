@@ -18,12 +18,6 @@ module Bambora
 
     def_delegators :connection, :request
 
-    # Summary: Statuses of batch bank-to-bank transactions.
-    # Docs: https://dev.na.bambora.com/docs/guides/batch_payment/report/
-    #       https://dev.na.bambora.com/docs/references/batch_payment_report/
-    # Endpoint: https://na.bambora.com/scripts/reporting/report.aspx
-    def batchpayment_reports; end
-
     protected
 
     def connection
