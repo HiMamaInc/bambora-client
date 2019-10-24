@@ -9,7 +9,7 @@ module Bambora
         subject { Bambora::Client.new }
 
         it 'returns a Bambora::V1::Profile' do
-          expect(subject.profile).to be_a Bambora::V1::Profile
+          expect(subject.profiles).to be_a Bambora::V1::Profile
         end
       end
 

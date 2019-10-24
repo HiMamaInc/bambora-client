@@ -28,8 +28,8 @@ module Bambora
 
     def_delegators :connection, :request
 
-    def profile
-      @profile ||= Bambora::V1::Profile.new(self)
+    def profiles
+      @profiles ||= Bambora::V1::Profile.new(self)
     end
 
     # Summary: Create and modify payments.

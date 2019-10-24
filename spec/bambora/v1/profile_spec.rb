@@ -42,7 +42,7 @@ module Bambora
         end
 
         it 'posts to the Bambora API' do
-          subject.profile.create(data)
+          subject.profiles.create(data)
 
           expect(
             a_request(:post, "#{subject.base_url}/v1/profiles").with(
@@ -62,7 +62,7 @@ module Bambora
         let(:customer_code) { '02355E2e58Bf488EAB4EaFAD7083dB6A' }
 
         it 'posts to the Bambora API' do
-          subject.profile.delete(customer_code: customer_code)
+          subject.profiles.delete(customer_code: customer_code)
 
           expect(
             a_request(:delete, "#{subject.base_url}/v1/profiles/#{customer_code}").with(
