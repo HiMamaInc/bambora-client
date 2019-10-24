@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 module Bambora
-  describe JSONRequest do
+  describe JSONClient do
     let(:api_key) { 'fakekey' }
     let(:merchant_id) { 1 }
     let(:base_url) { 'https://sandbox-api.na.bambora.com' }
@@ -11,7 +11,7 @@ module Bambora
     let(:response_body) { { response: 'body', with: { objects: 'yay!' }, and: [{ arrays: 'wow!' }] } }
     let(:client) { Bambora::Client.new(api_key: api_key, merchant_id: merchant_id) }
 
-    subject { Bambora::JSONRequest.new(client) }
+    subject { Bambora::JSONClient.new(client) }
 
     before { allow(ENV).to receive(:fetch).with('BAMBORA_API_URL').and_return(base_url) }
 

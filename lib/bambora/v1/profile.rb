@@ -2,7 +2,7 @@
 
 module Bambora
   module V1
-    class Profile < ::Bambora::JSONRequest
+    class Profile < ::Bambora::JSONClient
       def initialize(client)
         super
 
