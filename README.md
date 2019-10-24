@@ -63,33 +63,21 @@ client = Bambora::Client.new(
 ```ruby
 client.profile.create(
   {
-    'language': 'en',
-    'comments': 'hello',
-    'card':{
-      'name': 'Hup Podling',
-      'number': '4030000010001234',
-      'expiry_month': '12',
-      'expiry_year': '23',
-      'cvd': '123',
+    language: 'en',
+    comments: 'hello',
+    card: {
+      name: 'Hup Podling',
+      number: '4030000010001234',
+      expiry_month: '12',
+      expiry_year: '23',
+      cvd: '123',
     },
   },
 )
 # => {
-#       code: 1,
-#       message: 'Hup...want...buy.',
-#       customer_code: 'asdf1234',
-#       validation: {
-#         id: '',
-#         approved: 1,
-#         message_id: 1,
-#         message: '',
-#         auth_code: '',
-#         trans_date: '',
-#         order_number: '',
-#         type: '',
-#         amount: 0,
-#         cvd_id: 123,
-#       },
+#       :code => 1,
+#       :message => "Operation Successful"
+#       :customer_code: "02355E2e58Bf488EAB4EaFAD7083dB6A",
 #    }
 ```
 
