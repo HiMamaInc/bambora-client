@@ -4,12 +4,12 @@ require 'spec_helper'
 
 module Bambora
   describe Client do
-    describe '#profile' do
+    describe '#initialize' do
       context 'with defaults' do
         subject { Bambora::Client.new }
 
-        it 'returns a Bambora::V1::Profile' do
-          expect(subject.profile).to be_a Bambora::V1::Profile
+        it 'instantiates' do
+          expect(subject).to be_a Bambora::Client
         end
       end
 

@@ -1,16 +1,9 @@
 # frozen_string_literal: true
 
 module Bambora
-  class JSONClient
-    attr_reader :client
-
-    def initialize(client)
-      @client = client
-      @path = ''
-    end
-
+  class JSONClient < Bambora::Client
     def request(method:, path:, params: {}, body: {})
-      resp = client.request(method: method, path: path, params: params, body: body.to_json.to_s)
+      resp = connection.request(method: method, path: path, params: params, body: body.to_json.to_s)
       parse_response(resp)
     rescue JSON::ParserError
       error_response(resp)
