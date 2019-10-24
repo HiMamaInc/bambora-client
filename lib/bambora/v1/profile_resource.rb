@@ -2,19 +2,17 @@
 
 module Bambora
   module V1
-    class ProfileResource < ::Bambora::JSONClient
+    class ProfileResource
       def initialize(client)
-        super
-
-        @path = '/v1/profiles'
+        @client = client
       end
 
       def create(card_data)
-        request(method: :post, path: @path, body: card_data)
+        @client.request(method: :post, body: card_data)
       end
 
       def delete(customer_code:)
-        request(method: :delete, path: "#{@path}/#{customer_code}")
+        @client.request(method: :delete, path: "/#{customer_code}")
       end
     end
   end
