@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'base64'
+require 'excon'
+
 module Bambora
   class Client
     extend Forwardable
