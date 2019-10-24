@@ -84,23 +84,11 @@ client.profile.create(
 ## Delete a Profile
 
 ```ruby
-client.profile.delete(customer_code: 'asdf1234')
+client.profile.delete(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A')
 # => {
-#       code: 1,
-#       message: 'Hup...want...buy.',
-#       customer_code: 'asdf1234',
-#       validation: {
-#         id: '',
-#         approved: 1,
-#         message_id: 1,
-#         message: '',
-#         auth_code: '',
-#         trans_date: '',
-#         order_number: '',
-#         type: '',
-#         amount: 0,
-#         cvd_id: 123,
-#       },
+#       :code => 1,
+#       :message => "Operation Successful"
+#       :customer_code: "02355E2e58Bf488EAB4EaFAD7083dB6A",
 #    }
 ```
 
