@@ -31,6 +31,7 @@ You can initilize the client by passing a hash to it, or by passing a block.
 
 ```ruby
 client = Bambora::Client.new(
+  base_url: ENV.fetch('BAMBORA_BASE_URL') # Sandbox or Production URL
   api_key: ENV.fetch('BAMBORA_API_KEY'),
   merchant_id: ENV.fetch('BAMBORA_MERCHANT_ID'),
 )
@@ -38,6 +39,7 @@ client = Bambora::Client.new(
 
 ```ruby
 client = Bambora::Client.new do |c|
+  base_url: ENV.fetch('BAMBORA_BASE_URL') # Sandbox or Production URL
   c.api_key = ENV.fetch('BAMBORA_API_KEY')
   c.merchant_id = ENV.fetch('BAMBORA_MERCHANT_ID')
 end
@@ -47,72 +49,58 @@ You can also initilze a client with a sub-merchant-id:
 
 ```ruby
 client = Bambora::Client.new(
-  api_key: ENV.fetch('BAMBORA_API_KEY'),
-  merchant_id: ENV.fetch('BAMBORA_MERCHANT_ID'),
+  ...
   sub_merchant_id: 'submerchantid',
 )
 ```
+
+The client is then passed to one of the `*Resource` classes, mentioned below, in order to make a network request.
 
 ### Profiles
 
 *Summary*: Payment profiles store confidential payment information. Transactions can be processed against profiles.
 *Bambora Docs*: <https://dev.na.bambora.com/docs/guides/payment_profiles/>
 
+To use the profiles API, you must create an instance of the `Bambora::V1::ProfileResource` class.
+
+```ruby
+client = Bambora::JSONClient.new(...)
+profiles = Bambora::V1::ProfileResource.new(client: client, sub_path: '/v1/profiles')
+```
+
+Once the resource instance has been instantiated, actions can be made against the API.
+
 #### Create a Profile
 
 ```ruby
-client.profile.create(
+profiles.create(
   {
-    'language': 'en',
-    'comments': 'hello',
-    'card':{
-      'name': 'Hup Podling',
-      'number': '4030000010001234',
-      'expiry_month': '12',
-      'expiry_year': '23',
-      'cvd': '123',
+    language: 'en',
+    comments: 'hello',
+    card: {
+      name: 'Hup Podling',
+      number: '4030000010001234',
+      expiry_month: '12',
+      expiry_year: '23',
+      cvd: '123',
     },
   },
 )
 # => {
-#       code: 1,
-#       message: 'Hup...want...buy.',
-#       customer_code: 'asdf1234',
-#       validation: {
-#         id: '',
-#         approved: 1,
-#         message_id: 1,
-#         message: '',
-#         auth_code: '',
-#         trans_date: '',
-#         order_number: '',
-#         type: '',
-#         amount: 0,
-#         cvd_id: 123,
-#       },
+#       :code => 1,
+#       :message => "Operation Successful",
+#       :customer_code => "02355E2e58Bf488EAB4EaFAD7083dB6A",
 #    }
 ```
 
 ## Delete a Profile
 
 ```ruby
-client.profile.delete(customer_code: 'asdf1234')
+profiles.delete(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A')
 # => {
-#       code: 1,
-#       message: 'Hup...want...buy.',
-#       customer_code: 'asdf1234',
-#       validation: {
-#         id: '',
-#         approved: 1,
-#         message_id: 1,
-#         message: '',
-#         auth_code: '',
-#         trans_date: '',
-#         order_number: '',
-#         type: '',
-#         amount: 0,
-#         cvd_id: 123,
-#       },
+#       :code => 1,
+#       :message => "Operation Successful",
+#       :customer_code => "02355E2e58Bf488EAB4EaFAD7083dB6A",
 #    }
 ```
 

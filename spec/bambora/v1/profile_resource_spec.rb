@@ -4,7 +4,7 @@ require 'spec_helper'
 
 module Bambora
   module V1
-    describe Profile do
+    describe ProfileResource do
       let(:api_key) { 'fakekey' }
       let(:merchant_id) { 1 }
       let(:sub_merchant_id) { 2 }
@@ -29,10 +29,16 @@ module Bambora
           },
         }
       end
+      let(:client) do
+        Bambora::JSONClient.new(
+          base_url: base_url,
+          api_key: api_key,
+          merchant_id: merchant_id,
+          sub_merchant_id: sub_merchant_id,
+        )
+      end
 
-      subject { Bambora::Client.new(api_key: api_key, merchant_id: merchant_id, sub_merchant_id: sub_merchant_id) }
-
-      before { allow(ENV).to receive(:fetch).with('BAMBORA_API_URL').and_return(base_url) }
+      subject { Bambora::V1::ProfileResource.new(client: client, sub_path: '/v1/profiles') }
 
       describe '#create' do
         let(:data) do
@@ -57,7 +63,7 @@ module Bambora
         end
 
         it 'posts to the bambora api' do
-          subject.profile.create(data)
+          subject.create(data)
           expect(
             a_request(:post, "#{base_url}/v1/profiles").with(
               body: data.to_json.to_s,
@@ -74,7 +80,7 @@ module Bambora
         end
 
         it 'posts to the bambora api' do
-          subject.profile.delete(customer_code: customer_code)
+          subject.delete(customer_code: customer_code)
           expect(
             a_request(:delete, "#{base_url}/v1/profiles/#{customer_code}").with(
               headers: headers,
