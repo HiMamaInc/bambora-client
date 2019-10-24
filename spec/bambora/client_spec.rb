@@ -22,10 +22,6 @@ module Bambora
       end
     end
 
-    describe '#payments' do
-      pending
-    end
-
     describe '#batchpayments' do
       pending
     end
