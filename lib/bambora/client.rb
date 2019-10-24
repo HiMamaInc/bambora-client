@@ -18,12 +18,6 @@ module Bambora
 
     def_delegators :connection, :request
 
-    # Summary: Bank Electronic Funds Transfer (CAD) and Automatic Clearing House (USD)
-    # Docs: https://dev.na.bambora.com/docs/guides/batch_payment/
-    #       https://dev.na.bambora.com/docs/references/batch_payment/
-    # Endpoint: https://api.na.bambora.com/v1/batchpayments
-    def batchpayments; end
-
     # Summary: Statuses of batch bank-to-bank transactions.
     # Docs: https://dev.na.bambora.com/docs/guides/batch_payment/report/
     #       https://dev.na.bambora.com/docs/references/batch_payment_report/
