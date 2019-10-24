@@ -5,7 +5,7 @@ module Bambora
     def request(method:, path: '', params: {}, body: {})
       resp = connection.request(
         method: method,
-        path: base_url + path.to_s,
+        path: path,
         params: params,
         body: body.to_json.to_s
       )

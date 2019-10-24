@@ -9,9 +9,8 @@ module Bambora
     let(:base_url) { 'https://sandbox-api.na.bambora.com' }
     let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5' } }
     let(:response_body) { { response: 'body', with: { objects: 'yay!' }, and: [{ arrays: 'wow!' }] } }
-    let(:client) { Bambora::Client.new(base_url: base_url, api_key: api_key, merchant_id: merchant_id) }
 
-    subject { Bambora::JSONClient.new(client) }
+    subject { Bambora::JSONClient.new(base_url: base_url, api_key: api_key, merchant_id: merchant_id) }
 
     describe '#request' do
       context 'server responds with a 2xx status' do
