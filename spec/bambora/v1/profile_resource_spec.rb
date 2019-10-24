@@ -4,7 +4,7 @@ require 'spec_helper'
 
 module Bambora
   module V1
-    describe Profile do
+    describe ProfileResource do
       let(:api_key) { 'fakekey' }
       let(:merchant_id) { 1 }
       let(:sub_merchant_id) { 2 }

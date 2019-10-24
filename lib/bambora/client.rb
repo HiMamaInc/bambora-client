@@ -18,9 +18,7 @@ module Bambora
 
     def_delegators :connection, :request
 
-    def profile
-      @profile ||= Bambora::V1::Profile.new(self)
-    end
+    def profile; end
 
     # Summary: Create and modify payments.
     # Note: The link below links to all apis includding profiles and tokenization. There aren't great docs explaining
