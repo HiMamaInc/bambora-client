@@ -3,6 +3,8 @@
 require 'base64'
 require 'excon'
 
+require 'bambora/v1/profile'
+
 module Bambora
   class Client
     extend Forwardable

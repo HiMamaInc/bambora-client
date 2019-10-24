@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'bambora/json_request'
+
 module Bambora
   module V1
     class Profile < ::Bambora::JSONRequest
