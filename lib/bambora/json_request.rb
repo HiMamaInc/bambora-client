@@ -10,7 +10,14 @@ module Bambora
     end
 
     def request(method:, path:, params: {}, body: {})
-      resp = client.request(method: method, path: path, params: params, body: body.to_json.to_s)
+      resp = client.request(
+        method: method,
+        path: path,
+        params: params,
+        body: body.to_json.to_s,
+        headers: { 'Content-Type' => 'application/json' },
+      )
+
       parse_response(resp)
     rescue JSON::ParserError
       error_response(resp)
