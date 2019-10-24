@@ -6,7 +6,7 @@ require 'excon'
 module Bambora
   class Client
     extend Forwardable
-    attr_accessor :merchant_id, :sub_merchant_id, :api_key
+    attr_accessor :base_url, :merchant_id, :sub_merchant_id, :api_key
 
     def initialize(options = {})
       unless options[:version].nil?
