@@ -8,7 +8,7 @@ module Bambora
       let(:api_key) { 'fakekey' }
       let(:merchant_id) { 1 }
       let(:sub_merchant_id) { 2 }
-      let(:base_url) { 'https://sandbox-api.na.bambora.com' }
+      let(:base_url) { 'https://api.na.bambora.com' }
       let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5', 'Sub-Merchant-ID' => sub_merchant_id } }
       let(:response_body) do
         {
