@@ -114,7 +114,7 @@ To use the payments API, you must create an instance of the `Bambora::V1::Paymen
 
 ```ruby
 client = Bambora::JSONClient.new(...)
-payments = Bambora::V1::PaymentResource.new(client: client, sub_path: '/v1/payments')
+payments = Bambora::V1::PaymentResource.new(client: client)
 ```
 
 Once the resource instance has been instantiated, actions can be made against the API.
