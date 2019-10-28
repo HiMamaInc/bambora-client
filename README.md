@@ -139,35 +139,35 @@ payments.make_payment(
   },
 )
 # => {
-       :id => "10000000",
-       :authorizing_merchant_id => 300000000,
-       :approved => "1",
-       :message_id => "1",
-       :message => "Approved",
-       :auth_code => "TEST",
-       :created => "2019-10-28T07:12:11",
-       :order_number => "10000000",
-       :type => "P",
-       :payment_method => "CC",
-       :risk_score => 0.0,
-       :amount => 50.0,
-       :custom => { :ref1 => "", :ref2 => "", :ref3 => "", :ref4 => "", :ref5 => "" },
-       :card =>
-         {
-           :card_type => "VI",
-           :last_fouri => "2333",
-           :address_match => 0,
-           :postal_result => 0,
-           :avs_result => "0",
-           :cvd_result => "1",
-           :avs => { :id => "U", :message => "Address information is unavailable.", :processed => false }
-         },
-       :links =>
-         [
-           { :rel => "void", :href => "https://api.na.bambora.com/v1/payments/10000000/void", :method => "POST" },
-           { :rel => "return", :href => "https://api.na.bambora.com/v1/payments/10000000/returns", :method => "POST" }
-         ]
-     }
+#      :id => "10000000",
+#      :authorizing_merchant_id => 300000000,
+#      :approved => "1",
+#      :message_id => "1",
+#      :message => "Approved",
+#      :auth_code => "TEST",
+#      :created => "2019-10-28T07:12:11",
+#      :order_number => "10000000",
+#      :type => "P",
+#      :payment_method => "CC",
+#      :risk_score => 0.0,
+#      :amount => 50.0,
+#      :custom => { :ref1 => "", :ref2 => "", :ref3 => "", :ref4 => "", :ref5 => "" },
+#      :card =>
+#        {
+#          :card_type => "VI",
+#          :last_fouri => "2333",
+#          :address_match => 0,
+#          :postal_result => 0,
+#          :avs_result => "0",
+#          :cvd_result => "1",
+#          :avs => { :id => "U", :message => "Address information is unavailable.", :processed => false }
+#        },
+#      :links =>
+#        [
+#          { :rel => "void", :href => "https://api.na.bambora.com/v1/payments/10000000/void", :method => "POST" },
+#          { :rel => "return", :href => "https://api.na.bambora.com/v1/payments/10000000/returns", :method => "POST" }
+#        ]
+#    }
 ```
 
 ##### Make A Payment With A Payment Profile
@@ -175,13 +175,13 @@ payments.make_payment(
 ```ruby
 payments.make_payment_with_payment_profile(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A', amount: 50)
 # => {
-       :id => "10000000",
-       :authorizing_merchant_id => 300000000,
-       :approved => "1",
-       :message_id => "1",
-       :message => "Approved",
-       ...
-     }
+#      :id => "10000000",
+#      :authorizing_merchant_id => 300000000,
+#      :approved => "1",
+#      :message_id => "1",
+#      :message => "Approved",
+#      ...
+#    }
 ```
 
 ## Development
