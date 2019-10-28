@@ -3,6 +3,8 @@
 module Bambora
   module V1
     class PaymentResource
+      CREDIT_CARD_ID_DEFAULT = 1
+
       def initialize(client:)
         @client = client
         @sub_path = '/v1/payments'
@@ -18,7 +20,7 @@ module Bambora
           payment_method: 'payment_profile',
           payment_profile: {
             customer_code: customer_code,
-            card_id: 1,
+            card_id: CREDIT_CARD_ID_DEFAULT,
           },
         )
       end
