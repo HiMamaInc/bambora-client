@@ -19,16 +19,12 @@ module Bambora
       end
 
       def make_payment_with_payment_profile(customer_code:, amount:)
-        @client.request(
-          method: :post,
-          path: @sub_path,
-          body: {
-            amount: amount,
-            payment_method: 'payment_profile',
-            payment_profile: {
-              customer_code: customer_code,
-              card_id: 1,
-            },
+        make_payment(
+          amount: amount,
+          payment_method: 'payment_profile',
+          payment_profile: {
+            customer_code: customer_code,
+            card_id: 1,
           },
         )
       end
