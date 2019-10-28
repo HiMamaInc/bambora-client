@@ -39,7 +39,7 @@ client = Bambora::Client.new(
 
 ```ruby
 client = Bambora::Client.new do |c|
-  base_url: ENV.fetch('BAMBORA_BASE_URL') # Sandbox or Production URL
+  c.base_url: ENV.fetch('BAMBORA_BASE_URL') # Sandbox or Production URL
   c.api_key = ENV.fetch('BAMBORA_API_KEY')
   c.merchant_id = ENV.fetch('BAMBORA_MERCHANT_ID')
 end
