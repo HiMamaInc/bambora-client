@@ -87,9 +87,9 @@ profiles.create(
   },
 )
 # => {
-#       :code => 1,
-#       :message => "Operation Successful",
-#       :customer_code => "02355E2e58Bf488EAB4EaFAD7083dB6A",
+#      :code => 1,
+#      :message => "Operation Successful",
+#      :customer_code => "02355E2e58Bf488EAB4EaFAD7083dB6A",
 #    }
 ```
 
@@ -98,9 +98,9 @@ profiles.create(
 ```ruby
 profiles.delete(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A')
 # => {
-#       :code => 1,
-#       :message => "Operation Successful",
-#       :customer_code => "02355E2e58Bf488EAB4EaFAD7083dB6A",
+#      :code => 1,
+#      :message => "Operation Successful",
+#      :customer_code => "02355E2e58Bf488EAB4EaFAD7083dB6A",
 #    }
 ```
 
