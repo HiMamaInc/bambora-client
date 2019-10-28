@@ -12,21 +12,49 @@ module Bambora
       let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5', 'Sub-Merchant-ID' => sub_merchant_id } }
       let(:response_body) do
         {
-          code: 1,
-          message: 'Hup...want...buy.',
-          customer_code: 'aaa111',
-          validation: {
-            id: '',
-            approved: 1,
-            message_id: 1,
-            message: '',
-            auth_code: '',
-            trans_date: '',
-            order_number: '',
-            type: '',
-            amount: 0,
-            cvd_id: 123,
+          id: '10000000',
+          authorizing_merchant_id: merchant_id,
+          approved: '1',
+          message_id: '1',
+          message: 'Approved',
+          created: '2019-10-28T07:36:08',
+          order_number: '10000000',
+          type: 'P',
+          payment_method: 'CC',
+          risk_score: 0.0,
+          amount: 50.0,
+          custom: {
+            ref1: '',
+            ref2: '',
+            ref3: '',
+            ref4: '',
+            ref5: '',
           },
+          card: {
+            card_type: 'VI',
+            last_four: '1234',
+            address_match: 0,
+            postal_result: 0,
+            avs_result: '0',
+            cvd_result: '5',
+            avs: {
+              id: 'U',
+              message: 'Address information is unavailable.',
+              processed: false,
+            },
+          },
+          links: [
+            {
+              rel: 'void',
+              href: 'https://api.na.bambora.com/v1/payments/10000000/void',
+              method: 'POST',
+            },
+            {
+              rel: 'return',
+              href: 'https://api.na.bambora.com/v1/payments/10000000/returns',
+              method: 'POST',
+            },
+          ],
         }
       end
       let(:client) do
