@@ -73,6 +73,38 @@ module Bambora
           ).to have_been_made.once
         end
       end
+
+      describe '#make_payment_with_payment_profile' do
+        before(:each) do
+          stub_request(:post, "#{base_url}/v1/payments").with(
+            body: data.to_json.to_s,
+            headers: headers,
+          ).to_return(body: response_body.to_json.to_s)
+        end
+
+        let(:customer_code) { '02355E2e58Bf488EAB4EaFAD7083dB6A' }
+        let(:data) do
+          {
+            amount: 50,
+            payment_method: 'payment_profile',
+            payment_profile: {
+              customer_code: customer_code,
+              card_id: 1,
+            },
+          }
+        end
+
+        it "POST's to the Bambora API" do
+          subject.make_payment_with_payment_profile(customer_code: customer_code, amount: 50)
+
+          expect(
+            a_request(:post, "#{base_url}/v1/payments").with(
+              body: data.to_json.to_s,
+              headers: headers,
+            ),
+          ).to have_been_made.once
+        end
+      end
     end
   end
 end
