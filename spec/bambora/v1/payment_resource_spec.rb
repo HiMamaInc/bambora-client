@@ -118,6 +118,7 @@ module Bambora
             payment_profile: {
               customer_code: customer_code,
               card_id: 1,
+              complete: false,
             },
           }
         end
@@ -131,6 +132,38 @@ module Bambora
               headers: headers,
             ),
           ).to have_been_made.once
+        end
+
+        context 'with a card_id and complete parameter passed in' do
+          let(:card_id) { (1..5).to_a.sample }
+          let(:complete) { [true, false].sample }
+          let(:data) do
+            {
+              amount: 50,
+              payment_method: 'payment_profile',
+              payment_profile: {
+                customer_code: customer_code,
+                card_id: card_id,
+                complete: complete,
+              },
+            }
+          end
+
+          it 'sends the passed in values' do
+            subject.make_payment_with_payment_profile(
+              customer_code: customer_code,
+              amount: 50,
+              card_id: card_id,
+              complete: complete,
+            )
+
+            expect(
+              a_request(:post, "#{base_url}/v1/payments").with(
+                body: data.to_json.to_s,
+                headers: headers,
+              ),
+            ).to have_been_made.once
+          end
         end
       end
     end
