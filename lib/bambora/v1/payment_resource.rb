@@ -3,8 +3,6 @@
 module Bambora
   module V1
     class PaymentResource
-      CREDIT_CARD_ID_DEFAULT = 1
-
       # Summary: Create and modify payments.
       # Note: The link below links to all apis includding profiles and tokenization. There aren't great docs explaining
       #       the /payments endpoints alone.
@@ -20,13 +18,13 @@ module Bambora
         @client.request(method: :post, path: @sub_path, body: payment_data)
       end
 
-      def make_payment_with_payment_profile(customer_code:, amount:)
+      def make_payment_with_payment_profile(customer_code:, amount:, card_id: 1)
         make_payment(
           amount: amount,
           payment_method: 'payment_profile',
           payment_profile: {
             customer_code: customer_code,
-            card_id: CREDIT_CARD_ID_DEFAULT,
+            card_id: card_id,
           },
         )
       end
