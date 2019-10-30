@@ -39,7 +39,7 @@ client = Bambora::Client.new(
 
 ```ruby
 client = Bambora::Client.new do |c|
-  base_url: ENV.fetch('BAMBORA_BASE_URL') # Sandbox or Production URL
+  c.base_url: ENV.fetch('BAMBORA_BASE_URL') # Sandbox or Production URL
   c.api_key = ENV.fetch('BAMBORA_API_KEY')
   c.merchant_id = ENV.fetch('BAMBORA_MERCHANT_ID')
 end
@@ -87,9 +87,9 @@ profiles.create(
   },
 )
 # => {
-#       :code => 1,
-#       :message => "Operation Successful",
-#       :customer_code => "02355E2e58Bf488EAB4EaFAD7083dB6A",
+#      :code => 1,
+#      :message => "Operation Successful",
+#      :customer_code => "02355E2e58Bf488EAB4EaFAD7083dB6A",
 #    }
 ```
 
@@ -98,9 +98,89 @@ profiles.create(
 ```ruby
 profiles.delete(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A')
 # => {
-#       :code => 1,
-#       :message => "Operation Successful",
-#       :customer_code => "02355E2e58Bf488EAB4EaFAD7083dB6A",
+#      :code => 1,
+#      :message => "Operation Successful",
+#      :customer_code => "02355E2e58Bf488EAB4EaFAD7083dB6A",
+#    }
+```
+
+### Payments
+
+*Summary*: Process payments using Credit Card, Payment Profile, Legato Token, Cash, Cheque, Interac, Apple Pay, or
+Android Pay.
+*Bambora Docs*: <https://dev.na.bambora.com/docs/references/payment_APIs/>
+
+To use the payments API, you must create an instance of the `Bambora::V1::PaymentResource` class.
+
+```ruby
+client = Bambora::JSONClient.new(...)
+payments = Bambora::V1::PaymentResource.new(client: client)
+```
+
+Once the resource instance has been instantiated, actions can be made against the API.
+
+#### Make A Payment
+
+This is a lower level method that can be used to make a payment using any method. Below are some more specific and
+high level convenience methods.
+
+```ruby
+payments.make_payment(
+  {
+    amount: 50,
+    payment_method: 'card',
+    card: {
+      name: 'Hup Podling',
+      number: '4504481742333',
+      expiry_month: '12',
+      expiry_year: '20',
+      cvd: '123',
+    },
+  },
+)
+# => {
+#      :id => "10000000",
+#      :authorizing_merchant_id => 300000000,
+#      :approved => "1",
+#      :message_id => "1",
+#      :message => "Approved",
+#      :auth_code => "TEST",
+#      :created => "2019-10-28T07:12:11",
+#      :order_number => "10000000",
+#      :type => "P",
+#      :payment_method => "CC",
+#      :risk_score => 0.0,
+#      :amount => 50.0,
+#      :custom => { :ref1 => "", :ref2 => "", :ref3 => "", :ref4 => "", :ref5 => "" },
+#      :card =>
+#        {
+#          :card_type => "VI",
+#          :last_fouri => "2333",
+#          :address_match => 0,
+#          :postal_result => 0,
+#          :avs_result => "0",
+#          :cvd_result => "1",
+#          :avs => { :id => "U", :message => "Address information is unavailable.", :processed => false }
+#        },
+#      :links =>
+#        [
+#          { :rel => "void", :href => "https://api.na.bambora.com/v1/payments/10000000/void", :method => "POST" },
+#          { :rel => "return", :href => "https://api.na.bambora.com/v1/payments/10000000/returns", :method => "POST" }
+#        ]
+#    }
+```
+
+##### Make A Payment With A Payment Profile
+
+```ruby
+payments.make_payment_with_payment_profile(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A', amount: 50)
+# => {
+#      :id => "10000000",
+#      :authorizing_merchant_id => 300000000,
+#      :approved => "1",
+#      :message_id => "1",
+#      :message => "Approved",
+#      ...
 #    }
 ```
 
