@@ -3,6 +3,16 @@
 module Bambora
   module V1
     class ProfileResource
+      # Instantiate an interface to make requests against Bambora's Profiles API.
+      #
+      # @example
+      #
+      #   client = Bambora::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
+      #   profiles = Bambora::V1::ProfileResource(client: client)
+      #
+      #   # Start making requests ...
+      #
+      # @param client [Bambora::Client] An instance of Bambora::JSONClient, used to make network requests.
       def initialize(client:)
         @client = client
         @sub_path = '/v1/profiles'
