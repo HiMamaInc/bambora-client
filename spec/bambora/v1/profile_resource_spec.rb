@@ -38,7 +38,7 @@ module Bambora
         )
       end
 
-      subject { Bambora::V1::ProfileResource.new(client: client, sub_path: '/v1/profiles') }
+      subject { Bambora::V1::ProfileResource.new(client: client) }
 
       describe '#create' do
         let(:data) do

@@ -65,7 +65,7 @@ To use the profiles API, you must create an instance of the `Bambora::V1::Profil
 
 ```ruby
 client = Bambora::JSONClient.new(...)
-profiles = Bambora::V1::ProfileResource.new(client: client, sub_path: '/v1/profiles')
+profiles = Bambora::V1::ProfileResource.new(client: client)
 ```
 
 Once the resource instance has been instantiated, actions can be made against the API.
