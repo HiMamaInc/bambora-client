@@ -3,9 +3,9 @@
 module Bambora
   module V1
     class ProfileResource
-      def initialize(client:, sub_path:)
+      def initialize(client:)
         @client = client
-        @sub_path = sub_path
+        @sub_path = '/v1/profiles'
       end
 
       def create(card_data)
