@@ -46,7 +46,6 @@ module Bambora
         @client.request(method: :post, path: @sub_path, body: payment_data)
       end
 
-      # An alias of +create+.
       alias make_payment create
 
       # Make a payment with a credit card. Aliased as +make_payment_with_payment_profile+.
@@ -60,7 +59,12 @@ module Bambora
       #     customer_code: '2355E2e58Bf488EAB4EaFAD7083dB6A', amount: 50, complete: false
       #   )
       #
-      # @param payment_data [Hash] All information relevant to making a payment.
+      # @param customer_code [String] Bambora's payment profile ID.
+      # @param amount [Float] A decimal value in dollars. Uses up to two decimal places. Max value is account specific.
+      #   Default max value is 1000.
+      # @param card_id [Integer] Default +1+. Which credit card to use. Starts at 1 for the first card. You must
+      #   configure how many cards can be stored by visiting the profile options in the back office.
+      # @param complete [Boolean] Default +false+. Set to false for Pre-Authorize, and true to complete a payment.
       #
       # @return [Hash] Indicating success or failure of the operation.
       def create_with_payment_profile(customer_code:, amount:, card_id: 1, complete: false)
@@ -75,7 +79,6 @@ module Bambora
         )
       end
 
-      # An alias of =create_with_payment_profile+.
       alias make_payment_with_payment_profile create_with_payment_profile
     end
   end
