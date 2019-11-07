@@ -124,8 +124,10 @@ Once the resource instance has been instantiated, actions can be made against th
 This is a lower level method that can be used to make a payment using any method. Below are some more specific and
 high level convenience methods.
 
+`create` is aliased as `make_payment` if you prefer syntax that reads more like a sentence.
+
 ```ruby
-payments.make_payment(
+payments.create(
   {
     amount: 50,
     payment_method: 'card',
@@ -172,8 +174,11 @@ payments.make_payment(
 
 ##### Make A Payment With A Payment Profile
 
+`create_with_payment_profile` is aliased as `make_payment_with_payment_profile` if you prefer syntax that reads more
+like a sentence.
+
 ```ruby
-payments.make_payment_with_payment_profile(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A', amount: 50)
+payments.create_with_payment_profile(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A', amount: 50)
 # => {
 #      :id => "10000000",
 #      :authorizing_merchant_id => 300000000,

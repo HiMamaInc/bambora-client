@@ -68,7 +68,7 @@ module Bambora
 
       subject { described_class.new(client: client) }
 
-      describe '#make_payment' do
+      describe '#create' do
         before(:each) do
           stub_request(:post, "#{base_url}/v1/payments").with(
             body: data.to_json.to_s,
@@ -91,7 +91,7 @@ module Bambora
         end
 
         it "POST's to the Bambora API" do
-          subject.make_payment(data)
+          subject.create(data)
 
           expect(
             a_request(:post, "#{base_url}/v1/payments").with(
@@ -102,7 +102,15 @@ module Bambora
         end
       end
 
-      describe '#make_payment_with_payment_profile' do
+      describe '#make_payment' do
+        subject { Bambora::V1::PaymentResource.new(client: client) }
+
+        it 'is an alias of #create_with_payment_profile' do
+          expect(subject.method(:make_payment)).to eq(subject.method(:create))
+        end
+      end
+
+      describe '#create_with_payment_profile' do
         before(:each) do
           stub_request(:post, "#{base_url}/v1/payments").with(
             body: data.to_json.to_s,
@@ -124,7 +132,7 @@ module Bambora
         end
 
         it "POST's to the Bambora API" do
-          subject.make_payment_with_payment_profile(customer_code: customer_code, amount: 50)
+          subject.create_with_payment_profile(customer_code: customer_code, amount: 50)
 
           expect(
             a_request(:post, "#{base_url}/v1/payments").with(
@@ -150,7 +158,7 @@ module Bambora
           end
 
           it 'sends the passed in values' do
-            subject.make_payment_with_payment_profile(
+            subject.create_with_payment_profile(
               customer_code: customer_code,
               amount: 50,
               card_id: card_id,
@@ -164,6 +172,14 @@ module Bambora
               ),
             ).to have_been_made.once
           end
+        end
+      end
+
+      describe '#make_payment_with_payment_profile' do
+        subject { Bambora::V1::PaymentResource.new(client: client) }
+
+        it 'is an alias of #create_with_payment_profile' do
+          expect(subject.method(:make_payment_with_payment_profile)).to eq(subject.method(:create_with_payment_profile))
         end
       end
     end
