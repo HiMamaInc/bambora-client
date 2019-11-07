@@ -14,12 +14,57 @@ module Bambora
         @sub_path = '/v1/payments'
       end
 
-      def make_payment(payment_data)
+      # Make a payment with a credit card. Also aliased as +make_payment+.
+      #
+      #
+      # @example
+      #
+      #   client = Bambora::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
+      #   payments = Bambora::V1::PaymentResource(client: client)
+      #   payments.create(
+      #     {
+      #       amount: 50,
+      #       payment_method: 'card',
+      #       card: {
+      #         name: 'Hup Podling',
+      #         number: '4504481742333',
+      #         expiry_month: '12',
+      #         expiry_year: '20',
+      #         cvd: '123',
+      #       },
+      #     },
+      #   )
+      #
+      # @param payment_data [Hash] All information relevant to making a payment.
+      #
+      # @see https://dev.na.bambora.com/docs/references/payment_APIs/
+      #
+      # @see https://dev.na.bambora.com/docs/references/payment_SDKs/take_payments/?shell#
+      #
+      # @return [Hash] Indicating success or failure of the operation.
+      def create(payment_data)
         @client.request(method: :post, path: @sub_path, body: payment_data)
       end
 
-      def make_payment_with_payment_profile(customer_code:, amount:, card_id: 1, complete: false)
-        make_payment(
+      # An alias of +create+.
+      alias make_payment create
+
+      # Make a payment with a credit card. Aliased as +make_payment_with_payment_profile+.
+      #
+      #
+      # @example
+      #
+      #   client = Bambora::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
+      #   payments = Bambora::V1::PaymentResource(client: client)
+      #   payments.create_with_payment_profile(
+      #     customer_code: '2355E2e58Bf488EAB4EaFAD7083dB6A', amount: 50, complete: false
+      #   )
+      #
+      # @param payment_data [Hash] All information relevant to making a payment.
+      #
+      # @return [Hash] Indicating success or failure of the operation.
+      def create_with_payment_profile(customer_code:, amount:, card_id: 1, complete: false)
+        create(
           amount: amount,
           payment_method: 'payment_profile',
           payment_profile: {
@@ -29,6 +74,9 @@ module Bambora
           },
         )
       end
+
+      # An alias of =create_with_payment_profile+.
+      alias make_payment_with_payment_profile create_with_payment_profile
     end
   end
 end
