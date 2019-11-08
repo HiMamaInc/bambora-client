@@ -13,6 +13,12 @@ module Bambora
     #     params: '...',
     #     api_key: '...'
     #   )
+    #   # => {
+    #   #      :code => 1,
+    #   #      :message => "Operation Successful",
+    #   #      :customer_code => "02355E2e58Bf488EAB4EaFAD7083dB6A",
+    #   #      :card => { ... }
+    #   #    }
     #
     # @param path [String] Indicating request path.
     # @param params [Hash] Query parameters for the request.
@@ -20,7 +26,9 @@ module Bambora
     #
     # @return [Hash] Indicating success or failure of the operation.
     def get(path:, params: nil, api_key:)
-      parse_response(super(path: path, params: params, headers: build_headers(api_key)))
+      parse_response(
+        super(path: path, params: params, headers: build_headers(api_key)),
+      )
     end
 
     # Make a POST Request.
@@ -53,16 +61,17 @@ module Bambora
     #
     # @param method [Symbol] Indicating request verb.
     # @param path [String] Indicating request path.
-    # @param body [Hash] Data to be sent in the body of the request. This should be a Hash or an object that responds
-    #   to +to_hash+.
+    # @param body [Hash] Data to be sent in the body of the request.
     # @param api_key [String] Indicating the API Key to be used with the request.
     #
     # @return [Hash] Indicating success or failure of the operation.
     def post(path:, body:, api_key:)
-      parse_response(super(path: path, body: body, headers: build_headers(api_key)))
+      parse_response(
+        super(path: path, body: body, headers: build_headers(api_key)),
+      )
     end
 
-    # Make a DELTE Request.
+    # Make a DELETE Request.
     #
     # @example
     #
