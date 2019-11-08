@@ -40,7 +40,7 @@ module Bambora
       #
       # @return [Hash] Indicating success or failure of the operation.
       def create(payment_data)
-        client.request(method: :post, path: sub_path, body: payment_data, api_key: api_key)
+        client.post(path: sub_path, body: payment_data, api_key: api_key)
       end
 
       alias make_payment create

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'base64'
-require 'excon'
+require 'faraday'
 
 module Bambora
   class Client
@@ -19,15 +19,29 @@ module Bambora
       yield(self) if block_given?
     end
 
-    def_delegators :connection, :request
-
     protected
 
-    def connection
-      @connection ||= Excon.new(base_url)
+    def get(path:, params:, headers:)
+      connection.get(path, params, headers)
     end
 
-    def headers(api_key)
+    def post(path:, body:, headers:)
+      connection.post(path, body.to_json.to_s, headers)
+    end
+
+    def delete(path:, headers:)
+      connection.delete(path) do |req|
+        req.headers = headers
+      end
+    end
+
+    def connection
+      @connection ||= Faraday.new(url: base_url) do |f|
+        f.adapter :excon
+      end
+    end
+
+    def build_headers(api_key)
       Bambora::Headers.build(api_key: api_key, merchant_id: merchant_id, sub_merchant_id: sub_merchant_id)
     end
   end

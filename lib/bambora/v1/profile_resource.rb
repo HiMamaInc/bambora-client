@@ -51,7 +51,7 @@ module Bambora
       #
       # @return [Hash] Indicating success or failure of the operation.
       def create(card_data)
-        @client.request(method: :post, path: sub_path, body: card_data, api_key: api_key)
+        client.post(path: sub_path, body: card_data, api_key: api_key)
       end
 
       # Delete a Bambora payment profile given a customer code.
@@ -73,7 +73,7 @@ module Bambora
       #
       # @return [Hash] Indicating success or failure of the operation.
       def delete(customer_code:)
-        @client.request(method: :delete, path: "#{@sub_path}/#{customer_code}", api_key: api_key)
+        client.delete(path: "#{@sub_path}/#{customer_code}", api_key: api_key)
       end
     end
   end

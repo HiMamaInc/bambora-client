@@ -2,7 +2,28 @@
 
 module Bambora
   class JSONClient < Bambora::Client
-    # Make a JSON Request.
+    # Make a GET Request.
+    #
+    # @example
+    #
+    #   client = Bambora::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
+    #
+    #   client.get(
+    #     path: 'v1/profiles',
+    #     params: '...',
+    #     api_key: '...'
+    #   )
+    #
+    # @param path [String] Indicating request path.
+    # @param params [Hash] Query parameters for the request.
+    # @param api_key [String] Indicating the API Key to be used with the request.
+    #
+    # @return [Hash] Indicating success or failure of the operation.
+    def get(path:, params: nil, api_key:)
+      parse_response(super(path: path, params: params, headers: build_headers(api_key)))
+    end
+
+    # Make a POST Request.
     #
     # @example
     #
@@ -19,8 +40,7 @@ module Bambora
     #     },
     #   }
     #
-    #   client.request(
-    #     method: :post,
+    #   client.post(
     #     path: 'v1/profiles',
     #     body: data,
     #     api_key: '...'
@@ -38,27 +58,41 @@ module Bambora
     # @param api_key [String] Indicating the API Key to be used with the request.
     #
     # @return [Hash] Indicating success or failure of the operation.
-    def request(method:, path:, body: {}, api_key:)
-      request_options = {
-        method: method,
-        path: path,
-        body: request_body(body),
-        headers: headers(api_key),
-      }
-      resp = connection.request(request_options)
-      parse_response(resp)
-    rescue JSON::ParserError
-      error_response(resp)
+    def post(path:, body:, api_key:)
+      parse_response(super(path: path, body: body, headers: build_headers(api_key)))
+    end
+
+    # Make a DELTE Request.
+    #
+    # @example
+    #
+    #   client = Bambora::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
+    #
+    #   client.delete(path: 'v1/profiles/asdf1234', api_key: '...')
+    #   # => {
+    #   #      :code => 1,
+    #   #      :message => "Operation Successful",
+    #   #      :customer_code => "02355E2e58Bf488EAB4EaFAD7083dB6A",
+    #   #    }
+    #
+    # @param path [String] Indicating request path.
+    # @param api_key [String] Indicating the API Key to be used with the request.
+    #
+    # @return [Hash] Indicating success or failure of the operation.
+    def delete(path:, api_key:)
+      parse_response(super(path: path, headers: build_headers(api_key)))
     end
 
     private
 
-    def headers(api_key)
+    def build_headers(api_key)
       { 'Content-Type' => 'application/json' }.merge(super(api_key))
     end
 
     def parse_response(resp)
       deep_transform_keys_in_object(JSON.parse(resp.body), &:to_sym)
+    rescue JSON::ParserError
+      error_response(resp)
     end
 
     def deep_transform_keys_in_object(object, &block)
@@ -76,10 +110,6 @@ module Bambora
 
     def error_response(resp)
       { status: resp.status, body: resp.body }
-    end
-
-    def request_body(body)
-      JSON.unparse(body)
     end
   end
 end
