@@ -89,7 +89,9 @@ module Bambora
     #
     # @return [Hash] Indicating success or failure of the operation.
     def delete(path:, api_key:)
-      parse_response(super(path: path, headers: build_headers(api_key)))
+      parse_response(
+        super(path: path, headers: build_headers(api_key)),
+      )
     end
 
     private
