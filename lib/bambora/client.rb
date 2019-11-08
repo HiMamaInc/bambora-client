@@ -6,7 +6,7 @@ require 'excon'
 module Bambora
   class Client
     extend Forwardable
-    attr_accessor :base_url, :merchant_id, :sub_merchant_id, :api_key
+    attr_accessor :base_url, :merchant_id, :sub_merchant_id
 
     def initialize(options = {})
       unless options[:version].nil?
@@ -24,15 +24,11 @@ module Bambora
     protected
 
     def connection
-      @connection ||= Excon.new(base_url, headers: headers)
+      @connection ||= Excon.new(base_url)
     end
 
-    def headers
-      Bambora::Headers.build(passcode: passcode, sub_merchant_id: sub_merchant_id)
-    end
-
-    def passcode
-      Base64.encode64("#{merchant_id}:#{api_key}").delete("\n")
+    def headers(api_key)
+      Bambora::Headers.build(api_key: api_key, merchant_id: merchant_id, sub_merchant_id: sub_merchant_id)
     end
   end
 end

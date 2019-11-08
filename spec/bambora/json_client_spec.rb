@@ -10,7 +10,7 @@ module Bambora
     let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5' } }
     let(:response_body) { { response: 'body', with: { objects: 'yay!' }, and: [{ arrays: 'wow!' }] } }
 
-    subject { Bambora::JSONClient.new(base_url: base_url, api_key: api_key, merchant_id: merchant_id) }
+    subject { Bambora::JSONClient.new(base_url: base_url, merchant_id: merchant_id) }
 
     describe '#request' do
       context 'server responds with a 2xx status' do
@@ -19,7 +19,7 @@ module Bambora
         end
 
         it 'parses the response' do
-          resp = subject.request(method: :get, path: '/')
+          resp = subject.request(method: :get, path: '/', api_key: api_key)
           expect(resp).to eq response_body
         end
       end
@@ -33,7 +33,7 @@ module Bambora
         end
 
         it 'raises an error' do
-          resp = subject.request(method: :get, path: '/')
+          resp = subject.request(method: :get, path: '/', api_key: api_key)
           expect(resp).to eq(status: status, body: body)
         end
       end
