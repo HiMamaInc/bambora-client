@@ -32,15 +32,13 @@ You can initilize the client by passing a hash to it, or by passing a block.
 ```ruby
 client = Bambora::Client.new(
   base_url: ENV.fetch('BAMBORA_BASE_URL') # Sandbox or Production URL
-  api_key: ENV.fetch('BAMBORA_API_KEY'),
   merchant_id: ENV.fetch('BAMBORA_MERCHANT_ID'),
 )
 ```
 
 ```ruby
 client = Bambora::Client.new do |c|
-  c.base_url: ENV.fetch('BAMBORA_BASE_URL') # Sandbox or Production URL
-  c.api_key = ENV.fetch('BAMBORA_API_KEY')
+  c.base_url = ENV.fetch('BAMBORA_BASE_URL') # Sandbox or Production URL
   c.merchant_id = ENV.fetch('BAMBORA_MERCHANT_ID')
 end
 ```
@@ -65,7 +63,7 @@ To use the profiles API, you must create an instance of the `Bambora::V1::Profil
 
 ```ruby
 client = Bambora::JSONClient.new(...)
-profiles = Bambora::V1::ProfileResource.new(client: client)
+profiles = Bambora::V1::ProfileResource.new(client: client, api_key: ENV.fetch('BAMBORA_PROFILES_API_KEY'))
 ```
 
 Once the resource instance has been instantiated, actions can be made against the API.
@@ -114,7 +112,7 @@ To use the payments API, you must create an instance of the `Bambora::V1::Paymen
 
 ```ruby
 client = Bambora::JSONClient.new(...)
-payments = Bambora::V1::PaymentResource.new(client: client)
+payments = Bambora::V1::PaymentResource.new(client: client, api_key: ENV.fetch('BAMBORA_PAYMENTS_API_KEY'))
 ```
 
 Once the resource instance has been instantiated, actions can be made against the API.

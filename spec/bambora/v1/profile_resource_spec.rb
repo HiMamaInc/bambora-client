@@ -32,13 +32,12 @@ module Bambora
       let(:client) do
         Bambora::JSONClient.new(
           base_url: base_url,
-          api_key: api_key,
           merchant_id: merchant_id,
           sub_merchant_id: sub_merchant_id,
         )
       end
 
-      subject { Bambora::V1::ProfileResource.new(client: client) }
+      subject { Bambora::V1::ProfileResource.new(client: client, api_key: api_key) }
 
       describe '#create' do
         let(:data) do
@@ -64,6 +63,7 @@ module Bambora
 
         it 'posts to the bambora api' do
           subject.create(data)
+
           expect(
             a_request(:post, "#{base_url}/v1/profiles").with(
               body: data.to_json.to_s,
@@ -75,12 +75,16 @@ module Bambora
 
       describe '#delete' do
         let(:customer_code) { 'asdf1234' }
+
         before do
-          stub_request(:delete, "#{base_url}/v1/profiles/#{customer_code}").to_return(body: response_body.to_json.to_s)
+          stub_request(:delete, "#{base_url}/v1/profiles/#{customer_code}")
+            .with(headers: headers)
+            .to_return(body: response_body.to_json.to_s)
         end
 
         it 'posts to the bambora api' do
           subject.delete(customer_code: customer_code)
+
           expect(
             a_request(:delete, "#{base_url}/v1/profiles/#{customer_code}").with(
               headers: headers,

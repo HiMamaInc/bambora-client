@@ -2,6 +2,7 @@
 
 require 'bundler/setup'
 require 'bambora'
+require 'pry'
 require 'webmock/rspec'
 
 RSpec.configure do |config|

@@ -60,13 +60,12 @@ module Bambora
       let(:client) do
         Bambora::JSONClient.new(
           base_url: base_url,
-          api_key: api_key,
           merchant_id: merchant_id,
           sub_merchant_id: sub_merchant_id,
         )
       end
 
-      subject { described_class.new(client: client) }
+      subject { described_class.new(client: client, api_key: api_key) }
 
       describe '#create' do
         before(:each) do
@@ -103,8 +102,6 @@ module Bambora
       end
 
       describe '#make_payment' do
-        subject { Bambora::V1::PaymentResource.new(client: client) }
-
         it 'is an alias of #create_with_payment_profile' do
           expect(subject.method(:make_payment)).to eq(subject.method(:create))
         end
@@ -176,8 +173,6 @@ module Bambora
       end
 
       describe '#make_payment_with_payment_profile' do
-        subject { Bambora::V1::PaymentResource.new(client: client) }
-
         it 'is an alias of #create_with_payment_profile' do
           expect(subject.method(:make_payment_with_payment_profile)).to eq(subject.method(:create_with_payment_profile))
         end

@@ -3,6 +3,8 @@
 module Bambora
   module V1
     class ProfileResource
+      attr_accessor :client, :api_key, :sub_path
+
       # Instantiate an interface to make requests against Bambora's Profiles API.
       #
       # @example
@@ -13,8 +15,9 @@ module Bambora
       #   # Start making requests ...
       #
       # @param client [Bambora::Client] An instance of Bambora::JSONClient, used to make network requests.
-      def initialize(client:)
+      def initialize(client:, api_key:)
         @client = client
+        @api_key = api_key
         @sub_path = '/v1/profiles'
       end
 
@@ -48,7 +51,7 @@ module Bambora
       #
       # @return [Hash] Indicating success or failure of the operation.
       def create(card_data)
-        @client.request(method: :post, path: @sub_path, body: card_data)
+        client.post(path: sub_path, body: card_data, api_key: api_key)
       end
 
       # Delete a Bambora payment profile given a customer code.
@@ -70,7 +73,7 @@ module Bambora
       #
       # @return [Hash] Indicating success or failure of the operation.
       def delete(customer_code:)
-        @client.request(method: :delete, path: "#{@sub_path}/#{customer_code}")
+        client.delete(path: "#{@sub_path}/#{customer_code}", api_key: api_key)
       end
     end
   end
