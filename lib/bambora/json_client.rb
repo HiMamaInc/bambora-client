@@ -35,7 +35,7 @@ module Bambora
     #
     # @example
     #
-    #   client = Bambora::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
+    #   client = Bambora::JSONClient(base_url: '...', merchant_id: '...')
     #
     #   data = {
     #    language: 'en',
@@ -67,7 +67,7 @@ module Bambora
     # @return [Hash] Indicating success or failure of the operation.
     def post(path:, body:, api_key:)
       parse_response(
-        super(path: path, body: body, headers: build_headers(api_key)),
+        super(path: path, body: body.to_json.to_s, headers: build_headers(api_key)),
       )
     end
 
@@ -77,7 +77,7 @@ module Bambora
     #
     #   client = Bambora::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
     #
-    #   client.delete(path: 'v1/profiles/asdf1234', api_key: '...')
+    #   client.delete(path: 'v1/profiles/02355E2e58Bf488EAB4EaFAD7083dB6A', api_key: '...')
     #   # => {
     #   #      :code => 1,
     #   #      :message => "Operation Successful",

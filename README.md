@@ -38,7 +38,7 @@ client = Bambora::Client.new(
 
 ```ruby
 client = Bambora::Client.new do |c|
-  c.base_url: ENV.fetch('BAMBORA_BASE_URL') # Sandbox or Production URL
+  c.base_url = ENV.fetch('BAMBORA_BASE_URL') # Sandbox or Production URL
   c.merchant_id = ENV.fetch('BAMBORA_MERCHANT_ID')
 end
 ```

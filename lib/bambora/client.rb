@@ -5,7 +5,6 @@ require 'faraday'
 
 module Bambora
   class Client
-    extend Forwardable
     attr_accessor :base_url, :merchant_id, :sub_merchant_id
 
     def initialize(options = {})
@@ -26,7 +25,7 @@ module Bambora
     end
 
     def post(path:, body:, headers:)
-      connection.post(path, body.to_json.to_s, headers)
+      connection.post(path, body, headers)
     end
 
     def delete(path:, headers:)
