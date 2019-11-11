@@ -3,7 +3,7 @@ PATH
   specs:
     bambora-client (0.1.0)
       excon (~> 0.68.0)
-      faraday (~> 0.17)
+      faraday (>= 0.9, <= 1.0)
 
 GEM
   remote: https://rubygems.org/
