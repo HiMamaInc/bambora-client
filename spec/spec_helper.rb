@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-require 'bambora'
+require 'bambora/client'
 require 'pry'
 require 'webmock/rspec'
 

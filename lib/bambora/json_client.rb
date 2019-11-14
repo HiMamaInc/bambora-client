@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Bambora
-  class JSONClient < Bambora::Client
+  class JSONClient < Bambora::RestClient
     # Make a GET Request.
     #
     # @example

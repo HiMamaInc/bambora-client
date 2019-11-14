@@ -30,14 +30,14 @@ gem install bambora-client
 You can initilize the client by passing a hash to it, or by passing a block.
 
 ```ruby
-client = Bambora::Client.new(
+client = Bambora::RestClient.new(
   base_url: ENV.fetch('BAMBORA_BASE_URL') # Sandbox or Production URL
   merchant_id: ENV.fetch('BAMBORA_MERCHANT_ID'),
 )
 ```
 
 ```ruby
-client = Bambora::Client.new do |c|
+client = Bambora::RestClient.new do |c|
   c.base_url = ENV.fetch('BAMBORA_BASE_URL') # Sandbox or Production URL
   c.merchant_id = ENV.fetch('BAMBORA_MERCHANT_ID')
 end
@@ -46,7 +46,7 @@ end
 You can also initilze a client with a sub-merchant-id:
 
 ```ruby
-client = Bambora::Client.new(
+client = Bambora::RestClient.new(
   ...
   sub_merchant_id: 'submerchantid',
 )
@@ -91,7 +91,7 @@ profiles.create(
 #    }
 ```
 
-## Delete a Profile
+#### Delete a Profile
 
 ```ruby
 profiles.delete(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A')
