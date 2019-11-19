@@ -7,11 +7,95 @@ require 'bambora/v1/batch_payment_report_resource'
 require 'bambora/v1/batch_payment_resource'
 require 'bambora/v1/profile_resource'
 require 'bambora/v1/payment_resource'
-require 'bambora/version'
+require 'bambora/client/version'
 
 module Bambora
-  module Client
+  class Client
     class Error < StandardError; end
     class ServerError < StandardError; end
+
+    attr_accessor :base_url, :merchant_id, :sub_merchant_id, :profiles_api_key, :payments_api_key, :batch_api_key,
+                  :reporting_api_key
+
+    # Initialze a new Bambora::Client.
+    #
+    # @example
+    #
+    #   client = Bambora::Client.new do |c|
+    #     c.base_url = ENV.fetch('BAMBORA_BASE_URL')
+    #     c.merchant_id = ENV.fetch('BAMBORA_MERCHANT_ID')
+    #     c.sub_merchant_id = ENV.fetch('BAMBORA_SUB_MERCHANT_ID')
+    #     c.profiles_api_key = ENV.fetch('BAMBORA_PROFILES_API_KEY')
+    #     c.payments_api_key = ENV.fetch('BAMBORA_PAYMENTS_API_KEY')
+    #     c.batch_api_key = ENV.fetch('BAMBORA_BATCH_API_KEY')
+    #     c.reporting_api_key = ENV.fetch('BAMBORA_REPORTING_API_KEY')
+    #   end
+    #
+    # @param options[base_url] [String] Bambora Base URL
+    # @param options[merchant_id] [String] The Merchant ID for this request.
+    # @param options[sub_merchant_id] [String] The Sub-Merchant ID for this request.
+    # @param options[profiles_api_key] [String] The Profiles API Key for this request.
+    # @param options[payments_api_key] [String] The Payments API Key for this request.
+    # @param options[batch_api_key] [String] The Batch API Key for this request.
+    # @param options[reporting_api_key] [String] The Reporting API Key for this request.
+    def initialize(options = {})
+      if !options[:version].nil? && options[:version].upcase != 'V1'
+        raise Bambora::Client::Error, 'Only V1 endpoints are supported at this time.'
+      end
+
+      options.each do |key, value|
+        instance_variable_set("@#{key}", value)
+      end
+
+      yield(self) if block_given?
+    end
+
+    # Retrieve a client to make requests the Profiles endpoints.
+    #
+    # @example
+    #   profiles = client.profiles
+    #   profiles.delete(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A')
+    #
+    # @return [Bambora::V1::ProfileResource]
+    def profiles
+      @profiles ||= Bambora::V1::ProfileResource.new(client: json_client, api_key: profiles_api_key)
+    end
+
+    # Retrieve a client to make requests the Payments endpoints.
+    #
+    # @example
+    #   payments = client.profiles
+    #   payments.create(
+    #     {
+    #       amount: 50,
+    #       payment_method: 'card',
+    #       card: {
+    #         name: 'Hup Podling',
+    #         number: '4504481742333',
+    #         expiry_month: '12',
+    #         expiry_year: '20',
+    #         cvd: '123',
+    #       },
+    #     },
+    #   )
+    #
+    # @return [Bambora::V1::PaymentResource]
+    def payments
+      @payments ||= Bambora::V1::PaymentsResource.new(client: json_client, api_key: payments_api_key)
+    end
+
+    def batch_payment_reports; end
+
+    def batch_payments; end
+
+    private
+
+    def json_client
+      @json_client ||= Bambora::JSONClient.new(
+        base_url: base_url,
+        merchant_id: merchant_id,
+        sub_merchant_id: sub_merchant_id,
+      )
+    end
   end
 end
