@@ -6,7 +6,7 @@ module Bambora
     #
     # @example
     #
-    #   client = Bambora::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
+    #   client = Bambora::JSONClient(base_url: '...', merchant_id: '...')
     #
     #   client.get(
     #     path: 'v1/profiles',

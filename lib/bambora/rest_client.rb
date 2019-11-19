@@ -7,6 +7,14 @@ module Bambora
   class RestClient
     attr_accessor :base_url, :merchant_id, :sub_merchant_id
 
+    # Initialze a client that makes REST requests. The RestClient is used by the JSONClient.
+    #
+    # @example
+    #   rest_client = Bambora::RestClient.new(
+    #     base_url: ENV.fetch('BAMBORA_BASE_URL'),
+    #     merchant_id: ENV.fetch('BAMBORA_MERCHANT_ID'),
+    #     sub_merchant_id: ENV.fetch('BAMBORA_SUB_MERCHANT_ID'),
+    #   )
     def initialize(options = {})
       if !options[:version].nil? && options[:version].upcase != 'V1'
         raise Bambora::Client::Error, 'Only V1 endpoints are supported at this time.'
