@@ -30,29 +30,24 @@ gem install bambora-client
 You can initilize the client by passing a hash to it, or by passing a block.
 
 ```ruby
-client = Bambora::Client::RestClient.new(
-  base_url: ENV.fetch('BAMBORA_BASE_URL') # Sandbox or Production URL
+client = Bambora::Client.new(
+  base_url: ENV.fetch('BAMBORA_BASE_URL'),
   merchant_id: ENV.fetch('BAMBORA_MERCHANT_ID'),
+  sub_merchant_id: 'submerchantid', #optional
+  sub_merchant_id: ENV.fetch('BAMBORA_SUB_MERCHANT_ID'),
+  profiles_api_key: ENV.fetch('BAMBORA_PROFILES_API_KEY'),
+  payments_api_key: ENV.fetch('BAMBORA_PAYMENTS_API_KEY'),
+  batch_api_key: ENV.fetch('BAMBORA_BATCH_API_KEY'),
+  reporting_api_key: ENV.fetch('BAMBORA_REPORTING_API_KEY'),
 )
 ```
 
-```ruby
-client = Bambora::Client::RestClient.new do |c|
-  c.base_url = ENV.fetch('BAMBORA_BASE_URL') # Sandbox or Production URL
-  c.merchant_id = ENV.fetch('BAMBORA_MERCHANT_ID')
-end
-```
-
-You can also initilze a client with a sub-merchant-id:
+The `client` can now initialize new classes for making requests to `/profiles`, `/payments`, etc.
 
 ```ruby
-client = Bambora::Client::RestClient.new(
-  ...
-  sub_merchant_id: 'submerchantid',
-)
+profiles = client.profiles
+profiles.delete(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A')
 ```
-
-The client is then passed to one of the `*Resource` classes, mentioned below, in order to make a network request.
 
 ### Profiles
 
@@ -62,8 +57,8 @@ The client is then passed to one of the `*Resource` classes, mentioned below, in
 To use the profiles API, you must create an instance of the `Bambora::Client::V1::ProfileResource` class.
 
 ```ruby
-client = Bambora::Client::JSONClient.new(...)
-profiles = Bambora::Client::V1::ProfileResource.new(client: client, api_key: ENV.fetch('BAMBORA_PROFILES_API_KEY'))
+client = Bambora::Client.new(...)
+profiles = client.profiles
 ```
 
 Once the resource instance has been instantiated, actions can be made against the API.
