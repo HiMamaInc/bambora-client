@@ -103,14 +103,10 @@ profiles.delete(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A')
 Android Pay.
 *Bambora Docs*: <https://dev.na.bambora.com/docs/references/payment_APIs/>
 
-To use the payments API, you must create an instance of the `Bambora::Client::V1::PaymentResource` class.
-
 ```ruby
-client = Bambora::Client::JSONClient.new(...)
-payments = Bambora::Client::V1::PaymentResource.new(client: client, api_key: ENV.fetch('BAMBORA_PAYMENTS_API_KEY'))
+client = Bambora::Client.new(...)
+payments = client.payments
 ```
-
-Once the resource instance has been instantiated, actions can be made against the API.
 
 #### Make A Payment
 
