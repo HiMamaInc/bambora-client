@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require 'bambora/rest_client'
+require 'bambora/client/version'
 require 'bambora/headers'
 require 'bambora/json_client'
+require 'bambora/rest_client'
 require 'bambora/v1/batch_payment_report_resource'
 require 'bambora/v1/batch_payment_resource'
-require 'bambora/v1/profile_resource'
 require 'bambora/v1/payment_resource'
-require 'bambora/client/version'
+require 'bambora/v1/profile_resource'
 
 module Bambora
   class Client
@@ -50,7 +50,7 @@ module Bambora
       yield(self) if block_given?
     end
 
-    # Retrieve a client to make requests the Profiles endpoints.
+    # Retrieve a client to make requests to the Profiles endpoints.
     #
     # @example
     #   profiles = client.profiles
@@ -64,7 +64,7 @@ module Bambora
       @profiles ||= Bambora::V1::ProfileResource.new(client: json_client, api_key: api_key)
     end
 
-    # Retrieve a client to make requests the Payments endpoints.
+    # Retrieve a client to make requests to the Payments endpoints.
     #
     # @example
     #   payments = client.profiles

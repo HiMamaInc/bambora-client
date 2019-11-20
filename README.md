@@ -54,8 +54,6 @@ profiles.delete(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A')
 *Summary*: Payment profiles store confidential payment information. Transactions can be processed against profiles.
 *Bambora Docs*: <https://dev.na.bambora.com/docs/guides/payment_profiles/>
 
-To use the profiles API, you must create an instance of the `Bambora::Client::V1::ProfileResource` class.
-
 ```ruby
 client = Bambora::Client.new(...)
 profiles = client.profiles
