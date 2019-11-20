@@ -35,18 +35,6 @@ module Bambora
           expect(subject.public_send(method, api_key: override_api_key).api_key).to eq override_api_key
         end
       end
-
-      context 'without an API key passed in' do
-        subject { described_class.new("#{method}_api_key".to_sym => default_api_key) }
-
-        it "returns a #{resource_class}" do
-          expect(subject.public_send(method)).to be_a resource_class
-        end
-
-        it 'uses the API key passed in during initialization' do
-          expect(subject.public_send(method).api_key).to eq default_api_key
-        end
-      end
     end
 
     describe '#payments' do

@@ -51,7 +51,7 @@ module Bambora
     #   API key, this parameter is not needed.
     #
     # @return [Bambora::V1::ProfileResource]
-    def profiles(api_key: profiles_api_key)
+    def profiles(api_key:)
       @profiles ||= Bambora::V1::ProfileResource.new(client: json_client, api_key: api_key)
     end
 
@@ -77,7 +77,7 @@ module Bambora
     #   API key, this parameter is not needed.
     #
     # @return [Bambora::V1::PaymentResource]
-    def payments(api_key: payments_api_key)
+    def payments(api_key:)
       @payments ||= Bambora::V1::PaymentResource.new(client: json_client, api_key: api_key)
     end
 
