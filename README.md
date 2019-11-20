@@ -35,19 +35,14 @@ All `*_api_key` arguments are optional. If you do not pass these API keys in on 
 client = Bambora::Client.new(
   base_url: ENV.fetch('BAMBORA_BASE_URL'),
   merchant_id: ENV.fetch('BAMBORA_MERCHANT_ID'),
-  sub_merchant_id: 'submerchantid', #optional
   sub_merchant_id: ENV.fetch('BAMBORA_SUB_MERCHANT_ID'),
-  profiles_api_key: ENV.fetch('BAMBORA_PROFILES_API_KEY'),
-  payments_api_key: ENV.fetch('BAMBORA_PAYMENTS_API_KEY'),
-  batch_api_key: ENV.fetch('BAMBORA_BATCH_API_KEY'),
-  reporting_api_key: ENV.fetch('BAMBORA_REPORTING_API_KEY'),
 )
 ```
 
 The `client` can now initialize new classes for making requests to `/profiles`, `/payments`, etc.
 
 ```ruby
-profiles = client.profiles
+profiles = client.profiles(api_key: ENV.fetch('BAMBORA_PROFILES_API_KEY'))
 profiles.delete(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A')
 ```
 
@@ -58,9 +53,6 @@ profiles.delete(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A')
 
 ```ruby
 client = Bambora::Client.new(...)
-profiles = client.profiles
-
-# Or, if you did not pass an API key into the initializer:
 profiles = client.profiles(api_key: ENV.fetch('BAMBORA_PROFILES_API_KEY'))
 ```
 

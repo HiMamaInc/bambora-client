@@ -14,8 +14,7 @@ module Bambora
     class Error < StandardError; end
     class ServerError < StandardError; end
 
-    attr_accessor :base_url, :merchant_id, :sub_merchant_id, :profiles_api_key, :payments_api_key, :batch_api_key,
-                  :reporting_api_key
+    attr_accessor :base_url, :merchant_id, :sub_merchant_id
 
     # Initialze a new Bambora::Client.
     #
@@ -25,19 +24,11 @@ module Bambora
     #     c.base_url = ENV.fetch('BAMBORA_BASE_URL')
     #     c.merchant_id = ENV.fetch('BAMBORA_MERCHANT_ID')
     #     c.sub_merchant_id = ENV.fetch('BAMBORA_SUB_MERCHANT_ID')
-    #     c.profiles_api_key = ENV.fetch('BAMBORA_PROFILES_API_KEY')
-    #     c.payments_api_key = ENV.fetch('BAMBORA_PAYMENTS_API_KEY')
-    #     c.batch_api_key = ENV.fetch('BAMBORA_BATCH_API_KEY')
-    #     c.reporting_api_key = ENV.fetch('BAMBORA_REPORTING_API_KEY')
     #   end
     #
     # @param options[base_url] [String] Bambora Base URL
     # @param options[merchant_id] [String] The Merchant ID for this request.
     # @param options[sub_merchant_id] [String] The Sub-Merchant ID for this request.
-    # @param options[profiles_api_key] [String] The Profiles API Key for this request.
-    # @param options[payments_api_key] [String] The Payments API Key for this request.
-    # @param options[batch_api_key] [String] The Batch API Key for this request.
-    # @param options[reporting_api_key] [String] The Reporting API Key for this request.
     def initialize(options = {})
       if !options[:version].nil? && options[:version].upcase != 'V1'
         raise Bambora::Client::Error, 'Only V1 endpoints are supported at this time.'
