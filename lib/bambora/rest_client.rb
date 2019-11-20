@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'base64'
-require 'faraday'
-
 module Bambora
   class RestClient
     attr_accessor :base_url, :merchant_id, :sub_merchant_id
@@ -46,6 +43,10 @@ module Bambora
 
     def build_headers(api_key)
       Bambora::Headers.build(api_key: api_key, merchant_id: merchant_id, sub_merchant_id: sub_merchant_id)
+    end
+
+    def error_response(resp)
+      { status: resp.status, body: resp.body }
     end
   end
 end

@@ -2,6 +2,8 @@
 
 module Bambora
   class JSONClient < Bambora::RestClient
+    include Bambora::Utils
+
     # Make a GET Request.
     #
     # @example
@@ -104,23 +106,6 @@ module Bambora
       deep_transform_keys_in_object(JSON.parse(resp.body), &:to_sym)
     rescue JSON::ParserError
       error_response(resp)
-    end
-
-    def deep_transform_keys_in_object(object, &block)
-      case object
-        when Hash
-          object.each_with_object({}) do |(key, value), result|
-            result[yield(key)] = deep_transform_keys_in_object(value, &block)
-          end
-        when Array
-          object.map { |e| deep_transform_keys_in_object(e, &block) }
-        else
-          object
-      end
-    end
-
-    def error_response(resp)
-      { status: resp.status, body: resp.body }
     end
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Bambora
-  module V1
+  module Legacy
     class ProfileResource
       attr_accessor :client, :api_key, :sub_path
 
@@ -9,16 +9,16 @@ module Bambora
       #
       # @example
       #
-      #   client = Bambora::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
-      #   profiles = Bambora::V1::ProfileResource(client: client)
+      #   client = Bambora::XMLClient(base_url: '...', merchant_id: '...')
+      #   profiles = Bambora::Legacy::ProfileResource(client: client, api_key: '...')
       #
       #   # Start making requests ...
       #
-      # @param client [Bambora::JSONClient] An instance of Bambora::JSONClient, used to make network requests.
+      # @param client [Bambora::XMLClient] An instance of Bambora::XMLClient, used to make network requests.
       def initialize(client:, api_key:)
         @client = client
         @api_key = api_key
-        @sub_path = '/v1/profiles'
+        @sub_path = 'scripts/payment_profile.asp'
       end
 
       # Create a Bambora payment profile.
