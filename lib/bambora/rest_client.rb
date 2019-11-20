@@ -16,10 +16,6 @@ module Bambora
     #     sub_merchant_id: ENV.fetch('BAMBORA_SUB_MERCHANT_ID'),
     #   )
     def initialize(options = {})
-      if !options[:version].nil? && options[:version].upcase != 'V1'
-        raise Bambora::Client::Error, 'Only V1 endpoints are supported at this time.'
-      end
-
       options.each do |key, value|
         instance_variable_set("@#{key}", value)
       end

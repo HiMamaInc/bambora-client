@@ -56,9 +56,12 @@ module Bambora
     #   profiles = client.profiles
     #   profiles.delete(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A')
     #
+    # @param api_key [String] optional API key for the profiles endpoint. If the Client class was initialized with an
+    #   API key, this parameter is not needed.
+    #
     # @return [Bambora::V1::ProfileResource]
-    def profiles
-      @profiles ||= Bambora::V1::ProfileResource.new(client: json_client, api_key: profiles_api_key)
+    def profiles(api_key: profiles_api_key)
+      @profiles ||= Bambora::V1::ProfileResource.new(client: json_client, api_key: api_key)
     end
 
     # Retrieve a client to make requests the Payments endpoints.
@@ -79,9 +82,12 @@ module Bambora
     #     },
     #   )
     #
+    # @param api_key [String] optional API key for the payments endpoint. If the Client class was initialized with an
+    #   API key, this parameter is not needed.
+    #
     # @return [Bambora::V1::PaymentResource]
-    def payments
-      @payments ||= Bambora::V1::PaymentsResource.new(client: json_client, api_key: payments_api_key)
+    def payments(api_key: payments_api_key)
+      @payments ||= Bambora::V1::PaymentResource.new(client: json_client, api_key: api_key)
     end
 
     def batch_payment_reports; end
