@@ -29,6 +29,8 @@ gem install bambora-client
 
 You can initilize the client by passing a hash to it, or by passing a block.
 
+All `*_api_key` arguments are optional. If you do not pass these API keys in on initialization, you can pass them into their respective method calls.
+
 ```ruby
 client = Bambora::Client.new(
   base_url: ENV.fetch('BAMBORA_BASE_URL'),
@@ -57,6 +59,9 @@ profiles.delete(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A')
 ```ruby
 client = Bambora::Client.new(...)
 profiles = client.profiles
+
+# Or, if you did not pass an API key into the initializer:
+profiles = client.profiles(api_key: ENV.fetch('BAMBORA_PROFILES_API_KEY'))
 ```
 
 Once the resource instance has been instantiated, actions can be made against the API.
