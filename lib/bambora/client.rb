@@ -2,8 +2,8 @@
 
 require 'bambora/client/version'
 require 'bambora/headers'
-require 'bambora/json_client'
 require 'bambora/rest_client'
+require 'bambora/json_client'
 require 'bambora/v1/batch_payment_report_resource'
 require 'bambora/v1/batch_payment_resource'
 require 'bambora/v1/payment_resource'
