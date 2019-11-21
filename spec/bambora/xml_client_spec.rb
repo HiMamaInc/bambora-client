@@ -15,7 +15,6 @@ module Bambora
     end
     let(:path) { '/' }
     let(:response_body) { { response: 'body', with: { objects: 'yay!' }, and: [{ arrays: 'wow!' }] } }
-    let(:xml_response_body) { Gyoku.xml(response_body) }
     let(:failed_status) { 500 }
     let(:failed_response_body) { 'Mouldy mildew, mother of mouthmuck, dangle and strangle and death.' }
 
@@ -23,7 +22,7 @@ module Bambora
 
     describe '#post' do
       let(:request_body) { { gelfling: 'Deet' } }
-      let(:xml_request_body) { Gyoku.xml(request: xml_request_body) }
+      let(:xml_request_body) { Gyoku.xml(request: request_body.merge(rpt_format: 'JSON')) }
 
       context 'server responds with a 2xx status' do
         before do

@@ -14,6 +14,12 @@ module Bambora
         subject { described_class.build(api_key: sekret, merchant_id: 1, sub_merchant_id: id) }
         it { is_expected.to eq('Authorization' => 'Passcode MTpzZWtyZXQ=', 'Sub-Merchant-Id' => id) }
       end
+
+      context 'with a content_type' do
+        let(:content_type) { 'applicaiton/json' }
+        subject { described_class.build(api_key: sekret, merchant_id: 1, content_type: content_type) }
+        it { is_expected.to eq('Authorization' => 'Passcode MTpzZWtyZXQ=', 'Content-Type' => content_type) }
+      end
     end
   end
 end

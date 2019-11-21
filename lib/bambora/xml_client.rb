@@ -2,7 +2,8 @@
 
 module Bambora
   class XMLClient < Bambora::RestClient
-    include Bambora::Utils
+    CONTENT_TYPE = 'application/xml'
+    RESPONSE_FORMAT = 'JSON'
 
     # Make a POST Request.
     #
@@ -12,26 +13,13 @@ module Bambora
     #
     # @return [Hash] Indicating success or failure of the operation.
     def post(path:, body:, api_key:)
-      parse_response(
-        super(path: path, body: Gyoku.xml(request: body), headers: build_headers(api_key)),
-      )
-    end
-
-    private
-
-    def build_headers(api_key)
-      { 'Content-Type' => 'application/xml' }.merge(super(api_key))
-    end
-
-    def parse_response(resp)
-      parsed_body = deep_transform_keys_in_object(parser.parse(resp.body), &:to_sym)
-      return error_response(resp) if parsed_body.empty?
-
-      parsed_body
-    end
-
-    def parser
-      @parser ||= Nori.new
+      Bambora::JSONResponse.new(
+        super(
+          path: path,
+          body: Bambora::XMLRequestBody.build(body: body, response_format: RESPONSE_FORMAT),
+          headers: build_headers(api_key: api_key, content_type: CONTENT_TYPE),
+        ),
+      ).to_h
     end
   end
 end

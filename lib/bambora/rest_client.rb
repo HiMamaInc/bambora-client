@@ -41,12 +41,13 @@ module Bambora
       end
     end
 
-    def build_headers(api_key)
-      Bambora::Headers.build(api_key: api_key, merchant_id: merchant_id, sub_merchant_id: sub_merchant_id)
-    end
-
-    def error_response(resp)
-      { status: resp.status, body: resp.body }
+    def build_headers(api_key:, content_type: 'application/json')
+      Bambora::Headers.build(
+        content_type: content_type,
+        api_key: api_key,
+        merchant_id: merchant_id,
+        sub_merchant_id: sub_merchant_id,
+      )
     end
   end
 end

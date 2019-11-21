@@ -1,5 +1,21 @@
+# frozen_string_literal: true
+
 module Bambora
-  module Utils
+  class JSONResponse
+    attr_accessor :response
+
+    def initialize(response)
+      @response = response
+    end
+
+    def to_h
+      deep_transform_keys_in_object(JSON.parse(response.body), &:to_sym)
+    rescue JSON::ParserError
+      error_response
+    end
+
+    private
+
     def deep_transform_keys_in_object(object, &block)
       case object
         when Hash
@@ -11,6 +27,10 @@ module Bambora
         else
           object
       end
+    end
+
+    def error_response
+      { status: response.status, body: response.body }
     end
   end
 end

@@ -2,8 +2,6 @@
 
 module Bambora
   class JSONClient < Bambora::RestClient
-    include Bambora::Utils
-
     # Make a GET Request.
     #
     # @example
@@ -28,9 +26,9 @@ module Bambora
     #
     # @return [Hash] Indicating success or failure of the operation.
     def get(path:, params: nil, api_key:)
-      parse_response(
-        super(path: path, params: params, headers: build_headers(api_key)),
-      )
+      Bambora::JSONResponse.new(
+        super(path: path, params: params, headers: build_headers(api_key: api_key)),
+      ).to_h
     end
 
     # Make a POST Request.
@@ -68,9 +66,9 @@ module Bambora
     #
     # @return [Hash] Indicating success or failure of the operation.
     def post(path:, body:, api_key:)
-      parse_response(
-        super(path: path, body: body.to_json.to_s, headers: build_headers(api_key)),
-      )
+      Bambora::JSONResponse.new(
+        super(path: path, body: body.to_json.to_s, headers: build_headers(api_key: api_key)),
+      ).to_h
     end
 
     # Make a DELETE Request.
@@ -91,21 +89,9 @@ module Bambora
     #
     # @return [Hash] Indicating success or failure of the operation.
     def delete(path:, api_key:)
-      parse_response(
-        super(path: path, headers: build_headers(api_key)),
-      )
-    end
-
-    private
-
-    def build_headers(api_key)
-      { 'Content-Type' => 'application/json' }.merge(super(api_key))
-    end
-
-    def parse_response(resp)
-      deep_transform_keys_in_object(JSON.parse(resp.body), &:to_sym)
-    rescue JSON::ParserError
-      error_response(resp)
+      Bambora::JSONResponse.new(
+        super(path: path, headers: build_headers(api_key: api_key)),
+      ).to_h
     end
   end
 end
