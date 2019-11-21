@@ -13,7 +13,7 @@ module Bambora
     let(:failed_status) { 500 }
     let(:failed_response_body) { 'Mouldy mildew, mother of mouthmuck, dangle and strangle and death.' }
 
-    subject { Bambora::JSONClient.new(base_url: base_url, merchant_id: merchant_id) }
+    subject { described_class.new(base_url: base_url, merchant_id: merchant_id) }
 
     describe '#get' do
       context 'server responds with a 2xx status' do

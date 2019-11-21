@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'bambora/version'
+require 'bambora/client/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'bambora-client'
-  spec.version       = Bambora::VERSION
+  spec.version       = Bambora::Client::VERSION
   spec.authors       = ['Cassidy K']
   spec.email         = ['hello@cassidy.codes', 'tech@himama.com']
 

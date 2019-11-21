@@ -29,41 +29,31 @@ gem install bambora-client
 
 You can initilize the client by passing a hash to it, or by passing a block.
 
+All `*_api_key` arguments are optional. If you do not pass these API keys in on initialization, you can pass them into their respective method calls.
+
 ```ruby
 client = Bambora::Client.new(
-  base_url: ENV.fetch('BAMBORA_BASE_URL') # Sandbox or Production URL
+  base_url: ENV.fetch('BAMBORA_BASE_URL'),
   merchant_id: ENV.fetch('BAMBORA_MERCHANT_ID'),
+  sub_merchant_id: ENV.fetch('BAMBORA_SUB_MERCHANT_ID'),
 )
 ```
 
-```ruby
-client = Bambora::Client.new do |c|
-  c.base_url = ENV.fetch('BAMBORA_BASE_URL') # Sandbox or Production URL
-  c.merchant_id = ENV.fetch('BAMBORA_MERCHANT_ID')
-end
-```
-
-You can also initilze a client with a sub-merchant-id:
+The `client` can now initialize new classes for making requests to `/profiles`, `/payments`, etc.
 
 ```ruby
-client = Bambora::Client.new(
-  ...
-  sub_merchant_id: 'submerchantid',
-)
+profiles = client.profiles(api_key: ENV.fetch('BAMBORA_PROFILES_API_KEY'))
+profiles.delete(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A')
 ```
-
-The client is then passed to one of the `*Resource` classes, mentioned below, in order to make a network request.
 
 ### Profiles
 
 *Summary*: Payment profiles store confidential payment information. Transactions can be processed against profiles.
 *Bambora Docs*: <https://dev.na.bambora.com/docs/guides/payment_profiles/>
 
-To use the profiles API, you must create an instance of the `Bambora::V1::ProfileResource` class.
-
 ```ruby
-client = Bambora::JSONClient.new(...)
-profiles = Bambora::V1::ProfileResource.new(client: client, api_key: ENV.fetch('BAMBORA_PROFILES_API_KEY'))
+client = Bambora::Client.new(...)
+profiles = client.profiles(api_key: ENV.fetch('BAMBORA_PROFILES_API_KEY'))
 ```
 
 Once the resource instance has been instantiated, actions can be made against the API.
@@ -91,7 +81,7 @@ profiles.create(
 #    }
 ```
 
-## Delete a Profile
+#### Delete a Profile
 
 ```ruby
 profiles.delete(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A')
@@ -108,14 +98,10 @@ profiles.delete(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A')
 Android Pay.
 *Bambora Docs*: <https://dev.na.bambora.com/docs/references/payment_APIs/>
 
-To use the payments API, you must create an instance of the `Bambora::V1::PaymentResource` class.
-
 ```ruby
-client = Bambora::JSONClient.new(...)
-payments = Bambora::V1::PaymentResource.new(client: client, api_key: ENV.fetch('BAMBORA_PAYMENTS_API_KEY'))
+client = Bambora::Client.new(...)
+payments = client.payments
 ```
-
-Once the resource instance has been instantiated, actions can be made against the API.
 
 #### Make A Payment
 

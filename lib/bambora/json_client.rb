@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 module Bambora
-  class JSONClient < Bambora::Client
+  class JSONClient < Bambora::RestClient
     # Make a GET Request.
     #
     # @example
     #
-    #   client = Bambora::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
+    #   client = Bambora::JSONClient(base_url: '...', merchant_id: '...')
     #
     #   client.get(
     #     path: 'v1/profiles',
