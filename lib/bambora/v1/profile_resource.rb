@@ -2,9 +2,12 @@
 
 module Bambora
   module V1
+    ##
+    # For making requests to the /profiles endpoint
     class ProfileResource
-      attr_accessor :client, :api_key, :sub_path
+      attr_reader :client, :api_key, :sub_path
 
+      ##
       # Instantiate an interface to make requests against Bambora's Profiles API.
       #
       # @example
@@ -21,6 +24,7 @@ module Bambora
         @sub_path = '/v1/profiles'
       end
 
+      ##
       # Create a Bambora payment profile.
       #
       # @example
@@ -54,6 +58,7 @@ module Bambora
         client.post(path: sub_path, body: card_data, api_key: api_key)
       end
 
+      ##
       # Delete a Bambora payment profile given a customer code.
       #
       # @example

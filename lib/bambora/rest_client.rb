@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 module Bambora
+  ##
+  # A basic client for making REST requests.
   class RestClient
-    attr_accessor :base_url, :merchant_id, :sub_merchant_id
+    attr_reader :base_url, :merchant_id, :sub_merchant_id
 
     # Initialze a client that makes REST requests. The RestClient is used by the JSONClient.
     #
@@ -36,8 +38,8 @@ module Bambora
     end
 
     def connection
-      @connection ||= Faraday.new(url: base_url) do |f|
-        f.adapter :excon
+      @connection ||= Faraday.new(url: base_url) do |faraday|
+        faraday.adapter :excon
       end
     end
 

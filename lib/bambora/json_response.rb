@@ -2,7 +2,7 @@
 
 module Bambora
   class JSONResponse
-    attr_accessor :response
+    attr_reader :response
 
     def initialize(response)
       @response = response

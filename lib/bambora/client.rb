@@ -21,7 +21,7 @@ module Bambora
     class Error < StandardError; end
     class ServerError < StandardError; end
 
-    attr_accessor :base_url, :merchant_id, :sub_merchant_id
+    attr_reader :base_url, :merchant_id, :sub_merchant_id
 
     # Initialze a new Bambora::Client.
     #
