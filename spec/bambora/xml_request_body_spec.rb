@@ -6,7 +6,7 @@ module Bambora
   describe XMLRequestBody do
     describe '.build' do
       let(:hash_body) { { podlings: %w[hup kotha ydra] } }
-      let(:xml_body) { Gyoku.xml(request: hash_body) }
+      let(:xml_body) { "<?xml version='1.0' encoding='utf-8'?>#{Gyoku.xml(request: hash_body)}" }
       subject { described_class.build(body: hash_body) }
 
       it 'returns xml' do
@@ -15,7 +15,9 @@ module Bambora
 
       context 'with a response format' do
         let(:response_format) { 'application/json' }
-        let(:xml_body) { Gyoku.xml(request: hash_body.merge(rpt_format: response_format)) }
+        let(:xml_body) do
+          "<?xml version='1.0' encoding='utf-8'?>#{Gyoku.xml(request: hash_body.merge(rpt_format: response_format))}"
+        end
         subject { described_class.build(body: hash_body, response_format: response_format) }
 
         it 'uses the response format' do

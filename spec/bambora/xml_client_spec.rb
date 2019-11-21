@@ -22,7 +22,9 @@ module Bambora
 
     describe '#post' do
       let(:request_body) { { gelfling: 'Deet' } }
-      let(:xml_request_body) { Gyoku.xml(request: request_body.merge(rpt_format: 'JSON')) }
+      let(:xml_request_body) do
+        "<?xml version='1.0' encoding='utf-8'?>#{Gyoku.xml(request: request_body.merge(rpt_format: 'JSON'))}"
+      end
 
       context 'server responds with a 2xx status' do
         before do
