@@ -2,6 +2,8 @@
 
 module Bambora
   class JSONClient < Bambora::RestClient
+    CONTENT_TYPE = 'application/json'
+
     # Make a GET Request.
     #
     # @example
@@ -92,6 +94,12 @@ module Bambora
       Bambora::JSONResponse.new(
         super(path: path, headers: build_headers(api_key: api_key)),
       ).to_h
+    end
+
+    private
+
+    def build_headers(api_key:)
+      super(api_key: api_key, content_type: CONTENT_TYPE)
     end
   end
 end

@@ -41,7 +41,7 @@ module Bambora
       end
     end
 
-    def build_headers(api_key:, content_type: 'application/json')
+    def build_headers(api_key:, content_type: nil)
       Bambora::Headers.build(
         content_type: content_type,
         api_key: api_key,

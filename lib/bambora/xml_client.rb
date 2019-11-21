@@ -17,9 +17,15 @@ module Bambora
         super(
           path: path,
           body: Bambora::XMLRequestBody.build(body: body, response_format: RESPONSE_FORMAT),
-          headers: build_headers(api_key: api_key, content_type: CONTENT_TYPE),
+          headers: build_headers(api_key: api_key),
         ),
       ).to_h
+    end
+
+    private
+
+    def build_headers(api_key:)
+      super(api_key: api_key, content_type: CONTENT_TYPE)
     end
   end
 end
