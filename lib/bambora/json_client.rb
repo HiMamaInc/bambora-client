@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Bambora
+  ##
+  # The base class for making JSON requests.
   class JSONClient < Bambora::RestClient
     CONTENT_TYPE = 'application/json'
 

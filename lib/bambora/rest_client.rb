@@ -44,12 +44,12 @@ module Bambora
     end
 
     def build_headers(api_key:, content_type: nil)
-      Bambora::Headers.build(
+      Bambora::Headers.new(
         content_type: content_type,
         api_key: api_key,
         merchant_id: merchant_id,
         sub_merchant_id: sub_merchant_id,
-      )
+      ).build
     end
   end
 end

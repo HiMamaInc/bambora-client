@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Bambora
+  # The base class for making XML requests.
   class XMLClient < Bambora::RestClient
     CONTENT_TYPE = 'application/xml'
     RESPONSE_FORMAT = 'JSON'
@@ -16,7 +17,7 @@ module Bambora
       Bambora::JSONResponse.new(
         super(
           path: path,
-          body: Bambora::XMLRequestBody.build(body: body, response_format: RESPONSE_FORMAT),
+          body: Bambora::XMLRequestBody.new(body: body, response_format: RESPONSE_FORMAT).to_s,
           headers: build_headers(api_key: api_key),
         ),
       ).to_h

@@ -4,10 +4,10 @@ require 'spec_helper'
 
 module Bambora
   describe XMLRequestBody do
-    describe '.build' do
+    describe '#to_s' do
       let(:hash_body) { { podlings: %w[hup kotha ydra] } }
       let(:xml_body) { "<?xml version='1.0' encoding='utf-8'?>#{Gyoku.xml(request: hash_body)}" }
-      subject { described_class.build(body: hash_body) }
+      subject { described_class.new(body: hash_body).to_s }
 
       it 'returns xml' do
         expect(subject).to eq xml_body
@@ -18,7 +18,7 @@ module Bambora
         let(:xml_body) do
           "<?xml version='1.0' encoding='utf-8'?>#{Gyoku.xml(request: hash_body.merge(rpt_format: response_format))}"
         end
-        subject { described_class.build(body: hash_body, response_format: response_format) }
+        subject { described_class.new(body: hash_body, response_format: response_format).to_s }
 
         it 'uses the response format' do
           expect(subject).to eq xml_body
