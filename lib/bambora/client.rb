@@ -1,16 +1,29 @@
 # frozen_string_literal: true
 
+# Libraries
 require 'base64'
+require 'json'
 require 'faraday'
 require 'gyoku'
 require 'nori'
+
 require 'bambora/client/version'
+
+# Builders
 require 'bambora/headers'
 require 'bambora/xml_request_body'
-require 'bambora/json_response'
+
+# Adapters
+require 'bambora/adapters/response'
+require 'bambora/adapters/json_response'
+require 'bambora/adapters/query_string_response'
+
+# Clients
 require 'bambora/rest_client'
 require 'bambora/json_client'
 require 'bambora/xml_client'
+
+# Resources
 require 'bambora/v1/batch_payment_report_resource'
 require 'bambora/v1/batch_payment_resource'
 require 'bambora/v1/payment_resource'

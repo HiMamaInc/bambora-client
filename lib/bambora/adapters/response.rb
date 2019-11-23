@@ -2,8 +2,10 @@
 
 module Bambora
   ##
-  # Parses a JSON response into a Hash
-  class JSONResponse
+  # Parses a response into a Hash. Uses JSON to parse by default.
+  class Response
+    DEFAULT_PARSER = ::JSON
+
     attr_reader :response
 
     def initialize(response)
@@ -11,7 +13,7 @@ module Bambora
     end
 
     def to_h
-      deep_transform_keys_in_object(JSON.parse(response.body), &:to_sym)
+      deep_transform_keys_in_object(parser.parse(response.body), &:to_sym)
     rescue JSON::ParserError
       error_response
     end
@@ -33,6 +35,10 @@ module Bambora
 
     def error_response
       { status: response.status, body: response.body }
+    end
+
+    def parser
+      DEFAULT_PARSER
     end
   end
 end
