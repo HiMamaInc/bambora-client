@@ -14,7 +14,7 @@ module Bambora
     #
     # @return [Hash] Indicating success or failure of the operation.
     def post(path:, body:, api_key:)
-      Bambora::JSONResponse.new(
+      Bambora::ResponseAdapterFactory.for(
         super(
           path: path,
           body: Bambora::XMLRequestBody.new(body: body, response_format: RESPONSE_FORMAT).to_s,

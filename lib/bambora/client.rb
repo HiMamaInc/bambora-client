@@ -13,6 +13,9 @@ require 'bambora/client/version'
 require 'bambora/headers'
 require 'bambora/xml_request_body'
 
+# Factories
+require 'bambora/factories/response_adapter_factory'
+
 # Adapters
 require 'bambora/adapters/response'
 require 'bambora/adapters/json_response'
