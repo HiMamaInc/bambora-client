@@ -6,6 +6,7 @@ module Bambora
     CONTENT_TYPE = 'application/xml'
     RESPONSE_FORMAT = 'JSON'
 
+    ##
     # Make a POST Request.
     #
     # @param path [String] Indicating request path.

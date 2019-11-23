@@ -30,7 +30,7 @@ module Bambora
         before do
           stub_request(:post, base_url)
             .with(headers: headers, body: xml_request_body)
-            .to_return(body: response_body.to_json.to_s)
+            .to_return(headers: { 'Content-Type' => 'text/html' }, body: response_body.to_json.to_s)
         end
 
         it 'parses the response' do
@@ -45,7 +45,7 @@ module Bambora
         before do
           stub_request(:post, base_url)
             .with(headers: headers, body: xml_request_body)
-            .to_return(body: failed_response_body, status: failed_status)
+            .to_return(headers: { 'Content-Type' => 'text/html' }, body: failed_response_body, status: failed_status)
         end
 
         it 'it returns a hash' do

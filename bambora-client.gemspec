@@ -40,8 +40,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'excon', '~> 0.68.0'
   spec.add_dependency 'faraday', '>= 0.9', '<= 1.0'
   spec.add_dependency 'gyoku', '~> 1.0'
-  spec.add_dependency 'nokogiri'
-  spec.add_dependency 'nori', '~> 2.0'
 
   spec.add_development_dependency 'bundler', '~> 1.17'
   spec.add_development_dependency 'pry', '~> 0.12.0'

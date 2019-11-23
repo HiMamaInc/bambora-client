@@ -5,7 +5,6 @@ require 'base64'
 require 'json'
 require 'faraday'
 require 'gyoku'
-require 'nori'
 
 require 'bambora/client/version'
 
