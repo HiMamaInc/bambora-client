@@ -9,7 +9,7 @@ module Bambora
     let(:base_url) { 'https://sandbox-api.na.bambora.com' }
     let(:headers) do
       {
-        'Content-Type' => 'application/xml',
+        'Content-Type' => 'text/html',
         'Authorization' => 'Passcode MTpmYWtla2V5',
       }
     end
@@ -30,7 +30,7 @@ module Bambora
         before do
           stub_request(:post, base_url)
             .with(headers: headers, body: xml_request_body)
-            .to_return(headers: { 'Content-Type' => 'text/html' }, body: response_body.to_json.to_s)
+            .to_return(headers: { 'Content-Type' => 'application/json' }, body: response_body.to_json.to_s)
         end
 
         it 'parses the response' do
@@ -45,7 +45,7 @@ module Bambora
         before do
           stub_request(:post, base_url)
             .with(headers: headers, body: xml_request_body)
-            .to_return(headers: { 'Content-Type' => 'text/html' }, body: failed_response_body, status: failed_status)
+            .to_return(headers: { 'Content-Type' => 'application/json' }, body: failed_response_body, status: failed_status)
         end
 
         it 'it returns a hash' do

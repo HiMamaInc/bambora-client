@@ -3,7 +3,7 @@
 module Bambora
   # The base class for making XML requests.
   class XMLClient < Bambora::RestClient
-    CONTENT_TYPE = 'application/xml'
+    CONTENT_TYPE = 'text/html'
     RESPONSE_FORMAT = 'JSON'
 
     ##
