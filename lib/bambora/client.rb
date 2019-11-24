@@ -11,6 +11,7 @@ require 'bambora/client/version'
 # Builders
 require 'bambora/headers'
 require 'bambora/xml_request_body'
+require 'bambora/www_form_parameters'
 
 # Factories
 require 'bambora/factories/response_adapter_factory'
@@ -24,6 +25,7 @@ require 'bambora/adapters/query_string_response'
 require 'bambora/rest_client'
 require 'bambora/json_client'
 require 'bambora/xml_client'
+require 'bambora/www_form_client'
 
 # Resources
 require 'bambora/v1/batch_payment_report_resource'

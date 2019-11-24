@@ -2,8 +2,8 @@ PATH
   remote: .
   specs:
     bambora-client (0.1.0)
-      excon (~> 0.68.0)
-      faraday (>= 0.9, <= 1.0)
+      excon (< 1.0)
+      faraday (< 1.0)
       gyoku (~> 1.0)
 
 GEM
@@ -18,7 +18,7 @@ GEM
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     diff-lcs (1.3)
-    excon (0.68.0)
+    excon (0.69.1)
     faraday (0.17.0)
       multipart-post (>= 1.2, < 3)
     gyoku (1.3.1)

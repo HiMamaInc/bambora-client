@@ -37,8 +37,8 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'excon', '~> 0.68.0'
-  spec.add_dependency 'faraday', '>= 0.9', '<= 1.0'
+  spec.add_dependency 'excon', '< 1.0'
+  spec.add_dependency 'faraday', '< 1.0'
   spec.add_dependency 'gyoku', '~> 1.0'
 
   spec.add_development_dependency 'bundler', '~> 1.17'
