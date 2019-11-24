@@ -4,7 +4,7 @@ module Bambora
   ##
   # Builds WWW URL Encoded request parameters from a Hash
   class WWWFormParameters
-    attr_reader :body, :response_format
+    attr_reader :body
 
     def initialize(body:)
       @body = body
