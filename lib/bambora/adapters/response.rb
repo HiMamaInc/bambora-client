@@ -4,7 +4,7 @@ module Bambora
   ##
   # Parses a response into a Hash. Uses JSON to parse by default.
   class Response
-    DEFAULT_PARSER = ::JSON
+    DEFAULT_PARSER = JSON
 
     attr_reader :response
 
