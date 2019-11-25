@@ -2,7 +2,7 @@
 
 module Bambora
   ##
-  # Parses a JSON response into a Hash
+  # Selects an adapter for parsing an HTTP response body
   class ResponseAdapterFactory
     class << self
       def for(response)
