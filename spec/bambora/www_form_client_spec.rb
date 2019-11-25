@@ -37,20 +37,24 @@ module Bambora
         end
       end
 
-      # context 'server responds with a non 2xx status' do
-      #   let(:response_body) { 'Mouldy mildew, mother of mouthmuck, dangle and strangle and death.' }
+      context 'server responds with a non 2xx status' do
+        let(:response_body) { 'Mouldy mildew, mother of mouthmuck, dangle and strangle and death.' }
 
-      #   before do
-      #     # stub_request(:post, base_url)
-      #     #   .with(headers: headers)
-      #     #   .to_return(headers: { 'Content-Type' => 'application/json' }, body: failed_response_body, status: failed_status)
-      #   end
+        before do
+          stub_request(:post, base_url)
+            .with(headers: headers, query: request_body)
+            .to_return(
+              headers: { 'Content-Type' => 'text/html' },
+              body: failed_response_body,
+              status: failed_status,
+            )
+        end
 
-      #   it 'it returns a hash' do
-      #     resp = subject.post(path: path, body: request_body, api_key: api_key)
-      #     expect(resp).to eq(status: failed_status, body: failed_response_body)
-      #   end
-      # end
+        it 'it returns a hash' do
+          resp = subject.post(path: path, body: request_body, api_key: api_key)
+          expect(resp).to eq(status: failed_status, body: failed_response_body)
+        end
+      end
     end
   end
 end
