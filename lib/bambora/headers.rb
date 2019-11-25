@@ -6,12 +6,23 @@ module Bambora
   class Headers
     attr_reader :api_key, :merchant_id, :sub_merchant_id, :content_type
 
+    ##
+    # Initialize a new Headers object.
+    #
+    # @param options[:api_key] [String]
+    # @param options[:merchant_id] [String]
+    # @param options[:sub_merchant_id] [String] optional.
+    # @param options[:content_type] [String] optional.
     def initialize(options = {})
       options.each do |key, value|
         instance_variable_set("@#{key}", value)
       end
     end
 
+    ##
+    # Builds a header object.
+    #
+    # @return [Hash]
     def build
       headers = {
         'Authorization' => "Passcode #{passcode}",

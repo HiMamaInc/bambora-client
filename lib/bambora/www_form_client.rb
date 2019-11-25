@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Bambora
-  # The base class for making XML requests.
+  # The base class for making www form urlencoded requests.
   class WWWFormClient < Bambora::RestClient
     CONTENT_TYPE = 'application/x-www-form-urlencoded'
 
@@ -14,13 +14,13 @@ module Bambora
     #
     # @return [Hash] Indicating success or failure of the operation.
     def post(path:, body:, api_key:)
-      Bambora::ResponseAdapterFactory.for(
+      parse_response_body(
         super(
           path: "#{path}?#{WWWFormParameters.new(body: body)}",
           body: nil,
           headers: build_headers(api_key: api_key),
         ),
-      ).to_h
+      )
     end
 
     private

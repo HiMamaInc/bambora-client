@@ -51,5 +51,9 @@ module Bambora
         sub_merchant_id: sub_merchant_id,
       ).build
     end
+
+    def parse_response_body(response)
+      Bambora::ResponseAdapterFactory.for(response).to_h
+    end
   end
 end

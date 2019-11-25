@@ -30,7 +30,7 @@ module Bambora
     #
     # @return [Hash] Indicating success or failure of the operation.
     def get(path:, params: nil, api_key:)
-      Bambora::JSONResponse.new(
+      parse_response_body(
         super(path: path, params: params, headers: build_headers(api_key: api_key)),
       ).to_h
     end
@@ -70,7 +70,7 @@ module Bambora
     #
     # @return [Hash] Indicating success or failure of the operation.
     def post(path:, body:, api_key:)
-      Bambora::JSONResponse.new(
+      parse_response_body(
         super(path: path, body: body.to_json.to_s, headers: build_headers(api_key: api_key)),
       ).to_h
     end
@@ -93,7 +93,7 @@ module Bambora
     #
     # @return [Hash] Indicating success or failure of the operation.
     def delete(path:, api_key:)
-      Bambora::JSONResponse.new(
+      parse_response_body(
         super(path: path, headers: build_headers(api_key: api_key)),
       ).to_h
     end

@@ -15,13 +15,13 @@ module Bambora
     #
     # @return [Hash] Indicating success or failure of the operation.
     def post(path:, body:, api_key:)
-      Bambora::ResponseAdapterFactory.for(
+      parse_response_body(
         super(
           path: path,
           body: Bambora::XMLRequestBody.new(body: body, response_format: RESPONSE_FORMAT).to_s,
           headers: build_headers(api_key: api_key),
         ),
-      ).to_h
+      )
     end
 
     private

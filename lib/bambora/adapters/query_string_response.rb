@@ -2,7 +2,7 @@
 
 module Bambora
   ##
-  # Parses a JSON response into a Hash
+  # Parses a query string response into a Hash
   class QueryStringResponse < Response
     def to_h
       parsed_response = super
