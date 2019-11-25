@@ -4,13 +4,11 @@ require 'spec_helper'
 
 module Bambora
   describe WWWFormClient do
-    let(:api_key) { 'fakekey' }
     let(:merchant_id) { 1 }
     let(:base_url) { 'https://sandbox-api.na.bambora.com' }
     let(:headers) do
       {
         'Content-Type' => 'application/x-www-form-urlencoded',
-        'Authorization' => 'Passcode MTpmYWtla2V5',
       }
     end
     let(:path) { '/' }
@@ -32,7 +30,7 @@ module Bambora
         end
 
         it 'parses the response' do
-          resp = subject.post(path: path, body: request_body, api_key: api_key)
+          resp = subject.post(path: path, body: request_body)
           expect(resp).to eq response_body
         end
       end
@@ -51,7 +49,7 @@ module Bambora
         end
 
         it 'it returns a hash' do
-          resp = subject.post(path: path, body: request_body, api_key: api_key)
+          resp = subject.post(path: path, body: request_body)
           expect(resp).to eq(status: failed_status, body: failed_response_body)
         end
       end
