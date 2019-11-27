@@ -10,6 +10,7 @@ module Bambora
       let(:sub_merchant_id) { 2 }
       let(:base_url) { 'https://sandbox-api.na.bambora.com' }
       let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5', 'Sub-Merchant-ID' => sub_merchant_id } }
+      let(:response_headers) { { 'Content-Type' => 'application/json' } }
       let(:response_body) do
         {
           id: '10000000',
@@ -72,7 +73,7 @@ module Bambora
           stub_request(:post, "#{base_url}/v1/payments").with(
             body: data.to_json.to_s,
             headers: headers,
-          ).to_return(body: response_body.to_json.to_s)
+          ).to_return(headers: response_headers, body: response_body.to_json.to_s)
         end
 
         let(:data) do
@@ -112,7 +113,7 @@ module Bambora
           stub_request(:post, "#{base_url}/v1/payments").with(
             body: data.to_json.to_s,
             headers: headers,
-          ).to_return(body: response_body.to_json.to_s)
+          ).to_return(headers: response_headers, body: response_body.to_json.to_s)
         end
 
         let(:customer_code) { '02355E2e58Bf488EAB4EaFAD7083dB6A' }

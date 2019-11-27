@@ -1,20 +1,45 @@
 # frozen_string_literal: true
 
+# Libraries
+require 'base64'
+require 'json'
+require 'faraday'
+require 'gyoku'
+
 require 'bambora/client/version'
+
+# Builders
 require 'bambora/headers'
+require 'bambora/xml_request_body'
+require 'bambora/www_form_parameters'
+
+# Factories
+require 'bambora/factories/response_adapter_factory'
+
+# Adapters
+require 'bambora/adapters/response'
+require 'bambora/adapters/json_response'
+require 'bambora/adapters/query_string_response'
+
+# Clients
 require 'bambora/rest_client'
 require 'bambora/json_client'
+require 'bambora/xml_client'
+require 'bambora/www_form_client'
+
+# Resources
 require 'bambora/v1/batch_payment_report_resource'
 require 'bambora/v1/batch_payment_resource'
 require 'bambora/v1/payment_resource'
 require 'bambora/v1/profile_resource'
 
 module Bambora
+  ##
+  # The Client class is used to initialize Resource objects that can make requests to the Bambora API.
   class Client
     class Error < StandardError; end
-    class ServerError < StandardError; end
 
-    attr_accessor :base_url, :merchant_id, :sub_merchant_id
+    attr_reader :base_url, :merchant_id, :sub_merchant_id
 
     # Initialze a new Bambora::Client.
     #
@@ -30,10 +55,6 @@ module Bambora
     # @param options[merchant_id] [String] The Merchant ID for this request.
     # @param options[sub_merchant_id] [String] The Sub-Merchant ID for this request.
     def initialize(options = {})
-      if !options[:version].nil? && options[:version].upcase != 'V1'
-        raise Bambora::Client::Error, 'Only V1 endpoints are supported at this time.'
-      end
-
       options.each do |key, value|
         instance_variable_set("@#{key}", value)
       end

@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-require 'base64'
-require 'faraday'
-
 module Bambora
+  ##
+  # A basic client for making REST requests.
   class RestClient
-    attr_accessor :base_url, :merchant_id, :sub_merchant_id
+    attr_reader :base_url, :merchant_id, :sub_merchant_id
 
     # Initialze a client that makes REST requests. The RestClient is used by the JSONClient.
     #
@@ -39,13 +38,22 @@ module Bambora
     end
 
     def connection
-      @connection ||= Faraday.new(url: base_url) do |f|
-        f.adapter :excon
+      @connection ||= Faraday.new(url: base_url) do |faraday|
+        faraday.adapter :excon
       end
     end
 
-    def build_headers(api_key)
-      Bambora::Headers.build(api_key: api_key, merchant_id: merchant_id, sub_merchant_id: sub_merchant_id)
+    def build_headers(api_key:, content_type: nil)
+      Bambora::Headers.new(
+        content_type: content_type,
+        api_key: api_key,
+        merchant_id: merchant_id,
+        sub_merchant_id: sub_merchant_id,
+      ).build
+    end
+
+    def parse_response_body(response)
+      Bambora::ResponseAdapterFactory.for(response).to_h
     end
   end
 end

@@ -8,6 +8,7 @@ module Bambora
     let(:merchant_id) { 1 }
     let(:base_url) { 'https://sandbox-api.na.bambora.com' }
     let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5' } }
+    let(:response_headers) { { 'Content-Type' => 'application/json' } }
     let(:path) { '/' }
     let(:response_body) { { response: 'body', with: { objects: 'yay!' }, and: [{ arrays: 'wow!' }] } }
     let(:failed_status) { 500 }
@@ -18,7 +19,9 @@ module Bambora
     describe '#get' do
       context 'server responds with a 2xx status' do
         before do
-          stub_request(:get, base_url).with(headers: headers).to_return(body: response_body.to_json.to_s)
+          stub_request(:get, base_url)
+            .with(headers: headers)
+            .to_return(headers: response_headers, body: response_body.to_json.to_s)
         end
 
         it 'parses the response' do
@@ -31,7 +34,7 @@ module Bambora
         before do
           stub_request(:get, base_url)
             .with(headers: headers)
-            .to_return(body: failed_response_body, status: failed_status)
+            .to_return(headers: response_headers, body: failed_response_body, status: failed_status)
         end
 
         it 'it returns a hash' do
@@ -48,7 +51,7 @@ module Bambora
         before do
           stub_request(:post, base_url)
             .with(headers: headers, body: request_body)
-            .to_return(body: response_body.to_json.to_s)
+            .to_return(headers: response_headers, body: response_body.to_json.to_s)
         end
 
         it 'parses the response' do
@@ -63,7 +66,7 @@ module Bambora
         before do
           stub_request(:post, base_url)
             .with(headers: headers, body: request_body)
-            .to_return(body: failed_response_body, status: failed_status)
+            .to_return(headers: response_headers, body: failed_response_body, status: failed_status)
         end
 
         it 'it returns a hash' do
@@ -76,7 +79,9 @@ module Bambora
     describe '#delete' do
       context 'server responds with a 2xx status' do
         before do
-          stub_request(:delete, base_url).with(headers: headers).to_return(body: response_body.to_json.to_s)
+          stub_request(:delete, base_url)
+            .with(headers: headers)
+            .to_return(headers: response_headers, body: response_body.to_json.to_s)
         end
 
         it 'parses the response' do
@@ -89,7 +94,7 @@ module Bambora
         before do
           stub_request(:delete, base_url)
             .with(headers: headers)
-            .to_return(body: failed_response_body, status: failed_status)
+            .to_return(headers: response_headers, body: failed_response_body, status: failed_status)
         end
 
         it 'it returns a hash' do

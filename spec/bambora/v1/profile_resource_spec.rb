@@ -10,6 +10,7 @@ module Bambora
       let(:sub_merchant_id) { 2 }
       let(:base_url) { 'https://sandbox-api.na.bambora.com' }
       let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5', 'Sub-Merchant-ID' => sub_merchant_id } }
+      let(:response_headers) { { 'Content-Type' => 'application/json' } }
       let(:response_body) do
         {
           code: 1,
@@ -58,7 +59,7 @@ module Bambora
           stub_request(:post, "#{base_url}/v1/profiles").with(
             body: data.to_json.to_s,
             headers: headers,
-          ).to_return(body: response_body.to_json.to_s)
+          ).to_return(headers: response_headers, body: response_body.to_json.to_s)
         end
 
         it 'posts to the bambora api' do
@@ -79,7 +80,7 @@ module Bambora
         before do
           stub_request(:delete, "#{base_url}/v1/profiles/#{customer_code}")
             .with(headers: headers)
-            .to_return(body: response_body.to_json.to_s)
+            .to_return(headers: response_headers, body: response_body.to_json.to_s)
         end
 
         it 'posts to the bambora api' do

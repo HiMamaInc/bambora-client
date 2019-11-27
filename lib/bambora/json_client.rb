@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 module Bambora
+  ##
+  # The base class for making JSON requests.
   class JSONClient < Bambora::RestClient
+    CONTENT_TYPE = 'application/json'
+
     # Make a GET Request.
     #
     # @example
@@ -26,9 +30,9 @@ module Bambora
     #
     # @return [Hash] Indicating success or failure of the operation.
     def get(path:, params: nil, api_key:)
-      parse_response(
-        super(path: path, params: params, headers: build_headers(api_key)),
-      )
+      parse_response_body(
+        super(path: path, params: params, headers: build_headers(api_key: api_key)),
+      ).to_h
     end
 
     # Make a POST Request.
@@ -66,9 +70,9 @@ module Bambora
     #
     # @return [Hash] Indicating success or failure of the operation.
     def post(path:, body:, api_key:)
-      parse_response(
-        super(path: path, body: body.to_json.to_s, headers: build_headers(api_key)),
-      )
+      parse_response_body(
+        super(path: path, body: body.to_json.to_s, headers: build_headers(api_key: api_key)),
+      ).to_h
     end
 
     # Make a DELETE Request.
@@ -89,38 +93,15 @@ module Bambora
     #
     # @return [Hash] Indicating success or failure of the operation.
     def delete(path:, api_key:)
-      parse_response(
-        super(path: path, headers: build_headers(api_key)),
-      )
+      parse_response_body(
+        super(path: path, headers: build_headers(api_key: api_key)),
+      ).to_h
     end
 
     private
 
-    def build_headers(api_key)
-      { 'Content-Type' => 'application/json' }.merge(super(api_key))
-    end
-
-    def parse_response(resp)
-      deep_transform_keys_in_object(JSON.parse(resp.body), &:to_sym)
-    rescue JSON::ParserError
-      error_response(resp)
-    end
-
-    def deep_transform_keys_in_object(object, &block)
-      case object
-        when Hash
-          object.each_with_object({}) do |(key, value), result|
-            result[yield(key)] = deep_transform_keys_in_object(value, &block)
-          end
-        when Array
-          object.map { |e| deep_transform_keys_in_object(e, &block) }
-        else
-          object
-      end
-    end
-
-    def error_response(resp)
-      { status: resp.status, body: resp.body }
+    def build_headers(api_key:)
+      super(api_key: api_key, content_type: CONTENT_TYPE)
     end
   end
 end
