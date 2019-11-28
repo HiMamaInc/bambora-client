@@ -16,7 +16,7 @@ module Bambora
 
       context 'with a Query String Response' do
         let(:content_type) { 'text/html' }
-        it { is_expected.to be_a QueryStringResponse }
+        it { is_expected.to be_a LegacyPaymentProfileResponse }
       end
 
       context 'with an unknown content type' do

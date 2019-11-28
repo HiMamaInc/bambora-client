@@ -22,6 +22,7 @@ require 'bambora/factories/response_adapter_factory'
 require 'bambora/adapters/response'
 require 'bambora/adapters/json_response'
 require 'bambora/adapters/query_string_response'
+require 'bambora/adapters/legacy_payment_profile_response'
 
 # Clients
 require 'bambora/rest_client'
