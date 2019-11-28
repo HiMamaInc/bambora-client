@@ -3,6 +3,7 @@
 # Libraries
 require 'base64'
 require 'json'
+require 'cgi'
 require 'faraday'
 require 'gyoku'
 
