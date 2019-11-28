@@ -54,13 +54,15 @@ module Bambora
       #
       #  @params profile_data [Hash] with values as noted in the example.
       def create(profile_data)
-        client.post(path: sub_path, body: payment_profile_body(profile_data))
+        format_response(
+          client.post(path: sub_path, body: payment_profile_body(profile_data)),
+        )
       end
 
       private
 
       def payment_profile_body(profile_data)
-        Bambora::LegacyPaymentProfileParams.build(
+        Bambora::Builders::LegacyPaymentProfileParams.build(
           profile_data.merge(
             pass_code: api_key,
             merchant_id: client.merchant_id,
@@ -68,6 +70,19 @@ module Bambora
             service_version: version,
           ),
         )
+      end
+
+      def format_response(response)
+        response.each_with_object({}) do |(key, val), obj|
+          obj[transform(key)] = val
+        end
+      end
+
+      def transform(camel_case_word)
+        word = camel_case_word.to_s
+        underscored_word = ''
+        word.each_char { |chr| underscored_word += chr == chr.upcase ? "_#{chr.downcase}" : chr }
+        underscored_word.sub(/^ord_/, '').to_sym
       end
     end
   end
