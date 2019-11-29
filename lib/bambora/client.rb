@@ -153,7 +153,7 @@ module Bambora
     end
 
     def www_form_client
-      @www_form_client ||= Bambora::WWWFormClient.new(
+      @www_form_client ||= Bambora::Rest::WWWFormClient.new(
         base_url: base_url,
         merchant_id: merchant_id,
         sub_merchant_id: sub_merchant_id,
