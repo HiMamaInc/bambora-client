@@ -6,7 +6,7 @@ module Bambora
   class ResponseAdapterFactory
     class << self
       def for(response)
-        content_type = response.headers['Content-Type']
+        content_type = response.headers['Content-Type'].split(';').first
         case content_type
           when 'application/json' then Bambora::JSONResponse.new(response)
           when 'text/html' then Bambora::QueryStringResponse.new(response)

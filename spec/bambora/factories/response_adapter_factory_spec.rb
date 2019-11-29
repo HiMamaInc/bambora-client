@@ -10,7 +10,7 @@ module Bambora
       subject { described_class.for(response) }
 
       context 'with a JSON request' do
-        let(:content_type) { 'application/json' }
+        let(:content_type) { 'application/json; charset=utf-8' }
         it { is_expected.to be_a JSONResponse }
       end
 
