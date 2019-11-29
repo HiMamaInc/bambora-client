@@ -15,7 +15,7 @@ module Bambora
             it { is_expected.to eq some_gelflings_1: %w[rian deet brea] }
           end
 
-          context 'an invalid response' do
+          context 'when the response is invalid' do
             let(:string_response_body) { 'GARTHIM! ATTACK!' }
             let(:status) { 500 }
             let(:faraday_response) { Faraday::Response.new(body: string_response_body, status: status) }
