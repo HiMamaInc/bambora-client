@@ -4,8 +4,11 @@ module Bambora
   module Bank
     ##
     # For making requests to the /scripts/payment_profiles.asp endpoint
+    #
+    # @see https://help.na.bambora.com/hc/en-us/articles/115010346067-Secure-Payment-Profiles-Batch-Payments
     class PaymentProfileResource
       DEFAULT_VERSION = 1.0
+      DEFAULT_RESPONSE_FORMAT = 'QS'
       attr_reader :client, :api_key, :sub_path, :version
 
       ##
@@ -66,6 +69,7 @@ module Bambora
             merchant_id: client.merchant_id,
             sub_merchant_id: client.sub_merchant_id,
             service_version: version,
+            response_format: DEFAULT_RESPONSE_FORMAT,
           ),
         )
       end

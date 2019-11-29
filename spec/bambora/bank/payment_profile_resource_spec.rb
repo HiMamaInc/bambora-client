@@ -69,6 +69,7 @@ module Bambora
             'passCode' => api_key,
             'serviceVersion' => '1.0',
             'subMerchantId' => sub_merchant_id,
+            'responseFormat' => 'QS',
           }
         end
 
