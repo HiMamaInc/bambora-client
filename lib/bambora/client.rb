@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
-# Libraries
+# Standard Libraries
 require 'base64'
-require 'json'
 require 'cgi'
-require 'faraday'
-require 'gyoku'
+require 'json'
+
+# Gems
+require 'faraday' # HTTP Wraper
+require 'gyoku' # XML Builder
 
 require 'bambora/client/version'
 
@@ -72,8 +74,7 @@ module Bambora
     #   profiles = client.profiles
     #   profiles.delete(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A')
     #
-    # @param api_key [String] optional API key for the profiles endpoint. If the Client class was initialized with an
-    #   API key, this parameter is not needed.
+    # @param api_key [String] API key for the profiles endpoint.
     #
     # @return [Bambora::V1::ProfileResource]
     def profiles(api_key:)
@@ -98,7 +99,7 @@ module Bambora
     #     },
     #   )
     #
-    # @param api_key [String] optional API key for the payments endpoint.
+    # @param api_key [String] API key for the payments endpoint.
     #
     # @return [Bambora::V1::PaymentResource]
     def payments(api_key:)
@@ -113,25 +114,24 @@ module Bambora
     #   data = {
     #     customer_code: '1234',
     #     bank_account_type: 'CA',
-    #     account_holder: account_holder,
+    #     account_holder: 'All-Maudra Mayrin',
     #     institution_number: '123',
     #     branch_number: '12345',
     #     account_number: '123456789',
-    #     name: name,
-    #     email_address: email_address,
-    #     phone_number: phone_number,
-    #     address_1: address_1,
-    #     city: city,
-    #     postal_code: postal_code,
-    #     province: province,
-    #     country: country,
-    #     sub_merchant_id: sub_merchant_id,
-    #     operation_type: 'N',
+    #     name: 'Brea Princess of Vapra',
+    #     email_address: 'brea@theresistance.com',
+    #     phone_number: '1231231234',
+    #     address_1: 'The Castle',
+    #     city: "Ha'rar",
+    #     postal_code: 'H0H 0H0',
+    #     province: 'Vapra',
+    #     country: 'Thra',
+    #     sub_merchant_id: 1,
     #   }
     #
     #   profiles.create(data)
     #
-    # @param api_key [String] optional API key for the bank profiles endpoint.
+    # @param api_key [String] API key for the bank profiles endpoint.
     #
     # @return [Bambora::Bank::PaymentProfileResource]
     def bank_profiles(api_key:)
