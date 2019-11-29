@@ -43,7 +43,8 @@ module Bambora
       #
       #   # Start making requests ...
       #
-      # @param client [Bambora::JSONClient] An instance of Bambora::JSONClient, used to make network requests.
+      # @param client [Bambora::Rest::WWWFormlient] An instance of Bambora::RestWWWFormClient, used to make network
+      # requests.
       # @param api_key [String] An API key for this endpoint. This is also known as the "Pass Code"
       # @param version [String] The Service Version you are requesting from the server.
       def initialize(client:, api_key:)

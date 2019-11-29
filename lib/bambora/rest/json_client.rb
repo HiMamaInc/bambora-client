@@ -11,7 +11,7 @@ module Bambora
       #
       # @example
       #
-      #   client = Bambora::JSONClient(base_url: '...', merchant_id: '...')
+      #   client = Bambora::Rest::JSONClient(base_url: '...', merchant_id: '...')
       #
       #   client.get(
       #     path: 'v1/profiles',
@@ -40,7 +40,7 @@ module Bambora
       #
       # @example
       #
-      #   client = Bambora::JSONClient(base_url: '...', merchant_id: '...')
+      #   client = Bambora::Rest::JSONClient(base_url: '...', merchant_id: '...')
       #
       #   data = {
       #    language: 'en',
@@ -80,7 +80,7 @@ module Bambora
       #
       # @example
       #
-      #   client = Bambora::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
+      #   client = Bambora::Rest::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
       #
       #   client.delete(path: 'v1/profiles/02355E2e58Bf488EAB4EaFAD7083dB6A', api_key: '...')
       #   # => {
