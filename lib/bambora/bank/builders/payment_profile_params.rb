@@ -10,7 +10,11 @@ module Bambora
 
         class << self
           ##
+<<<<<<< HEAD
           # Converts a snake_case hash to camelCase keys with vendor-specific prefixes.
+=======
+          # Converts a snake_case hash to camelCase keys with vendor-specific previxes.
+>>>>>>> legacy -> bank
           # See tests for examples.
           #
           # @params params [Hash]

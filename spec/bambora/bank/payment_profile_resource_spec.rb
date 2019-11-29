@@ -44,6 +44,10 @@ module Bambora
             province: province,
             country: country,
             sub_merchant_id: sub_merchant_id,
+<<<<<<< HEAD
+=======
+            operation_type: 'N',
+>>>>>>> legacy -> bank
           }
         end
 
@@ -68,7 +72,10 @@ module Bambora
             'passCode' => api_key,
             'serviceVersion' => '1.0',
             'subMerchantId' => sub_merchant_id,
+<<<<<<< HEAD
             'responseFormat' => 'QS',
+=======
+>>>>>>> legacy -> bank
           }
         end
 

@@ -27,6 +27,10 @@ module Bambora
               merchant_id: 1,
               sub_merchant_id: 1,
               service_version: '1.0',
+<<<<<<< HEAD
+=======
+              operation_type: 'N',
+>>>>>>> legacy -> bank
             }
           end
 
@@ -50,6 +54,10 @@ module Bambora
               'merchantId' => 1,
               'subMerchantId' => 1,
               'serviceVersion' => '1.0',
+<<<<<<< HEAD
+=======
+              'operationType' => 'N',
+>>>>>>> legacy -> bank
             }
           end
 
