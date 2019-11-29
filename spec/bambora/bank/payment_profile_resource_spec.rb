@@ -12,7 +12,7 @@ module Bambora
       let(:headers) { { 'Content-Type' => 'application/x-www-form-urlencoded' } }
       let(:response_headers) { { 'Content-Type' => 'text/html' } }
       let(:client) do
-        Bambora::WWWFormClient.new(base_url: base_url, merchant_id: merchant_id, sub_merchant_id: sub_merchant_id)
+        Bambora::Rest::WWWFormClient.new(base_url: base_url, merchant_id: merchant_id, sub_merchant_id: sub_merchant_id)
       end
 
       subject { described_class.new(client: client, api_key: api_key) }

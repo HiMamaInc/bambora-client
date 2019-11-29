@@ -9,16 +9,14 @@ require 'json'
 require 'faraday' # HTTP Wraper
 require 'gyoku' # XML Builder
 
-require 'bambora/client/version'
-
 # Builders
-require 'bambora/headers'
-require 'bambora/xml_request_body'
-require 'bambora/www_form_parameters'
+require 'bambora/builders/headers'
+require 'bambora/builders/xml_request_body'
+require 'bambora/builders/www_form_parameters'
 require 'bambora/bank/builders/payment_profile_params'
 
 # Factories
-require 'bambora/factories/response_adapter_factory'
+require 'bambora/factories/response_adapter'
 
 # Adapters
 require 'bambora/adapters/response'
@@ -27,10 +25,10 @@ require 'bambora/adapters/query_string_response'
 require 'bambora/bank/adapters/payment_profile_response'
 
 # Clients
-require 'bambora/rest_client'
-require 'bambora/json_client'
-require 'bambora/xml_client'
-require 'bambora/www_form_client'
+require 'bambora/rest/client'
+require 'bambora/rest/json_client'
+require 'bambora/rest/xml_client'
+require 'bambora/rest/www_form_client'
 
 # Resources
 require 'bambora/v1/batch_payment_report_resource'
@@ -43,6 +41,8 @@ module Bambora
   ##
   # The Client class is used to initialize Resource objects that can make requests to the Bambora API.
   class Client
+    VERSION = '0.1.0'
+
     class Error < StandardError; end
 
     attr_reader :base_url, :merchant_id, :sub_merchant_id
@@ -145,7 +145,7 @@ module Bambora
     private
 
     def json_client
-      @json_client ||= Bambora::JSONClient.new(
+      @json_client ||= Bambora::Rest::JSONClient.new(
         base_url: base_url,
         merchant_id: merchant_id,
         sub_merchant_id: sub_merchant_id,
