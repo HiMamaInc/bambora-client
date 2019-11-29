@@ -26,10 +26,9 @@ module Bambora
 
         def transform(camel_case_word)
           word = camel_case_word.to_s
-          underscored_word = ''
-          # This would likely be faster with regex
-          word.each_char { |chr| underscored_word += chr == chr.upcase ? "_#{chr.downcase}" : chr }
-          underscored_word.sub(/^ord_/, '').to_sym
+          word.gsub!(/([a-z\d])([A-Z0-9])/, '\1_\2')
+          word.downcase!
+          word.sub(/^ord_/, '').to_sym
         end
       end
     end
