@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Bambora
-  module Legacy
+  module Bank
     ##
     # For making requests to the /scripts/payment_profiles.asp endpoint
     class PaymentProfileResource
@@ -14,7 +14,7 @@ module Bambora
       # @example
       #
       #   client = Bambora::WWWFormClient(base_url: '...', api_key: '...', merchant_id: '...')
-      #   profiles = Bambora::Legacy::PaymentProfileResource(client: client)
+      #   profiles = Bambora::Bank::PaymentProfileResource(client: client)
       #
       #   # Start making requests ...
       #
@@ -60,7 +60,7 @@ module Bambora
       private
 
       def payment_profile_body(profile_data)
-        Bambora::Builders::LegacyPaymentProfileParams.build(
+        Bambora::Bank::Builders::PaymentProfileParams.build(
           profile_data.merge(
             pass_code: api_key,
             merchant_id: client.merchant_id,

@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 module Bambora
-  module Legacy
+  module Bank
     describe PaymentProfileResource do
       let(:api_key) { 'fakekey' }
       let(:merchant_id) { 1 }

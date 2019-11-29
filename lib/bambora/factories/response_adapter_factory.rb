@@ -12,7 +12,7 @@ module Bambora
             Bambora::JSONResponse.new(response)
           when 'text/html'
             # Currently, the only endpoint that responds wit text/html is /scripts/payment_profiles.asp
-            Bambora::LegacyPaymentProfileResponse.new(response)
+            Bambora::Bank::Adapters::PaymentProfileResponse.new(response)
           else raise Bambora::Client::Error, "Unknown Content Type: #{content_type}"
         end
       end

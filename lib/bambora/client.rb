@@ -13,7 +13,7 @@ require 'bambora/client/version'
 require 'bambora/headers'
 require 'bambora/xml_request_body'
 require 'bambora/www_form_parameters'
-require 'bambora/builders/legacy_payment_profile_params'
+require 'bambora/bank/builders/payment_profile_params'
 
 # Factories
 require 'bambora/factories/response_adapter_factory'
@@ -22,7 +22,7 @@ require 'bambora/factories/response_adapter_factory'
 require 'bambora/adapters/response'
 require 'bambora/adapters/json_response'
 require 'bambora/adapters/query_string_response'
-require 'bambora/adapters/legacy_payment_profile_response'
+require 'bambora/bank/adapters/payment_profile_response'
 
 # Clients
 require 'bambora/rest_client'
@@ -35,7 +35,7 @@ require 'bambora/v1/batch_payment_report_resource'
 require 'bambora/v1/batch_payment_resource'
 require 'bambora/v1/payment_resource'
 require 'bambora/v1/profile_resource'
-require 'bambora/legacy/payment_profile_resource'
+require 'bambora/bank/payment_profile_resource'
 
 module Bambora
   ##
