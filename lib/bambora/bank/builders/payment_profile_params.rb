@@ -3,18 +3,15 @@
 module Bambora
   module Bank
     module Builders
-    ##
-    # Builds a request body for the Bank Payment Profile endpoint from a Hash
+      ##
+      # Builds a request body for the Bank Payment Profile endpoint from a Hash
       class PaymentProfileParams
-        CONTACT_PARAMS = %w[name email_address phone_number address_1 address_2 city postal_code province country].freeze
+        CONTACT_PARAMS = %w[name email_address phone_number address_1 address_2 city postal_code province
+                            country].freeze
 
         class << self
           ##
-<<<<<<< HEAD
           # Converts a snake_case hash to camelCase keys with vendor-specific prefixes.
-=======
-          # Converts a snake_case hash to camelCase keys with vendor-specific previxes.
->>>>>>> legacy -> bank
           # See tests for examples.
           #
           # @params params [Hash]
