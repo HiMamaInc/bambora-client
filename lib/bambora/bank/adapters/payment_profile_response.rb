@@ -26,7 +26,7 @@ module Bambora
 
         def transform(camel_case_word)
           word = camel_case_word.to_s
-          word.gsub!(/([a-z\d])([A-Z0-9])/, '\1_\2')
+          word.gsub!(/([a-z])([A-Z\d])/, '\1_\2')
           word.downcase!
           word.sub(/^ord_/, '').to_sym
         end
