@@ -17,7 +17,8 @@ module Bambora
       #
       #   # Start making requests ...
       #
-      # @param client [Bambora::Rest::JSONClient] An instance of Bambora::Rest::JSONClient, used to make network requests.
+      # @param client [Bambora::Rest::JSONClient] An instance of Bambora::Rest::JSONClient used to make network
+      #   requests.
       def initialize(client:, api_key:)
         @client = client
         @api_key = api_key

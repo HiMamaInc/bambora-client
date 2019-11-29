@@ -46,7 +46,11 @@ module Bambora
           before do
             stub_request(:post, base_url)
               .with(headers: headers, body: xml_request_body)
-              .to_return(headers: { 'Content-Type' => 'application/json' }, body: failed_response_body, status: failed_status)
+              .to_return(
+                headers: { 'Content-Type' => 'application/json' },
+                body: failed_response_body,
+                status: failed_status,
+              )
           end
 
           it 'it returns a hash' do
