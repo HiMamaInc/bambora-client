@@ -10,7 +10,6 @@ module Bambora
     #
     # @param path [String] Indicating request path.
     # @param body [Hash] Data to be sent in the query parameters of the request.
-    # @param api_key [String] Indicating the API Key to be used with the request.
     #
     # @return [Hash] Indicating success or failure of the operation.
     def post(path:, body:)
