@@ -10,23 +10,27 @@ module Bambora
     #
     # @param path [String] Indicating request path.
     # @param body [Hash] Data to be sent in the query parameters of the request.
-    # @param api_key [String] Indicating the API Key to be used with the request.
     #
     # @return [Hash] Indicating success or failure of the operation.
-    def post(path:, body:, api_key:)
+    def post(path:, body:)
+      # Both Faraday's and Excon's docs show that you can pass a hash into the +body+ and set the content type to
+      # application/x-www-form-urlencoded and the +body+ will be transformed into query parameters, however, this
+      # did not work in testing so I am manually transforming the hash into query parameters here.
       parse_response_body(
         super(
           path: "#{path}?#{WWWFormParameters.new(body: body)}",
           body: nil,
-          headers: build_headers(api_key: api_key),
+          headers: build_headers,
         ),
       )
     end
 
     private
 
-    def build_headers(api_key:)
-      super(api_key: api_key, content_type: CONTENT_TYPE)
+    def build_headers
+      {
+        'Content-Type' => CONTENT_TYPE,
+      }
     end
   end
 end

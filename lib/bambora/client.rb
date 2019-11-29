@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
-# Libraries
+# Standard Libraries
 require 'base64'
+require 'cgi'
 require 'json'
-require 'faraday'
-require 'gyoku'
+
+# Gems
+require 'faraday' # HTTP Wraper
+require 'gyoku' # XML Builder
 
 require 'bambora/client/version'
 
@@ -12,6 +15,7 @@ require 'bambora/client/version'
 require 'bambora/headers'
 require 'bambora/xml_request_body'
 require 'bambora/www_form_parameters'
+require 'bambora/bank/builders/payment_profile_params'
 
 # Factories
 require 'bambora/factories/response_adapter_factory'
@@ -20,6 +24,7 @@ require 'bambora/factories/response_adapter_factory'
 require 'bambora/adapters/response'
 require 'bambora/adapters/json_response'
 require 'bambora/adapters/query_string_response'
+require 'bambora/bank/adapters/payment_profile_response'
 
 # Clients
 require 'bambora/rest_client'
@@ -32,6 +37,7 @@ require 'bambora/v1/batch_payment_report_resource'
 require 'bambora/v1/batch_payment_resource'
 require 'bambora/v1/payment_resource'
 require 'bambora/v1/profile_resource'
+require 'bambora/bank/payment_profile_resource'
 
 module Bambora
   ##
@@ -68,8 +74,7 @@ module Bambora
     #   profiles = client.profiles
     #   profiles.delete(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A')
     #
-    # @param api_key [String] optional API key for the profiles endpoint. If the Client class was initialized with an
-    #   API key, this parameter is not needed.
+    # @param api_key [String] API key for the profiles endpoint.
     #
     # @return [Bambora::V1::ProfileResource]
     def profiles(api_key:)
@@ -94,12 +99,43 @@ module Bambora
     #     },
     #   )
     #
-    # @param api_key [String] optional API key for the payments endpoint. If the Client class was initialized with an
-    #   API key, this parameter is not needed.
+    # @param api_key [String] API key for the payments endpoint.
     #
     # @return [Bambora::V1::PaymentResource]
     def payments(api_key:)
       @payments ||= Bambora::V1::PaymentResource.new(client: json_client, api_key: api_key)
+    end
+
+    # Retrieve a client to make requests to the Bank Payment Profiles endpoints.
+    #
+    # @example
+    #   profiles = client.bank_profiles
+    #
+    #   data = {
+    #     customer_code: '1234',
+    #     bank_account_type: 'CA',
+    #     account_holder: 'All-Maudra Mayrin',
+    #     institution_number: '123',
+    #     branch_number: '12345',
+    #     account_number: '123456789',
+    #     name: 'Brea Princess of Vapra',
+    #     email_address: 'brea@theresistance.com',
+    #     phone_number: '1231231234',
+    #     address_1: 'The Castle',
+    #     city: "Ha'rar",
+    #     postal_code: 'H0H 0H0',
+    #     province: 'Vapra',
+    #     country: 'Thra',
+    #     sub_merchant_id: 1,
+    #   }
+    #
+    #   profiles.create(data)
+    #
+    # @param api_key [String] API key for the bank profiles endpoint.
+    #
+    # @return [Bambora::Bank::PaymentProfileResource]
+    def bank_profiles(api_key:)
+      @bank_profiles ||= Bambora::Bank::PaymentProfileResource.new(client: www_form_client, api_key: api_key)
     end
 
     def batch_payment_reports; end
@@ -110,6 +146,14 @@ module Bambora
 
     def json_client
       @json_client ||= Bambora::JSONClient.new(
+        base_url: base_url,
+        merchant_id: merchant_id,
+        sub_merchant_id: sub_merchant_id,
+      )
+    end
+
+    def www_form_client
+      @www_form_client ||= Bambora::WWWFormClient.new(
         base_url: base_url,
         merchant_id: merchant_id,
         sub_merchant_id: sub_merchant_id,

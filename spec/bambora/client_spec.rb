@@ -36,5 +36,9 @@ module Bambora
     describe '#profiles' do
       include_examples 'a client resource method', :profiles, Bambora::V1::ProfileResource
     end
+
+    describe '#bank_profiles' do
+      include_examples 'a client resource method', :bank_profiles, Bambora::Bank::PaymentProfileResource
+    end
   end
 end
