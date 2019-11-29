@@ -16,7 +16,7 @@ module Bambora
     def post(path:, body:)
       # Both Faraday's and Excon's docs show that you can pass a hash into the +body+ and set the content type to
       # application/x-www-form-urlencoded and the +body+ will be transformed into query parameters, however, this
-      # did not work n testing so I am manually transforming the hash into query parameters here.
+      # did not work in testing so I am manually transforming the hash into query parameters here.
       parse_response_body(
         super(
           path: "#{path}?#{WWWFormParameters.new(body: body)}",
