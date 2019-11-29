@@ -44,7 +44,6 @@ module Bambora
             province: province,
             country: country,
             sub_merchant_id: sub_merchant_id,
-            operation_type: 'N',
           }
         end
 

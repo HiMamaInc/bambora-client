@@ -9,6 +9,8 @@ module Bambora
     class PaymentProfileResource
       DEFAULT_VERSION = 1.0
       DEFAULT_RESPONSE_FORMAT = 'QS'
+      CREATE_OPERATION_TYPE = 'N'
+
       attr_reader :client, :api_key, :sub_path, :version
 
       ##
@@ -16,42 +18,41 @@ module Bambora
       #
       # @example
       #
-      #   client = Bambora::WWWFormClient(base_url: '...', api_key: '...', merchant_id: '...')
-      #   profiles = Bambora::Bank::PaymentProfileResource(client: client)
+      #   client = Bambora::WWWFormClient(base_url: '...', merchant_id: '...')
+      #   profiles = Bambora::Bank::PaymentProfileResource(client: client, api_key: '...')
       #
       #   # Start making requests ...
       #
-      # @param client [Bambora::JSONClient] An instance of Bambora::JSONClient, used to make network requests.
+      # @param client [Bambora::WWWFormClient] An instance of Bambora::WWWFormClient, used to make network requests.
       # @param api_key [String] An API key for this endpoint. This is also known as the "Pass Code"
       # @param version [String] The Service Version you are requesting from the server.
-      def initialize(client:, api_key:)
+      def initialize(client:, api_key:, version: DEFAULT_VERSION)
         @client = client
         @api_key = api_key
+        @version = version
         @sub_path = '/scripts/payment_profiles.asp'
-        @version = version || DEFAULT_VERSION
       end
 
       ##
       # Create a Bank Payment Profile
       #
       # @example
-      #  data = {
-      #   customer_code: '1234',
-      #   bank_account_type: 'CA',
-      #   account_holder: 'All-Maudra Mayrin',
-      #   institution_number: '123',
-      #   branch_number: '12345',
-      #   account_number: '123456789',
-      #   name: 'Hup Podling',
-      #   email_address: 'Brea Princess of Vapra',
-      #   phone_number: '1231231234',
-      #   address_1: 'The Castle',
-      #   city: "Ha'rar",
-      #   postal_code: 'H0H 0H0',
-      #   province: 'Vapra',
-      #   country: 'Thra',
-      #   sub_merchant_id: '1',
-      #  }
+      #   data = {
+      #     customer_code: '1234',
+      #     bank_account_type: 'CA',
+      #     account_holder: 'All-Maudra Mayrin',
+      #     institution_number: '123',
+      #     branch_number: '12345',
+      #     account_number: '123456789',
+      #     name: 'Hup Podling',
+      #     email_address: 'Brea Princess of Vapra',
+      #     phone_number: '1231231234',
+      #     address_1: 'The Castle',
+      #     city: "Ha'rar",
+      #     postal_code: 'H0H 0H0',
+      #     province: 'Vapra',
+      #     country: 'Thra',
+      #   }
       #
       #  payment_profile_resource.create(data)
       #
@@ -70,6 +71,7 @@ module Bambora
             sub_merchant_id: client.sub_merchant_id,
             service_version: version,
             response_format: DEFAULT_RESPONSE_FORMAT,
+            operation_type: CREATE_OPERATION_TYPE,
           ),
         )
       end
