@@ -12,12 +12,13 @@ module Bambora
       #
       # @example
       #
-      #   client = Bambora::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
+      #   client = Bambora::Rest::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
       #   profiles = Bambora::V1::ProfileResource(client: client)
       #
       #   # Start making requests ...
       #
-      # @param client [Bambora::JSONClient] An instance of Bambora::JSONClient, used to make network requests.
+      # @param client [Bambora::Rest::JSONClient] An instance of Bambora::Rest::JSONClient used to make network
+      #   requests.
       def initialize(client:, api_key:)
         @client = client
         @api_key = api_key
@@ -29,7 +30,7 @@ module Bambora
       #
       # @example
       #
-      #   client = Bambora::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
+      #   client = Bambora::Rest::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
       #   profiles = Bambora::V1::ProfileResource(client: client)
       #   data = {
       #    language: 'en',
@@ -63,7 +64,7 @@ module Bambora
       #
       # @example
       #
-      #   client = Bambora::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
+      #   client = Bambora::Rest::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
       #   profiles = Bambora::V1::ProfileResource(client: client)
       #   customer_code = '02355E2e58Bf488EAB4EaFAD7083dB6A'
       #
