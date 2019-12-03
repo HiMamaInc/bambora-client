@@ -59,7 +59,7 @@ module Bambora
         }
       end
       let(:client) do
-        Bambora::Rest::JSONClient.new(
+        Bambora::JSONClient.new(
           base_url: base_url,
           merchant_id: merchant_id,
           sub_merchant_id: sub_merchant_id,

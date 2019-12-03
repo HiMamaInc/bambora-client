@@ -21,7 +21,7 @@ module Bambora
         private
 
         def parsed_query_string
-          Bambora::Adapters::QueryStringResponse.new(response).to_h
+          Bambora::QueryStringResponse.new(response).to_h
         end
 
         def transform(camel_case_word)

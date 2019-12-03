@@ -16,7 +16,7 @@ module Bambora
       #
       # @example
       #
-      #   client = Bambora::Rest:JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
+      #   client = Bambora::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
       #   payments = Bambora::V1::PaymentResource(client: client)
       #   payments.create(
       #     {
@@ -50,7 +50,7 @@ module Bambora
       #
       # @example
       #
-      #   client = Bambora::Rest:JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
+      #   client = Bambora::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
       #   payments = Bambora::V1::PaymentResource(client: client)
       #   payments.create_with_payment_profile(
       #     customer_code: '2355E2e58Bf488EAB4EaFAD7083dB6A', amount: 50, complete: false

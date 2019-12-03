@@ -27,7 +27,6 @@ module Bambora
               merchant_id: 1,
               sub_merchant_id: 1,
               service_version: '1.0',
-              operation_type: 'N',
             }
           end
 
@@ -51,7 +50,6 @@ module Bambora
               'merchantId' => 1,
               'subMerchantId' => 1,
               'serviceVersion' => '1.0',
-              'operationType' => 'N',
             }
           end
 
