@@ -44,7 +44,7 @@ module Bambora
     end
 
     def build_headers(api_key:, content_type: nil)
-      Bambora::Headers.new(
+      Bambora::Builders::Headers.new(
         content_type: content_type,
         api_key: api_key,
         merchant_id: merchant_id,

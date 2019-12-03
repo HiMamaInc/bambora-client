@@ -18,7 +18,7 @@ module Bambora
       parse_response_body(
         super(
           path: path,
-          body: Bambora::XMLRequestBody.new(body: body, response_format: RESPONSE_FORMAT).to_s,
+          body: Bambora::Builders::XMLRequestBody.new(body: body, response_format: RESPONSE_FORMAT).to_s,
           headers: build_headers(api_key: api_key),
         ),
       )

@@ -11,20 +11,20 @@ require 'gyoku' # XML Builder
 
 require 'bambora/client/version'
 
-# Builders
-require 'bambora/headers'
-require 'bambora/xml_request_body'
-require 'bambora/www_form_parameters'
-require 'bambora/bank/builders/payment_profile_params'
-
-# Factories
-require 'bambora/factories/response_adapter_factory'
-
 # Adapters
 require 'bambora/adapters/response'
 require 'bambora/adapters/json_response'
 require 'bambora/adapters/query_string_response'
 require 'bambora/bank/adapters/payment_profile_response'
+
+# Builders
+require 'bambora/builders/headers'
+require 'bambora/builders/xml_request_body'
+require 'bambora/builders/www_form_parameters'
+require 'bambora/bank/builders/payment_profile_params'
+
+# Factories
+require 'bambora/factories/response_adapter_factory'
 
 # Clients
 require 'bambora/rest_client'

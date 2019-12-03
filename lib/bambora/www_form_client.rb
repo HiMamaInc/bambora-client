@@ -18,7 +18,7 @@ module Bambora
       # did not work in testing so I am manually transforming the hash into query parameters here.
       parse_response_body(
         super(
-          path: "#{path}?#{WWWFormParameters.new(body: body)}",
+          path: "#{path}?#{Bambora::Builders::WWWFormParameters.new(body: body)}",
           body: nil,
           headers: build_headers,
         ),
