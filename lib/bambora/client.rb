@@ -27,10 +27,10 @@ require 'bambora/bank/builders/payment_profile_params'
 require 'bambora/factories/response_adapter_factory'
 
 # Clients
-require 'bambora/rest_client'
-require 'bambora/json_client'
-require 'bambora/xml_client'
-require 'bambora/www_form_client'
+require 'bambora/rest/client'
+require 'bambora/rest/json_client'
+require 'bambora/rest/www_form_client'
+require 'bambora/rest/xml_client'
 
 # Resources
 require 'bambora/v1/batch_payment_report_resource'
@@ -145,7 +145,7 @@ module Bambora
     private
 
     def json_client
-      @json_client ||= Bambora::JSONClient.new(
+      @json_client ||= Bambora::Rest::JSONClient.new(
         base_url: base_url,
         merchant_id: merchant_id,
         sub_merchant_id: sub_merchant_id,
@@ -153,7 +153,7 @@ module Bambora
     end
 
     def www_form_client
-      @www_form_client ||= Bambora::WWWFormClient.new(
+      @www_form_client ||= Bambora::Rest::WWWFormClient.new(
         base_url: base_url,
         merchant_id: merchant_id,
         sub_merchant_id: sub_merchant_id,
