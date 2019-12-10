@@ -39,6 +39,14 @@ module Bambora
 
     describe '#bank_profiles' do
       include_examples 'a client resource method', :bank_profiles, Bambora::Bank::PaymentProfileResource
+
+      let(:scripts_api_base_url) { 'https://web.na.bambora.com' }
+      let(:client) { described_class.new(scripts_api_base_url: scripts_api_base_url) }
+      let(:bank_profiles) { client.bank_profiles(api_key: 'fakekey') }
+
+      it 'uses the scripts api url' do
+        expect(bank_profiles.client.base_url).to eq scripts_api_base_url
+      end
     end
   end
 end
