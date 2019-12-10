@@ -20,7 +20,13 @@ module Bambora
       #
       # @return [String]
       def to_s
-        URI.encode_www_form(body)
+        URI.encode_www_form(sanitized_body)
+      end
+
+      private
+
+      def sanitized_body
+        body.reject { |_, val| val.to_s.empty? }
       end
     end
   end

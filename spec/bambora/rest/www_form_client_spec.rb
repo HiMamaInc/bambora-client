@@ -26,7 +26,7 @@ module Bambora
         context 'server responds with a 2xx status' do
           before do
             stub_request(:post, base_url)
-              .with(headers: headers, query: request_body)
+              .with(headers: headers, body: request_body)
               .to_return(headers: { 'Content-Type' => 'text/html' }, body: query_string_response_body)
           end
 
@@ -41,7 +41,7 @@ module Bambora
 
           before do
             stub_request(:post, base_url)
-              .with(headers: headers, query: request_body)
+              .with(headers: headers, body: request_body)
               .to_return(
                 headers: { 'Content-Type' => 'text/html' },
                 body: failed_response_body,

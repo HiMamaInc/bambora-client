@@ -18,7 +18,7 @@ module Bambora
       subject { described_class.new(client: client, api_key: api_key) }
 
       describe '#create' do
-        let(:account_holder) { 'All-Maudra Mayrin' }
+        let(:bank_account_holder) { 'All-Maudra Mayrin' }
         let(:name) { 'Brea Princess of Vapra' }
         let(:email_address) { 'brea@theresistance.com' }
         let(:phone_number) { '1231231234' }
@@ -31,7 +31,7 @@ module Bambora
           {
             customer_code: '1234',
             bank_account_type: 'CA',
-            account_holder: account_holder,
+            bank_account_holder: bank_account_holder,
             institution_number: '123',
             branch_number: '12345',
             account_number: '123456789',
@@ -43,19 +43,18 @@ module Bambora
             postal_code: postal_code,
             province: province,
             country: country,
-            sub_merchant_id: sub_merchant_id,
           }
         end
 
         let(:query_params) do
           {
-            'accountHolder' => account_holder,
+            'bankAccountHolder' => bank_account_holder,
             'accountNumber' => '123456789',
             'bankAccountType' => 'CA',
             'branchNumber' => '12345',
             'customerCode' => '1234',
             'institutionNumber' => '123',
-            'merchantId' => merchant_id,
+            'merchantId' => merchant_id.to_s,
             'operationType' => 'N',
             'ordAddress1' => address_1,
             'ordCity' => city,
@@ -67,8 +66,8 @@ module Bambora
             'ordProvince' => province,
             'passCode' => api_key,
             'serviceVersion' => '1.0',
-            'subMerchantId' => sub_merchant_id,
             'responseFormat' => 'QS',
+            'subMerchantId' => sub_merchant_id.to_s,
           }
         end
 
@@ -100,8 +99,8 @@ module Bambora
         end
 
         before do
-          stub_request(:post, "#{base_url}/scripts/payment_profiles.asp").with(
-            query: query_params,
+          stub_request(:post, "#{base_url}/scripts/payment_profile.asp").with(
+            body: query_params,
             headers: headers,
           ).to_return(headers: response_headers, body: response_body)
         end
@@ -111,8 +110,8 @@ module Bambora
           expect(resp).to eq response_body_hash
 
           expect(
-            a_request(:post, "#{base_url}/scripts/payment_profiles.asp").with(
-              query: query_params,
+            a_request(:post, "#{base_url}/scripts/payment_profile.asp").with(
+              body: query_params,
               headers: headers,
             ),
           ).to have_been_made.once

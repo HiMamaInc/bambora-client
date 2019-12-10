@@ -45,7 +45,7 @@ module Bambora
   class Client
     class Error < StandardError; end
 
-    attr_reader :base_url, :merchant_id, :sub_merchant_id
+    attr_reader :base_url, :merchant_id, :scripts_api_base_url, :sub_merchant_id
 
     # Initialze a new Bambora::Client.
     #
@@ -53,6 +53,7 @@ module Bambora
     #
     #   client = Bambora::Client.new do |c|
     #     c.base_url = ENV.fetch('BAMBORA_BASE_URL')
+    #     c.scripts_api_base_url = ENV.fetch('BAMBORA_SCRIPTS_BASE_URL')
     #     c.merchant_id = ENV.fetch('BAMBORA_MERCHANT_ID')
     #     c.sub_merchant_id = ENV.fetch('BAMBORA_SUB_MERCHANT_ID')
     #   end
@@ -114,7 +115,7 @@ module Bambora
     #   data = {
     #     customer_code: '1234',
     #     bank_account_type: 'CA',
-    #     account_holder: 'All-Maudra Mayrin',
+    #     bank_account_holder: 'All-Maudra Mayrin',
     #     institution_number: '123',
     #     branch_number: '12345',
     #     account_number: '123456789',
@@ -154,7 +155,7 @@ module Bambora
 
     def www_form_client
       @www_form_client ||= Bambora::Rest::WWWFormClient.new(
-        base_url: base_url,
+        base_url: scripts_api_base_url,
         merchant_id: merchant_id,
         sub_merchant_id: sub_merchant_id,
       )

@@ -30,7 +30,7 @@ module Bambora
         @client = client
         @api_key = api_key
         @version = version
-        @sub_path = '/scripts/payment_profiles.asp'
+        @sub_path = '/scripts/payment_profile.asp'
       end
 
       ##
@@ -40,7 +40,7 @@ module Bambora
       #   data = {
       #     customer_code: '1234',
       #     bank_account_type: 'CA',
-      #     account_holder: 'All-Maudra Mayrin',
+      #     bank_account_holder: 'All-Maudra Mayrin',
       #     institution_number: '123',
       #     branch_number: '12345',
       #     account_number: '123456789',

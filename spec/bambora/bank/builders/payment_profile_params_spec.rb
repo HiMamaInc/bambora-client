@@ -11,7 +11,7 @@ module Bambora
             {
               customer_code: '1234',
               bank_account_type: 'CA',
-              account_holder: 'All-Maudra Mayrin',
+              bank_account_holder: 'All-Maudra Mayrin',
               institution_number: '123',
               branch_number: '12345',
               account_number: '123456789',
@@ -25,7 +25,6 @@ module Bambora
               country: 'Thra',
               pass_code: 'aba121',
               merchant_id: 1,
-              sub_merchant_id: 1,
               service_version: '1.0',
             }
           end
@@ -34,7 +33,7 @@ module Bambora
             {
               'customerCode' => '1234',
               'bankAccountType' => 'CA',
-              'accountHolder' => 'All-Maudra Mayrin',
+              'bankAccountHolder' => 'All-Maudra Mayrin',
               'institutionNumber' => '123',
               'branchNumber' => '12345',
               'accountNumber' => '123456789',
@@ -48,7 +47,6 @@ module Bambora
               'ordCountry' => 'Thra',
               'passCode' => 'aba121',
               'merchantId' => 1,
-              'subMerchantId' => 1,
               'serviceVersion' => '1.0',
             }
           end
