@@ -43,7 +43,6 @@ module Bambora
             postal_code: postal_code,
             province: province,
             country: country,
-            sub_merchant_id: sub_merchant_id,
           }
         end
 
@@ -55,7 +54,7 @@ module Bambora
             'branchNumber' => '12345',
             'customerCode' => '1234',
             'institutionNumber' => '123',
-            'merchantId' => merchant_id,
+            'merchantId' => merchant_id.to_s,
             'operationType' => 'N',
             'ordAddress1' => address_1,
             'ordCity' => city,
@@ -67,8 +66,8 @@ module Bambora
             'ordProvince' => province,
             'passCode' => api_key,
             'serviceVersion' => '1.0',
-            'subMerchantId' => sub_merchant_id,
             'responseFormat' => 'QS',
+            'subMerchantId' => sub_merchant_id.to_s,
           }
         end
 
@@ -100,8 +99,8 @@ module Bambora
         end
 
         before do
-          stub_request(:post, "#{base_url}/scripts/payment_profiles.asp").with(
-            query: query_params,
+          stub_request(:post, "#{base_url}/scripts/payment_profile.asp").with(
+            body: query_params,
             headers: headers,
           ).to_return(headers: response_headers, body: response_body)
         end
@@ -111,8 +110,8 @@ module Bambora
           expect(resp).to eq response_body_hash
 
           expect(
-            a_request(:post, "#{base_url}/scripts/payment_profiles.asp").with(
-              query: query_params,
+            a_request(:post, "#{base_url}/scripts/payment_profile.asp").with(
+              body: query_params,
               headers: headers,
             ),
           ).to have_been_made.once

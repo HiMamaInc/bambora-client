@@ -26,7 +26,7 @@ module Bambora
       private
 
       def sanitized_body
-        body.reject! { |_, val| val.to_s.empty? }
+        body.reject { |_, val| val.to_s.empty? }
       end
     end
   end
