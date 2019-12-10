@@ -11,7 +11,7 @@ module Bambora
             {
               customer_code: '1234',
               bank_account_type: 'CA',
-              account_holder: 'All-Maudra Mayrin',
+              bank_account_holder: 'All-Maudra Mayrin',
               institution_number: '123',
               branch_number: '12345',
               account_number: '123456789',
@@ -34,7 +34,7 @@ module Bambora
             {
               'customerCode' => '1234',
               'bankAccountType' => 'CA',
-              'accountHolder' => 'All-Maudra Mayrin',
+              'bankAccountHolder' => 'All-Maudra Mayrin',
               'institutionNumber' => '123',
               'branchNumber' => '12345',
               'accountNumber' => '123456789',

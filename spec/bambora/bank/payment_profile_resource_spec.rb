@@ -18,7 +18,7 @@ module Bambora
       subject { described_class.new(client: client, api_key: api_key) }
 
       describe '#create' do
-        let(:account_holder) { 'All-Maudra Mayrin' }
+        let(:bank_account_holder) { 'All-Maudra Mayrin' }
         let(:name) { 'Brea Princess of Vapra' }
         let(:email_address) { 'brea@theresistance.com' }
         let(:phone_number) { '1231231234' }
@@ -31,7 +31,7 @@ module Bambora
           {
             customer_code: '1234',
             bank_account_type: 'CA',
-            account_holder: account_holder,
+            bank_account_holder: bank_account_holder,
             institution_number: '123',
             branch_number: '12345',
             account_number: '123456789',
@@ -49,7 +49,7 @@ module Bambora
 
         let(:query_params) do
           {
-            'accountHolder' => account_holder,
+            'bankAccountHolder' => bank_account_holder,
             'accountNumber' => '123456789',
             'bankAccountType' => 'CA',
             'branchNumber' => '12345',

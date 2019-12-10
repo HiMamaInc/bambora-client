@@ -29,6 +29,7 @@ module Bambora
       end
 
       def post(path:, body:, headers:)
+        require 'pry'; binding.pry
         connection.post(path, body, headers)
       end
 
