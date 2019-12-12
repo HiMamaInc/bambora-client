@@ -8,12 +8,14 @@ require 'json'
 # Gems
 require 'faraday' # HTTP Wraper
 require 'gyoku' # XML Builder
+require 'multiparty' # Multipart/mixed requestss
 
 require 'bambora/client/version'
 
 # Adapters
 require 'bambora/adapters/response'
 require 'bambora/adapters/json_response'
+require 'bambora/adapters/multipart_mixed_request'
 require 'bambora/adapters/query_string_response'
 require 'bambora/bank/adapters/payment_profile_response'
 
