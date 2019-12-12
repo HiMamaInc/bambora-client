@@ -22,7 +22,7 @@ module Bambora
 
       private
 
-      def init_payload(file_contents, params)
+      def init_payload(file_contents, options)
         return @payload if @payload
 
         @payload = Bambora::Adapters::MultipartMixedRequest.new(
@@ -30,7 +30,7 @@ module Bambora
             criteria: {
               content_disposition: CONTENT_DISPOSITION,
               content_type: JSON_CONTENT_TYPE,
-              content: params.to_json,
+              content: options.to_json,
             },
             data: {
               filename: "merchant_#{sub_merchant_id}.txt",

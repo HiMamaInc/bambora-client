@@ -2,10 +2,7 @@
 
 module Bambora
   module V1
-    # Summary: Bank Electronic Funds Transfer (CAD) and Automatic Clearing House (USD)
-    # Docs: https://dev.na.bambora.com/docs/guides/batch_payment/
-    #       https://dev.na.bambora.com/docs/references/batch_payment/
-    # Endpoint: https://api.na.bambora.com/v1/batchpayments
+    # Bank Electronic Funds Transfer (CAD) and Automatic Clearing House (USD)
     class BatchPaymentResource
       attr_reader :client, :api_key, :sub_path
 
@@ -16,7 +13,10 @@ module Bambora
       end
 
       ##
+      # Post batch payment data.
+      #
       # @see https://dev.na.bambora.com/docs/references/batch_payment/
+      # @see https://dev.na.bambora.com/docs/guides/batch_payment/
       #
       # @example
       #   batch_payment_resource.create(
@@ -33,19 +33,16 @@ module Bambora
       #       dynamic_description: 'The Skeksis',
       #     }],
       #   )
-      def create(transactions, opts = { process_now: true })
+      #
+      # @param transactions [Array] of hashes with payment data.
+      # @param opts[:process_now] [Integer]
+      def create(transactions, opts = { process_now: 1 })
         client.post(
           path: sub_path,
-          file_contents: csv_string(transactions),
+          file_contents: Bambora::Builders::BatchPaymentCSV.build(transactions),
           options: opts,
           api_key: api_key,
         )
-      end
-
-      private
-
-      def csv_string(transactions)
-        Bambora::Builders::BatchPaymentCSV.build(transactions)
       end
     end
   end
