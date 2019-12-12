@@ -32,7 +32,9 @@ module Bambora
 
       describe '#content_type' do
         it 'returns the correct content type' do
-          expect(multipart_request.content_type).to include %r{^multipart/form-data; boundary=multiparty-boundary-r}
+          expect(multipart_request.content_type.sub(/-\d+/, '')).to(
+            eq('multipart/form-data; boundary=multiparty-boundary'),
+          )
         end
       end
     end
