@@ -3,7 +3,7 @@
 module Bambora
   module Bank
     ##
-    # For making requests to the /scripts/payment_profiles.asp endpoint
+    # For making requests to the /scripts/payment_profile.asp endpoint
     #
     # @see https://help.na.bambora.com/hc/en-us/articles/115010346067-Secure-Payment-Profiles-Batch-Payments
     class PaymentProfileResource
