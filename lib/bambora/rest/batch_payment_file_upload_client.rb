@@ -46,6 +46,7 @@ module Bambora
           content_type: @payload.content_type,
           api_key: api_key,
           merchant_id: merchant_id,
+          sub_merchant_id: sub_merchant_id,
         ).build
       end
     end

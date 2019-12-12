@@ -3,6 +3,7 @@
 # Standard Libraries
 require 'base64'
 require 'cgi'
+require 'csv'
 require 'json'
 
 # Gems
@@ -23,6 +24,7 @@ require 'bambora/bank/adapters/payment_profile_response'
 require 'bambora/builders/headers'
 require 'bambora/builders/xml_request_body'
 require 'bambora/builders/www_form_parameters'
+require 'bambora/builders/batch_payment_csv'
 require 'bambora/bank/builders/payment_profile_params'
 
 # Factories
