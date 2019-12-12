@@ -30,6 +30,7 @@ require 'bambora/factories/response_adapter_factory'
 
 # Clients
 require 'bambora/rest/client'
+require 'bambora/rest/batch_payment_file_upload_client'
 require 'bambora/rest/json_client'
 require 'bambora/rest/www_form_client'
 require 'bambora/rest/xml_client'
