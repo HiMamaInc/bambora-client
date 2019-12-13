@@ -4,7 +4,7 @@ module Bambora
   module Rest
     class BatchPaymentFileUploadClient < Bambora::Rest::Client
       CONTENT_DISPOSITION = 'form-data'
-      CONTENT_TYPES ={
+      CONTENT_TYPES = {
         text_plain: 'text/plain',
         application_json: 'application/json',
       }.freeze
