@@ -17,7 +17,7 @@ module Bambora
           super(
             path: args[:path],
             body: @payload.body,
-            headers: build_headers(api_key: args[:api_key]).merge(FILE_TYPE_HEADER),
+            headers: build_headers(api_key: args[:api_key]),
           ),
         ).to_h
       end
@@ -44,11 +44,12 @@ module Bambora
       end
 
       def build_headers(api_key:)
-        Bambora::Builders::Headers.new(
+        headers = Bambora::Builders::Headers.new(
           content_type: @payload.content_type,
           api_key: api_key,
           merchant_id: merchant_id,
         ).build
+        headers.merge(FILE_TYPE_HEADER)
       end
     end
   end
