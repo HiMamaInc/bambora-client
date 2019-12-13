@@ -5,8 +5,6 @@ module Bambora
     ##
     # Creates headers and a body for a multipart/mixed request with a file and a JSON body.
     class MultipartMixedRequest
-      extend Forwardable
-
       attr_reader :multiparty
 
       def initialize(options = {})
