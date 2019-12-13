@@ -174,19 +174,9 @@ module Bambora
     def batch_payment_file_upload_client
       Bambora::Rest::BatchPaymentFileUploadClient.new(
         base_url: base_url,
-        connection: connection,
         merchant_id: merchant_id,
         sub_merchant_id: sub_merchant_id,
       )
-    end
-
-    # TODO: Refactor other Clients to receive a connection as well.
-    def connection
-      @connection ||= Faraday.new(url: base_url) do |faraday|
-        faraday.request :multipart
-        faraday.request :url_encoded
-        faraday.adapter :excon
-      end
     end
   end
 end
