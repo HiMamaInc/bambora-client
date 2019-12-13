@@ -17,7 +17,9 @@ module Bambora
         multiparty.header.sub(/^Content-Type: /, '').strip
       end
 
-      def_delegator :multiparty, :body, :body
+      def body
+       "#{multiparty.body}\r\n"
+      end
     end
   end
 end

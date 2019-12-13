@@ -16,7 +16,7 @@ module Bambora
         parse_response_body(
           super(
             path: args[:path],
-            body: "#{@payload.body}\r\n",
+            body: @payload.body,
             headers: build_headers(api_key: args[:api_key]).merge(FILE_TYPE_HEADER),
           ),
         ).to_h

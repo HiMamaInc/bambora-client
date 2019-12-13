@@ -37,6 +37,12 @@ module Bambora
           )
         end
       end
+
+      describe '#body' do
+        it 'returns the body with a carrage return at the end' do
+          expect(multipart_request.body.chars.last(2)).to eq ["\r", "\n"]
+        end
+      end
     end
   end
 end
