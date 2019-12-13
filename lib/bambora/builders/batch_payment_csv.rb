@@ -18,7 +18,7 @@ module Bambora
         #     account_number: 1223456789,
         #     amount: 10000
         #     reference_nubmer: 1234,
-        #     reccipient_name: 'Hup Podling',
+        #     recipient_name: 'Hup Podling',
         #     customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A',
         #     dynamic_description: 'The Skeksis',
         #   }])
