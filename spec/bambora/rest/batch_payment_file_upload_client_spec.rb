@@ -35,21 +35,21 @@ module Bambora
 
       let(:request_body) do
         <<~BODY
-					--multiparty-boundary-50428029
-					Content-Disposition: form-data; name="criteria"
-					Content-Type: application/json
+          --multiparty-boundary-50428029
+          Content-Disposition: form-data; name="criteria"
+          Content-Type: application/json
 
-					{"process_now":1}
-					--multiparty-boundary-50428029
-					Content-Disposition: form-data; name="data"; filename="merchant_2.txt"
-					Content-Type: text/plain
-					Content-Transfer-Encoding: binary
+          {"process_now":1}
+          --multiparty-boundary-50428029
+          Content-Disposition: form-data; name="data"; filename="merchant_2.txt"
+          Content-Type: text/plain
+          Content-Transfer-Encoding: binary
 
-					E,C,001,99001,09400313371,10000,1000070001,ACME Corp
-					E,C,002,99002,09400313372,20000,1000070002,John Doe
-					E,C,003,99003,09400313373,30000,1000070003,Jane Doe
+          E,C,001,99001,09400313371,10000,1000070001,ACME Corp
+          E,C,002,99002,09400313372,20000,1000070002,John Doe
+          E,C,003,99003,09400313373,30000,1000070003,Jane Doe
 
-					--multiparty-boundary-50428029--
+          --multiparty-boundary-50428029--
         BODY
       end
 
