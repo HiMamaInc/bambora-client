@@ -12,20 +12,7 @@ module Bambora
       let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5', 'Sub-Merchant-ID' => sub_merchant_id } }
 
       let(:transactions) do
-        [
-          {
-            super_type: 'E',
-            transaction_type: 'D',
-            institution_number: 12_345,
-            transit_number: 123,
-            account_number: 1_223_456_789,
-            amount: 10_000,
-            reference_nubmer: 1234,
-            reccipient_name: 'Hup Podling',
-            customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A',
-            dynamic_description: 'The Skeksis',
-          },
-        ]
+        [ { super_type: 'E', transaction_type: 'D', institution_number: 12_345, transit_number: 123, account_number: 1_223_456_789, amount: 10_000, reference_nubmer: 1234, reccipient_name: 'Hup Podling', customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A', dynamic_description: 'The Skeksis' } ]
       end
 
       let(:file_contents) do
@@ -46,7 +33,6 @@ module Bambora
       describe '#create' do
         before do
         end
-
 
         it 'sends post to the client' do
           expect(client).to receive(:post).with(

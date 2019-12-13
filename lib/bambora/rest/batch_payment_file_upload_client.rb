@@ -8,7 +8,7 @@ module Bambora
         text_plain: 'text/plain',
         application_json: 'application/json',
       }.freeze
-      FILE_TYPE_HEADER = { 'FileType' => 'STD' }
+      FILE_TYPE_HEADER = { 'FileType' => 'STD' }.freeze
 
       # @param args[:file_contents] [String] CSV file contents
       # @param args[:options] [Hash] Request Parameters as documented by Bambora.
