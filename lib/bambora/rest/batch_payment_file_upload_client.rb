@@ -4,9 +4,11 @@ module Bambora
   module Rest
     class BatchPaymentFileUploadClient < Bambora::Rest::Client
       CONTENT_DISPOSITION = 'form-data'
-      FILE_CONTENT_TYPE = 'text/plain'
+      CONTENT_TYPES ={
+        text_plain: 'text/plain',
+        application_json: 'application/json',
+      }.freeze
       FILE_TYPE_HEADER = { 'FileType' => 'STD' }
-      JSON_CONTENT_TYPE = 'application/json'
 
       # @param args[:file_contents] [String] CSV file contents
       # @param args[:options] [Hash] Request Parameters as documented by Bambora.
@@ -31,12 +33,12 @@ module Bambora
           multipart_args: {
             criteria: {
               content_disposition: CONTENT_DISPOSITION,
-              content_type: JSON_CONTENT_TYPE,
+              content_type: CONTENT_TYPES[:application_json],
               content: options.to_json,
             },
             data: {
               filename: "merchant_#{sub_merchant_id}.txt",
-              content_type: FILE_CONTENT_TYPE,
+              content_type: CONTENT_TYPES[:text_plain],
               content: file_contents,
             },
           },

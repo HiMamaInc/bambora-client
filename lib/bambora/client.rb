@@ -172,7 +172,7 @@ module Bambora
     end
 
     def batch_payment_file_upload_client
-      Bambora::Rest::BatchPaymentFileUploadClient.new(
+      @batch_payment_file_upload_client ||= Bambora::Rest::BatchPaymentFileUploadClient.new(
         base_url: base_url,
         merchant_id: merchant_id,
         sub_merchant_id: sub_merchant_id,
