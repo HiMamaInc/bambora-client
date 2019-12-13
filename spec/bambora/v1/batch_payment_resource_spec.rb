@@ -10,7 +10,7 @@ module Bambora
       let(:sub_merchant_id) { 2 }
       let(:base_url) { 'https://sandbox-api.na.bambora.com' }
       let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5', 'Sub-Merchant-ID' => sub_merchant_id } }
-      let(:response_headers) { { 'Content-Type' => 'application/json' } }
+
       let(:transactions) do
         [
           {
@@ -27,28 +27,14 @@ module Bambora
           },
         ]
       end
-      let(:response_body) do
-        {
-          code: 1,
-          message: 'Hup...want...buy.',
-          customer_code: 'aaa111',
-          validation: {
-            id: '',
-            approved: 1,
-            message_id: 1,
-            message: '',
-            auth_code: '',
-            trans_date: '',
-            order_number: '',
-            type: '',
-            amount: 0,
-            cvd_id: 123,
-          },
-        }
+
+      let(:file_contents) do
+        "E,D,12345,123,1223456789,10000,1234,Hup Podling,02355E2e58Bf488EAB4EaFAD7083dB6A,The Skeksis\n"
       end
 
       let(:client) do
-        Bambora::Rest::BatchPaymentFileUploadClient.new(
+        instance_double(
+          'Bambora::Rest::BatchPaymentFileUploadClient',
           base_url: base_url,
           merchant_id: merchant_id,
           sub_merchant_id: sub_merchant_id,
@@ -59,19 +45,17 @@ module Bambora
 
       describe '#create' do
         before do
-          stub_request(:post, "#{base_url}/v1/batchpayments")
-            .with(headers: headers)
-            .to_return(headers: response_headers, body: response_body.to_json.to_s)
         end
 
-        it 'POSTs to the Bambora API' do
-          resource.create(transactions)
 
-          expect(
-            a_request(:post, "#{base_url}/v1/batchpayments").with(
-              headers: headers,
-            ),
-          ).to have_been_made.once
+        it 'sends post to the client' do
+          expect(client).to receive(:post).with(
+            path: '/v1/batchpayments',
+            file_contents: file_contents,
+            options: { process_now: 1, sub_merchant_id: client.sub_merchant_id },
+            api_key: api_key,
+          )
+          resource.create(transactions)
         end
       end
     end

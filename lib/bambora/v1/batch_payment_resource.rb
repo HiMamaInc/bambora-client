@@ -15,9 +15,6 @@ module Bambora
       ##
       # Post batch payment data.
       #
-      # @see https://dev.na.bambora.com/docs/references/batch_payment/
-      # @see https://dev.na.bambora.com/docs/guides/batch_payment/
-      #
       # @example
       #   batch_payment_resource.create(
       #     [{
@@ -35,12 +32,16 @@ module Bambora
       #   )
       #
       # @param transactions [Array] of hashes with payment data.
-      # @param opts[:process_now] [Integer]
+      # @param opts[:process_now] [Integer] optional. Defaults to 1.
+      # @param opts[:process_date] [String] optional. Must also set process_now to 0.
+      #
+      # @see https://dev.na.bambora.com/docs/references/batch_payment/
+      # @see https://dev.na.bambora.com/docs/guides/batch_payment/
       def create(transactions, opts = { process_now: 1 })
         client.post(
           path: sub_path,
           file_contents: Bambora::Builders::BatchPaymentCSV.build(transactions),
-          options: opts,
+          options: opts.merge(sub_merchant_id: client.sub_merchant_id),
           api_key: api_key,
         )
       end
