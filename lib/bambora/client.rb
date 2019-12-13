@@ -9,7 +9,7 @@ require 'json'
 # Gems
 require 'faraday' # HTTP Wraper
 require 'gyoku' # XML Builder
-require 'multiparty' # Multipart/mixed requestss
+require 'multiparty' # Multipart/mixed requests
 
 require 'bambora/client/version'
 
