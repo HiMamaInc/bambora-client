@@ -36,7 +36,7 @@ module Bambora
       let(:request_body) do
         <<~BODY
 					--multiparty-boundary-50428029
-					Content-Disposition: form-data; name='criteria'; name="criteria"
+					Content-Disposition: form-data; name="criteria"
 					Content-Type: application/json
 
 					{"process_now":1}
@@ -69,7 +69,7 @@ module Bambora
         {
           multipart_args: {
             criteria: {
-              content_disposition: "form-data; name='criteria'",
+              content_disposition: 'form-data',
               content_type: 'application/json',
               content: options.to_json,
             },
@@ -82,16 +82,18 @@ module Bambora
         }
       end
 
+      let(:faraday_class_double) { class_double('Faraday').as_stubbed_const(transfer_nested_constants: true) }
+      let(:response_double) do
+        instance_double('Faraday::Response', body: response_body.to_json.to_s, headers: response_headers)
+      end
+      let(:connection_double) { instance_double('Faraday::Connection', post: response_double) }
+
+      before { allow(faraday_class_double).to receive(:new).and_return(connection_double) }
+
       describe '#create' do
         context 'server responds with a 2xx status' do
           before do
             allow(multipart_mixed_request_class).to receive(:new).with(multipart_args).and_return(multipart_double)
-            # WebMock does not support verifying the body with a regex on a multi-part form request.
-            stub_request(:post, base_url).with(
-              headers: {
-                'Authorization' => 'Passcode MTpmYWtla2V5',
-              },
-            ).to_return(headers: response_headers, body: response_body.to_json.to_s)
           end
 
           it 'parses the response' do
@@ -108,13 +110,17 @@ module Bambora
         context 'server responds with a non 2xx status' do
           let(:failed_status) { 500 }
           let(:failed_response_body) { 'Mouldy mildew, mother of mouthmuck, dangle and strangle and death.' }
+          let(:failed_response_double) do
+            instance_double(
+              'Faraday::Response',
+              headers: response_headers,
+              status: failed_status,
+              body: failed_response_body,
+            )
+          end
 
           before do
-            stub_request(:post, base_url).with(
-              headers: {
-                'Authorization' => 'Passcode MTpmYWtla2V5',
-              },
-            ).to_return(headers: response_headers, body: failed_response_body, status: failed_status)
+            allow(connection_double).to receive(:post).and_return(failed_response_double)
           end
 
           it 'parses the response' do

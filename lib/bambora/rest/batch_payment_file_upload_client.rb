@@ -3,8 +3,9 @@
 module Bambora
   module Rest
     class BatchPaymentFileUploadClient < Bambora::Rest::Client
-      CONTENT_DISPOSITION = "form-data; name='criteria'"
+      CONTENT_DISPOSITION = 'form-data'
       FILE_CONTENT_TYPE = 'text/plain'
+      FILE_TYPE_HEADER = { 'FileType' => 'STD' }
       JSON_CONTENT_TYPE = 'application/json'
 
       # @param args[:file_contents] [String] CSV file contents
@@ -15,8 +16,9 @@ module Bambora
         parse_response_body(
           super(
             path: args[:path],
-            body: @payload.body,
-            headers: build_headers(api_key: args[:api_key])),
+            body: "#{@payload.body}\r\n",
+            headers: build_headers(api_key: args[:api_key]).merge(FILE_TYPE_HEADER),
+          ),
         ).to_h
       end
 
@@ -46,7 +48,6 @@ module Bambora
           content_type: @payload.content_type,
           api_key: api_key,
           merchant_id: merchant_id,
-          sub_merchant_id: sub_merchant_id,
         ).build
       end
     end
