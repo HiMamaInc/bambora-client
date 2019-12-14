@@ -13,7 +13,9 @@ module Bambora
       end
 
       ##
-      # Post batch payment data.
+      # Post batch payment data. Transaction objects must have keys that match the order of the columns defined in the
+      # Bambora documentation.https://dev.na.bambora.com/docs/references/batch_payment/#format-of-data-in-file
+      # The values of each object are used to create one row of a CSV.
       #
       # @example
       #   batch_payment_resource.create(
