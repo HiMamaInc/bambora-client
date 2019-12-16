@@ -3,17 +3,20 @@
 # Standard Libraries
 require 'base64'
 require 'cgi'
+require 'csv'
 require 'json'
 
 # Gems
 require 'faraday' # HTTP Wraper
 require 'gyoku' # XML Builder
+require 'multiparty' # Multipart/mixed requests
 
 require 'bambora/client/version'
 
 # Adapters
 require 'bambora/adapters/response'
 require 'bambora/adapters/json_response'
+require 'bambora/adapters/multipart_mixed_request'
 require 'bambora/adapters/query_string_response'
 require 'bambora/bank/adapters/payment_profile_response'
 
@@ -21,6 +24,7 @@ require 'bambora/bank/adapters/payment_profile_response'
 require 'bambora/builders/headers'
 require 'bambora/builders/xml_request_body'
 require 'bambora/builders/www_form_parameters'
+require 'bambora/builders/batch_payment_csv'
 require 'bambora/bank/builders/payment_profile_params'
 
 # Factories
@@ -28,6 +32,7 @@ require 'bambora/factories/response_adapter_factory'
 
 # Clients
 require 'bambora/rest/client'
+require 'bambora/rest/batch_payment_file_upload_client'
 require 'bambora/rest/json_client'
 require 'bambora/rest/www_form_client'
 require 'bambora/rest/xml_client'
@@ -141,7 +146,12 @@ module Bambora
 
     def batch_payment_reports; end
 
-    def batch_payments; end
+    def batch_payments(api_key:)
+      @batch_payments ||= Bambora::V1::BatchPaymentResource.new(
+        client: batch_payment_file_upload_client,
+        api_key: api_key
+      )
+    end
 
     private
 
@@ -156,6 +166,14 @@ module Bambora
     def www_form_client
       @www_form_client ||= Bambora::Rest::WWWFormClient.new(
         base_url: scripts_api_base_url,
+        merchant_id: merchant_id,
+        sub_merchant_id: sub_merchant_id,
+      )
+    end
+
+    def batch_payment_file_upload_client
+      @batch_payment_file_upload_client ||= Bambora::Rest::BatchPaymentFileUploadClient.new(
+        base_url: base_url,
         merchant_id: merchant_id,
         sub_merchant_id: sub_merchant_id,
       )
