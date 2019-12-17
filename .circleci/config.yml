@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/ruby:2.3.8-stretch
+      - image: circleci/ruby:2.5.7-stretch
 
     working_directory: ~/repo
 
