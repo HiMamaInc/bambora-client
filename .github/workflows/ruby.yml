@@ -1,0 +1,24 @@
+name: Ruby
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: [ '2.x', '3.x' ]
+    name: Ruby ${{ matrix.ruby }} sample
+    steps:
+      - uses: actions/checkout@master
+        with:
+          ref: ${{ github.ref }}
+      - name: Setup ruby and run tests
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      - run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+          bundle exec rake
