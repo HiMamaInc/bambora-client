@@ -5,7 +5,7 @@ PATH
       excon (< 1.0)
       faraday (< 1.0)
       gyoku (~> 1.0)
-      multiparty
+      multiparty (~> 0)
 
 GEM
   remote: https://rubygems.org/
@@ -80,14 +80,14 @@ PLATFORMS
 
 DEPENDENCIES
   bambora-client!
-  bundler (~> 1.17)
+  bundler (~> 2)
   pry (~> 0.12.0)
-  pry-byebug (~> 3.7.0)
+  pry-byebug (~> 3.7)
   rake (~> 10.0)
   rspec (~> 3.0)
   rspec_junit_formatter (~> 0.4.1)
   rubocop (~> 0.74.0)
-  webmock (~> 3.7.0)
+  webmock (~> 3.7)
 
 BUNDLED WITH
    2.1.0
