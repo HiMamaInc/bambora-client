@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         ruby: [ '2.4.x', '2.5.x', '2.6.x']
-    name: Ruby ${{ matrix.ruby }} sample
+    name: Ruby ${{ matrix.ruby }} Test
     steps:
       - uses: actions/checkout@master
         with:
