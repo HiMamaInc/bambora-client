@@ -5,15 +5,13 @@ module Bambora
     ##
     # Builds an XML request body from a Hash
     class XMLRequestBody
-      attr_reader :body, :response_format
+      attr_reader :body
 
-      def initialize(body:, response_format: nil)
+      def initialize(body:)
         @body = body
-        @response_format = response_format
       end
 
       def to_s
-        body.merge!(rpt_format: response_format) if response_format
         "<?xml version='1.0' encoding='utf-8'?>#{Gyoku.xml(request: body)}"
       end
     end

@@ -3,8 +3,8 @@
 require 'spec_helper'
 
 module Bambora
-  module V1
-    describe BatchPaymentReportResource do
+  module Bank
+    describe BatchReportResource do
       let(:api_key) { 'fakekey' }
       let(:merchant_id) { 1 }
       let(:sub_merchant_id) { 2 }
