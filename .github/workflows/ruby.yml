@@ -1,7 +1,10 @@
-name: Tests & Linting
+name: Tests
+
 on: [push]
+
 jobs:
   build:
+
     runs-on: ubuntu-latest
     strategy:
       matrix:
