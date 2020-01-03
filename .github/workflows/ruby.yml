@@ -1,7 +1,5 @@
-name: Tests
-
+name: Tests & Linting
 on: [push]
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,12 +29,5 @@ jobs:
       - name: Run Tests
         run: |
           bundle exec rake spec
-name: Linting
-on: [push]
-jobs:
-  build:
-    name: Linting
-    runs-on: ubuntu-latest
-    steps:
       - name: Rubocop Linter
         uses: andrewmcodes/rubocop-linter-action@v3.0.0.rc2
