@@ -47,7 +47,7 @@ module Bambora
       #     service_name: 'BatchPaymentsETF',
       #   }
       #
-      #  payment_profile_resource.create(data)
+      #  payment_profile_resource.show(data)
       #
       #  @params profile_data [Hash] with values as noted in the example.
       def show(profile_data)

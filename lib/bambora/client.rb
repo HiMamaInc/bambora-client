@@ -144,12 +144,17 @@ module Bambora
       @bank_profiles ||= Bambora::Bank::PaymentProfileResource.new(client: www_form_client, api_key: api_key)
     end
 
-    def batch_payment_reports; end
+    def batch_reports(api_key:)
+      @batch_reports = Bambora::Bank::BatchReportResource.new(
+        client: xml_client,
+        api_key: api_key,
+      )
+    end
 
     def batch_payments(api_key:)
       @batch_payments ||= Bambora::V1::BatchPaymentResource.new(
         client: batch_payment_file_upload_client,
-        api_key: api_key
+        api_key: api_key,
       )
     end
 
@@ -173,6 +178,14 @@ module Bambora
 
     def batch_payment_file_upload_client
       @batch_payment_file_upload_client ||= Bambora::Rest::BatchPaymentFileUploadClient.new(
+        base_url: base_url,
+        merchant_id: merchant_id,
+        sub_merchant_id: sub_merchant_id,
+      )
+    end
+
+    def xml_client
+      @xml_client ||= Bambora::Rest::XMLClient.new(
         base_url: base_url,
         merchant_id: merchant_id,
         sub_merchant_id: sub_merchant_id,
