@@ -23,9 +23,9 @@ module Bambora
         end
         let(:response_headers) { { 'Content-Type' => 'application/json' } }
         let(:response_body) { { response: 'body', with: { objects: 'yay!' }, and: [{ arrays: 'wow!' }] } }
-        let(:response) {
+        let(:response) do
           instance_double('Faraday::Response', headers: response_headers, body: response_body.to_json.to_s)
-        }
+        end
 
         context 'server responds with a 2xx status' do
           before do
@@ -42,14 +42,14 @@ module Bambora
           let(:failed_response_body) { 'Mouldy mildew, mother of mouthmuck, dangle and strangle and death.' }
           let(:response_headers) { { 'Content-Type' => 'text/html' } }
           let(:failed_status) { 500 }
-          let(:response) {
+          let(:response) do
             instance_double(
               'Faraday::Response',
               headers: response_headers,
               status: failed_status,
               body: failed_response_body,
             )
-          }
+          end
 
           before do
             allow(connection).to(receive(:post).with(path, xml_request_body, headers).and_return(response))
