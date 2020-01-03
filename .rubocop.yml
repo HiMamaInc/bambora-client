@@ -4,9 +4,6 @@ AllCops:
 Metrics/ClassLength:
   Enabled: false
 
-StyleDocumentation:
-  Enabled: false
-
 Metrics/AbcSize:
   Enabled: false
 
@@ -31,9 +28,8 @@ Style/ConditionalAssignment:
 Style/EmptyElse:
   EnforcedStyle: empty
 
-Metrics/LineLength:
-  Max: 120
-  Severity: 'warning'
+Style/Documentation:
+  Enabled: false
 
 Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: comma
@@ -49,6 +45,10 @@ Layout/ParameterAlignment:
 
 Layout/EmptyLineAfterMagicComment:
   Enabled: false
+
+Layout/LineLength:
+  Max: 120
+  Severity: 'warning'
 
 Metrics/MethodLength:
   CountComments: false
