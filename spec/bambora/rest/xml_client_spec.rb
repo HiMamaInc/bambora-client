@@ -10,12 +10,7 @@ module Bambora
       let(:api_key) { 'fakekey' }
       let(:merchant_id) { 1 }
       let(:base_url) { 'https://sandbox-api.na.bambora.com' }
-      let(:headers) do
-        {
-          'Content-Type' => 'text/html',
-          'Authorization' => 'Passcode MTpmYWtla2V5',
-        }
-      end
+      let(:headers) { { 'Content-Type' => 'application/xml' } }
       let(:path) { '/' }
       let(:connection) { instance_double('Faraday::Connection') }
 
@@ -48,7 +43,12 @@ module Bambora
           let(:response_headers) { { 'Content-Type' => 'text/html' } }
           let(:failed_status) { 500 }
           let(:response) {
-            instance_double('Faraday::Response', headers: response_headers, status: failed_status, body: failed_response_body)
+            instance_double(
+              'Faraday::Response',
+              headers: response_headers,
+              status: failed_status,
+              body: failed_response_body,
+            )
           }
 
           before do

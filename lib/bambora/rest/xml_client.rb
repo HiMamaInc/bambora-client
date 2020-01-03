@@ -4,7 +4,7 @@ module Bambora
   module Rest
     # The base class for making XML requests.
     class XMLClient < Bambora::Rest::Client
-      CONTENT_TYPE = 'text/html'
+      CONTENT_TYPE = 'application/xml'
       RESPONSE_FORMAT = 'JSON'
 
       ##
@@ -20,15 +20,15 @@ module Bambora
           super(
             path: path,
             body: Bambora::Builders::XMLRequestBody.new(body: body).to_s,
-            headers: build_headers(api_key: api_key),
+            headers: build_headers,
           ),
         )
       end
 
       private
 
-      def build_headers(api_key:)
-        super(api_key: api_key, content_type: CONTENT_TYPE)
+      def build_headers
+        { 'Content-Type' => CONTENT_TYPE }
       end
     end
   end

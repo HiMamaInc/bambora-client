@@ -5,6 +5,8 @@ require 'spec_helper'
 module Bambora
   module Bank
     describe BatchReportResource do
+      subject(:reports) { described_class.new(client: client, api_key: api_key) }
+
       let(:api_key) { 'fakekey' }
       let(:merchant_id) { 1 }
       let(:sub_merchant_id) { 2 }
@@ -29,18 +31,58 @@ module Bambora
           },
         }
       end
+
       let(:client) do
-        Bambora::Rest::JSONClient.new(
-          base_url: base_url,
-          api_key: api_key,
+        instance_double(
+          'Bambora::Rest::XMLClient',
           merchant_id: merchant_id,
           sub_merchant_id: sub_merchant_id,
+          post: true,
         )
       end
 
-      subject { described_class.new(client: client, sub_path: '/scripts/reporting/report.aspx') }
+      describe '#show' do
+        let(:batch_id) { 1 }
+        let(:from_date) { Time.now.to_s }
+        let(:to_date) { Time.now.to_s }
+        let(:service_name) { 'BatchPaymentsETF' }
+        let(:filter_by) { 'batch_id' }
+        let(:request_data) do
+          {
+            rpt_filter_by_1: filter_by,
+            rpt_filter_value_1: batch_id,
+            rpt_from_date_time: from_date,
+            rpt_to_date_time: to_date,
+            service_name: service_name,
+          }
+        end
+        let(:posted_data) do
+          {
+            api_key: 'fakekey',
+            body: {
+              merchant_id: 1,
+              pass_code: 'fakekey',
+              rpt_filter_by_1: filter_by,
+              rpt_filter_value_1: batch_id,
+              rpt_format: 'JSON',
+              rpt_from_date_time: from_date,
+              rpt_operation_type: 'EQ',
+              rpt_to_date_time: to_date,
+              rpt_version: '2.0',
+              service_name: service_name,
+              session_source: 'external',
+              sub_merchant_id: 2,
+            },
+            path: '/scripts/payment_profile.aspx',
+          }
+        end
 
-      pending
+        before { reports.show(request_data) }
+
+        it 'sends `post` to the client with the correct data' do
+          expect(client).to have_received(:post).with(posted_data)
+        end
+      end
     end
   end
 end
