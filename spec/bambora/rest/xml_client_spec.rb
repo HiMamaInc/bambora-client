@@ -33,7 +33,7 @@ module Bambora
           end
 
           it 'parses the response' do
-            resp = subject.post(path: path, body: request_body, api_key: api_key)
+            resp = subject.post(path: path, body: request_body)
             expect(resp).to eq response_body
           end
         end
@@ -56,7 +56,7 @@ module Bambora
           end
 
           it 'it returns a hash' do
-            resp = subject.post(path: path, body: request_body, api_key: api_key)
+            resp = subject.post(path: path, body: request_body)
             expect(resp).to eq(status: failed_status, body: failed_response_body)
           end
         end

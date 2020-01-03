@@ -15,7 +15,7 @@ module Bambora
       # @param api_key [String] Indicating the API Key to be used with the request.
       #
       # @return [Hash] Indicating success or failure of the operation.
-      def post(path:, body:, api_key:)
+      def post(path:, body:)
         parse_response_body(
           super(
             path: path,

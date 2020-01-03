@@ -51,7 +51,7 @@ module Bambora
       #
       #  @params profile_data [Hash] with values as noted in the example.
       def show(profile_data)
-        client.post(path: sub_path, body: batch_report_body(profile_data), api_key: api_key)
+        client.post(path: sub_path, body: batch_report_body(profile_data))
       end
 
       private

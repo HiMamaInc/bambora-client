@@ -59,7 +59,6 @@ module Bambora
         end
         let(:posted_data) do
           {
-            api_key: 'fakekey',
             body: {
               merchant_id: 1,
               pass_code: 'fakekey',
