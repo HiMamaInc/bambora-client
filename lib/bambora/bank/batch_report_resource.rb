@@ -9,7 +9,6 @@ module Bambora
     class BatchReportResource
       DEFAULT_REQUEST_PARAMS = {
         rpt_format: 'JSON',
-        rpt_operation_type: 'EQ',
         rpt_version: '2.0',
         session_source: 'external',
       }.freeze
@@ -32,7 +31,7 @@ module Bambora
       def initialize(client:, api_key:)
         @client = client
         @api_key = api_key
-        @sub_path = '/scripts/payment_profile.aspx'
+        @sub_path = '/scripts/reporting/report.aspx'
       end
 
       ##
@@ -42,9 +41,10 @@ module Bambora
       #   data = {
       #     rpt_filter_by_1: 'batch_id',
       #     rpt_filter_value_1: 1,
-      #     rpt_from_date_time: '2019-12-18T13:06:52-05:00',
-      #     rpt_to_date_time: '2019-12-18T13:06:52-05:00',
-      #     service_name: 'BatchPaymentsETF',
+      #     rpt_operation_type_1: 'EQ',
+      #     rpt_from_date_time: '2019-12-18 00:00:00',
+      #     rpt_to_date_time: '2019-12-18 23:59:59',
+      #     service_name: 'BatchPaymentsEFT',
       #   }
       #
       #  payment_profile_resource.show(data)

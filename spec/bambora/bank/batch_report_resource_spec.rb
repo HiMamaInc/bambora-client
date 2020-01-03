@@ -51,6 +51,7 @@ module Bambora
           {
             rpt_filter_by_1: filter_by,
             rpt_filter_value_1: batch_id,
+            rpt_operation_type_1: 'EQ',
             rpt_from_date_time: from_date,
             rpt_to_date_time: to_date,
             service_name: service_name,
@@ -66,14 +67,14 @@ module Bambora
               rpt_filter_value_1: batch_id,
               rpt_format: 'JSON',
               rpt_from_date_time: from_date,
-              rpt_operation_type: 'EQ',
+              rpt_operation_type_1: 'EQ',
               rpt_to_date_time: to_date,
               rpt_version: '2.0',
               service_name: service_name,
               session_source: 'external',
               sub_merchant_id: 2,
             },
-            path: '/scripts/payment_profile.aspx',
+            path: '/scripts/reporting/report.aspx',
           }
         end
 
