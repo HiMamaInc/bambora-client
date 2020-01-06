@@ -50,8 +50,8 @@ module Bambora
       #  payment_profile_resource.show(data)
       #
       #  @params profile_data [Hash] with values as noted in the example.
-      def show(profile_data)
-        client.post(path: sub_path, body: batch_report_body(profile_data))
+      def show(report_data)
+        client.post(path: sub_path, body: batch_report_body(report_data))
       end
 
       private
