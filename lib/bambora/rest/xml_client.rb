@@ -4,7 +4,7 @@ module Bambora
   module Rest
     # The base class for making XML requests.
     class XMLClient < Bambora::Rest::Client
-      CONTENT_TYPE = 'text/html'
+      CONTENT_TYPE = 'application/xml'
       RESPONSE_FORMAT = 'JSON'
 
       ##
@@ -15,20 +15,20 @@ module Bambora
       # @param api_key [String] Indicating the API Key to be used with the request.
       #
       # @return [Hash] Indicating success or failure of the operation.
-      def post(path:, body:, api_key:)
+      def post(path:, body:)
         parse_response_body(
           super(
             path: path,
-            body: Bambora::Builders::XMLRequestBody.new(body: body, response_format: RESPONSE_FORMAT).to_s,
-            headers: build_headers(api_key: api_key),
+            body: Bambora::Builders::XMLRequestBody.new(body: body).to_s,
+            headers: build_headers,
           ),
         )
       end
 
       private
 
-      def build_headers(api_key:)
-        super(api_key: api_key, content_type: CONTENT_TYPE)
+      def build_headers
+        { 'Content-Type' => CONTENT_TYPE }
       end
     end
   end

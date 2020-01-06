@@ -5,52 +5,58 @@ require 'spec_helper'
 module Bambora
   module Rest
     describe XMLClient do
+      subject(:client) { described_class.new(base_url: base_url, merchant_id: merchant_id) }
+
       let(:api_key) { 'fakekey' }
       let(:merchant_id) { 1 }
       let(:base_url) { 'https://sandbox-api.na.bambora.com' }
-      let(:headers) do
-        {
-          'Content-Type' => 'text/html',
-          'Authorization' => 'Passcode MTpmYWtla2V5',
-        }
-      end
+      let(:headers) { { 'Content-Type' => 'application/xml' } }
       let(:path) { '/' }
-      let(:response_body) { { response: 'body', with: { objects: 'yay!' }, and: [{ arrays: 'wow!' }] } }
-      let(:failed_status) { 500 }
-      let(:failed_response_body) { 'Mouldy mildew, mother of mouthmuck, dangle and strangle and death.' }
+      let(:connection) { instance_double('Faraday::Connection') }
 
-      subject { described_class.new(base_url: base_url, merchant_id: merchant_id) }
+      before { allow(Faraday).to receive(:new).and_return(connection) }
 
       describe '#post' do
         let(:request_body) { { gelfling: 'Deet' } }
         let(:xml_request_body) do
-          "<?xml version='1.0' encoding='utf-8'?>#{Gyoku.xml(request: request_body.merge(rpt_format: 'JSON'))}"
+          "<?xml version='1.0' encoding='utf-8'?>#{Gyoku.xml(request: request_body)}"
         end
+        let(:response_headers) { { 'Content-Type' => 'application/json' } }
+        let(:response_body) { { response: 'body', with: { objects: 'yay!' }, and: [{ arrays: 'wow!' }] } }
+        let(:response) {
+          instance_double('Faraday::Response', headers: response_headers, body: response_body.to_json.to_s)
+        }
 
         context 'server responds with a 2xx status' do
           before do
-            stub_request(:post, base_url)
-              .with(headers: headers, body: xml_request_body)
-              .to_return(headers: { 'Content-Type' => 'application/json' }, body: response_body.to_json.to_s)
+            allow(connection).to(receive(:post).with(path, xml_request_body, headers).and_return(response))
           end
 
           it 'parses the response' do
-            resp = subject.post(path: path, body: request_body, api_key: api_key)
+            resp = subject.post(path: path, body: request_body)
             expect(resp).to eq response_body
           end
         end
 
         context 'server responds with a non 2xx status' do
-          let(:response_body) { 'Mouldy mildew, mother of mouthmuck, dangle and strangle and death.' }
+          let(:failed_response_body) { 'Mouldy mildew, mother of mouthmuck, dangle and strangle and death.' }
+          let(:response_headers) { { 'Content-Type' => 'text/html' } }
+          let(:failed_status) { 500 }
+          let(:response) {
+            instance_double(
+              'Faraday::Response',
+              headers: response_headers,
+              status: failed_status,
+              body: failed_response_body,
+            )
+          }
 
           before do
-            stub_request(:post, base_url)
-              .with(headers: headers, body: xml_request_body)
-              .to_return(headers: { 'Content-Type' => 'application/json' }, body: failed_response_body, status: failed_status)
+            allow(connection).to(receive(:post).with(path, xml_request_body, headers).and_return(response))
           end
 
           it 'it returns a hash' do
-            resp = subject.post(path: path, body: request_body, api_key: api_key)
+            resp = subject.post(path: path, body: request_body)
             expect(resp).to eq(status: failed_status, body: failed_response_body)
           end
         end

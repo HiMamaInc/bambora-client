@@ -5,9 +5,12 @@ require 'spec_helper'
 module Bambora
   describe ResponseAdapterFactory do
     describe '.for' do
-      let(:response) { instance_double('Faraday::Response', headers: { 'Content-Type' => content_type }) }
+      let(:body) { 'When single shines the triple sun / What was sundered and undone' }
+      let(:response) do
+        instance_double('Faraday::Response', headers: { 'Content-Type' => content_type }, body: body) 
+      end
 
-      subject { described_class.for(response) }
+      subject(:parsed_response) { described_class.for(response) }
 
       context 'with a JSON request' do
         let(:content_type) { 'application/json; charset=utf-8' }
@@ -22,7 +25,12 @@ module Bambora
       context 'with an unknown content type' do
         let(:content_type) { 'application/example' }
         it 'raises an error' do
-          expect { subject }.to raise_error(Bambora::Client::Error, "Unknown Content Type: #{content_type}")
+          expect { parsed_response }.to(
+            raise_error(
+              Bambora::Client::Error,
+              "Unknown Content Type: #{content_type}. Response Body: #{body}",
+            )
+          )
         end
       end
     end

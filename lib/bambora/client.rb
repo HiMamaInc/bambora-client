@@ -38,11 +38,11 @@ require 'bambora/rest/www_form_client'
 require 'bambora/rest/xml_client'
 
 # Resources
-require 'bambora/v1/batch_payment_report_resource'
 require 'bambora/v1/batch_payment_resource'
 require 'bambora/v1/payment_resource'
 require 'bambora/v1/profile_resource'
 require 'bambora/bank/payment_profile_resource'
+require 'bambora/bank/batch_report_resource'
 
 module Bambora
   ##
@@ -90,7 +90,7 @@ module Bambora
     # Retrieve a client to make requests to the Payments endpoints.
     #
     # @example
-    #   payments = client.profiles
+    #   payments = client.profiles(api_key: <yourapikey>)
     #   payments.create(
     #     {
     #       amount: 50,
@@ -115,7 +115,7 @@ module Bambora
     # Retrieve a client to make requests to the Bank Payment Profiles endpoints.
     #
     # @example
-    #   profiles = client.bank_profiles
+    #   profiles = client.bank_profiles(api_key: <yourapikey>)
     #
     #   data = {
     #     customer_code: '1234',
@@ -144,12 +144,36 @@ module Bambora
       @bank_profiles ||= Bambora::Bank::PaymentProfileResource.new(client: www_form_client, api_key: api_key)
     end
 
-    def batch_payment_reports; end
+    # Retrieve a client to make requests to the batch report endpoint.
+    #
+    # @example
+    #   batch_reports = client.batch_reports(api_key: <yourapikey>)
+    #
+    #   data = {
+    #     rpt_filter_by_1: 'batch_id',
+    #     rpt_filter_value_1: 1,
+    #     rpt_operation_type_1: 'EQ',
+    #     rpt_from_date_time: '2019-12-18 00:00:00',
+    #     rpt_to_date_time: '2019-12-18 23:59:59',
+    #     service_name: 'BatchPaymentsEFT',
+    #   }
+    #
+    #   batch_reports.show(data)
+    #
+    # @param api_key [String] API key for the bank profiles endpoint.
+    #
+    # @return [Bambora::Bank::PaymentProfileResource]
+    def batch_reports(api_key:)
+      @batch_reports = Bambora::Bank::BatchReportResource.new(
+        client: xml_client,
+        api_key: api_key,
+      )
+    end
 
     def batch_payments(api_key:)
       @batch_payments ||= Bambora::V1::BatchPaymentResource.new(
         client: batch_payment_file_upload_client,
-        api_key: api_key
+        api_key: api_key,
       )
     end
 
@@ -174,6 +198,14 @@ module Bambora
     def batch_payment_file_upload_client
       @batch_payment_file_upload_client ||= Bambora::Rest::BatchPaymentFileUploadClient.new(
         base_url: base_url,
+        merchant_id: merchant_id,
+        sub_merchant_id: sub_merchant_id,
+      )
+    end
+
+    def xml_client
+      @xml_client ||= Bambora::Rest::XMLClient.new(
+        base_url: scripts_api_base_url,
         merchant_id: merchant_id,
         sub_merchant_id: sub_merchant_id,
       )

@@ -29,6 +29,16 @@ module Bambora
       end
     end
 
+    shared_examples 'it uses the scripts api' do |method|
+      let(:scripts_api_base_url) { 'https://web.na.bambora.com' }
+      let(:client) { described_class.new(scripts_api_base_url: scripts_api_base_url) }
+      let(:resource) { client.send(method, api_key: 'fakekey') }
+
+      it 'uses the scripts api url' do
+        expect(resource.client.base_url).to eq scripts_api_base_url
+      end
+    end
+
     describe '#payments' do
       include_examples 'a client resource method', :payments, Bambora::V1::PaymentResource
     end
@@ -39,14 +49,12 @@ module Bambora
 
     describe '#bank_profiles' do
       include_examples 'a client resource method', :bank_profiles, Bambora::Bank::PaymentProfileResource
+      include_examples 'it uses the scripts api', :bank_profiles
+    end
 
-      let(:scripts_api_base_url) { 'https://web.na.bambora.com' }
-      let(:client) { described_class.new(scripts_api_base_url: scripts_api_base_url) }
-      let(:bank_profiles) { client.bank_profiles(api_key: 'fakekey') }
-
-      it 'uses the scripts api url' do
-        expect(bank_profiles.client.base_url).to eq scripts_api_base_url
-      end
+    describe '#batch_reports' do
+      include_examples 'a client resource method', :batch_reports, Bambora::Bank::BatchReportResource
+      include_examples 'it uses the scripts api', :batch_reports
     end
   end
 end
