@@ -16,7 +16,7 @@ module Bambora
       end
 
       def body
-       "#{multiparty.body}\r\n"
+        "#{multiparty.body}\r\n"
       end
     end
   end

@@ -1,13 +1,7 @@
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.4
 
-ClassLength:
-  Enabled: false
-
-CyclomaticComplexity:
-  Enabled: false
-
-Documentation:
+Metrics/ClassLength:
   Enabled: false
 
 Metrics/AbcSize:
@@ -34,9 +28,8 @@ Style/ConditionalAssignment:
 Style/EmptyElse:
   EnforcedStyle: empty
 
-LineLength:
-  Max: 120
-  Severity: 'warning'
+Style/Documentation:
+  Enabled: false
 
 Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: comma
@@ -47,11 +40,15 @@ Style/TrailingCommaInHashLiteral:
 Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: comma
 
-Layout/AlignParameters:
+Layout/ParameterAlignment:
   EnforcedStyle: with_fixed_indentation
 
 Layout/EmptyLineAfterMagicComment:
   Enabled: false
+
+Layout/LineLength:
+  Max: 120
+  Severity: 'warning'
 
 Metrics/MethodLength:
   CountComments: false

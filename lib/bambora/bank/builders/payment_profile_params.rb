@@ -6,7 +6,8 @@ module Bambora
       ##
       # Builds a request body for the Bank Payment Profile endpoint from a Hash
       class PaymentProfileParams
-        CONTACT_PARAMS = %w[name email_address phone_number address_1 address_2 city postal_code province country].freeze
+        CONTACT_PARAMS =
+          %w[name email_address phone_number address_1 address_2 city postal_code province country].freeze
 
         class << self
           ##

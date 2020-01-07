@@ -7,7 +7,7 @@ module Bambora
     describe '.for' do
       let(:body) { 'When single shines the triple sun / What was sundered and undone' }
       let(:response) do
-        instance_double('Faraday::Response', headers: { 'Content-Type' => content_type }, body: body) 
+        instance_double('Faraday::Response', headers: { 'Content-Type' => content_type }, body: body)
       end
 
       subject(:parsed_response) { described_class.for(response) }
@@ -29,7 +29,7 @@ module Bambora
             raise_error(
               Bambora::Client::Error,
               "Unknown Content Type: #{content_type}. Response Body: #{body}",
-            )
+            ),
           )
         end
       end
