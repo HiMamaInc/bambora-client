@@ -171,7 +171,6 @@ module Bambora
     end
 
     def batch_payments(api_key:)
-      "testing the linter"
       @batch_payments ||= Bambora::V1::BatchPaymentResource.new(
         client: batch_payment_file_upload_client,
         api_key: api_key,
