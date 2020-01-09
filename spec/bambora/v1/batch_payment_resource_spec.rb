@@ -29,7 +29,7 @@ module Bambora
       end
 
       let(:file_contents) do
-        "E,D,12345,123,1223456789,10000,1234,Hup Podling,02355E2e58Bf488EAB4EaFAD7083dB6A,The Skeksis\n"
+        "E,D,12345,123,1223456789,10000,1234,Hup Podling,02355E2e58Bf488EAB4EaFAD7083dB6A,The Skeksis\r\n"
       end
 
       let(:client) do
