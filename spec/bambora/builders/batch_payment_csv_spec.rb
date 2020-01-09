@@ -24,12 +24,12 @@ module Bambora
         end
 
         let(:csv_string) do
-          "E,D,12345,123,123456789,10000,1234,Hup Podling,02355E2e58Bf488EAB4EaFAD7083dB6A,The Skeksis\n"
+          "E,D,12345,123,123456789,10000,1234,Hup Podling,02355E2e58Bf488EAB4EaFAD7083dB6A,The Skeksis\r\n"
         end
 
-        subject { described_class.build(transactions) }
-
-        it { is_expected.to eq(csv_string) }
+        it 'generates a CSV with CRLF line endings' do
+          expect(described_class.build(transactions)).to eq csv_string
+        end
       end
     end
   end

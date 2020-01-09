@@ -29,7 +29,7 @@ module Bambora
         #
         # @return [String], a CSV as a string
         def build(transactions)
-          CSV.generate do |csv|
+          CSV.generate(row_sep: "\r\n") do |csv|
             transactions.each do |transaction|
               csv << transaction.values
             end
