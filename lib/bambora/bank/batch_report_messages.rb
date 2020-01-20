@@ -75,7 +75,7 @@ module Bambora
         '70' => 'Transaction rejected - contact support',
         '71' => 'Refund Request by End Customer',
         '72' => 'Blocked due to a Notice of Change',
-      }
+      }.freeze
     end
   end
 end
