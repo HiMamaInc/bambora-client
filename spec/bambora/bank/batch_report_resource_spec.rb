@@ -14,20 +14,75 @@ module Bambora
       let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5', 'Sub-Merchant-ID' => sub_merchant_id } }
       let(:response_body) do
         {
-          code: 1,
-          message: 'Hup...want...buy.',
-          customer_code: 'aaa111',
-          validation: {
-            id: '',
-            approved: 1,
-            message_id: 1,
-            message: '',
-            auth_code: '',
-            trans_date: '',
-            order_number: '',
-            type: '',
-            amount: 0,
-            cvd_id: 123,
+          response: {
+            version: '1.0',
+            code: 1,
+            message: 'Report generated',
+            records: {
+              total: 3,
+            },
+            record: [
+              {
+                rowId: 1,
+                merchantId: 300_202_779,
+                batchId: 10_000_000,
+                transId: 1,
+                itemNumber: 1,
+                payeeName: 'General Motors',
+                reference: '1000070001',
+                operationType: 'C',
+                amount: 10_000,
+                stateId: 2,
+                stateName: 'Scheduled',
+                statusId: 1,
+                statusName: 'Validated/Approved',
+                bankDescriptor: '',
+                messageId: '',
+                customerCode: '',
+                settlementDate: '2017-08-09',
+                returnedDate: '',
+                returnType: '',
+                eftId: 0,
+              },
+            ],
+          },
+        }
+      end
+
+      let(:expected_response) do
+        {
+          response: {
+            version: '1.0',
+            code: 1,
+            message: 'Report generated',
+            records: {
+              total: 3,
+            },
+            record: [
+              {
+                rowId: 1,
+                merchantId: 300_202_779,
+                batchId: 10_000_000,
+                transId: 1,
+                itemNumber: 1,
+                payeeName: 'General Motors',
+                reference: '1000070001',
+                operationType: 'C',
+                amount: 10_000,
+                stateId: 2,
+                stateName: 'Scheduled',
+                statusId: 1,
+                statusName: 'Validated/Approved',
+                bankDescriptor: '',
+                messageId: '',
+                messages: [],
+                customerCode: '',
+                settlementDate: '2017-08-09',
+                returnedDate: '',
+                returnType: '',
+                eftId: 0,
+              },
+            ],
           },
         }
       end
@@ -37,7 +92,7 @@ module Bambora
           'Bambora::Rest::XMLClient',
           merchant_id: merchant_id,
           sub_merchant_id: sub_merchant_id,
-          post: true,
+          post: response_body,
         )
       end
 
@@ -77,10 +132,96 @@ module Bambora
           }
         end
 
-        before { reports.show(request_data) }
+        context 'with no messageId' do
+          it 'sends `post` to the client with the correct data' do
+            reports.show(request_data)
+            expect(client).to have_received(:post).with(posted_data)
+          end
 
-        it 'sends `post` to the client with the correct data' do
-          expect(client).to have_received(:post).with(posted_data)
+          it 'returns the expected response' do
+            expect(reports.show(request_data)).to eq expected_response
+          end
+        end
+
+        context 'with messageIds' do
+          let(:response_body) do
+            {
+              response: {
+                version: '1.0',
+                code: 1,
+                message: 'Report generated',
+                records: {
+                  total: 3,
+                },
+                record: [
+                  {
+                    rowId: 1,
+                    merchantId: 300_202_779,
+                    batchId: 10_000_000,
+                    transId: 1,
+                    itemNumber: 1,
+                    payeeName: 'General Motors',
+                    reference: '1000070001',
+                    operationType: 'C',
+                    amount: 10_000,
+                    stateId: 2,
+                    stateName: 'Scheduled',
+                    statusId: 1,
+                    statusName: 'Validated/Approved',
+                    bankDescriptor: '',
+                    messageId: '1,2',
+                    customerCode: '',
+                    settlementDate: '2017-08-09',
+                    returnedDate: '',
+                    returnType: '',
+                    eftId: 0,
+                  },
+                ],
+              },
+            }
+          end
+
+          let(:expected_response) do
+            {
+              response: {
+                version: '1.0',
+                code: 1,
+                message: 'Report generated',
+                records: {
+                  total: 3,
+                },
+                record: [
+                  {
+                    rowId: 1,
+                    merchantId: 300_202_779,
+                    batchId: 10_000_000,
+                    transId: 1,
+                    itemNumber: 1,
+                    payeeName: 'General Motors',
+                    reference: '1000070001',
+                    operationType: 'C',
+                    amount: 10_000,
+                    stateId: 2,
+                    stateName: 'Scheduled',
+                    statusId: 1,
+                    statusName: 'Validated/Approved',
+                    bankDescriptor: '',
+                    messageId: '1,2',
+                    messages: ['Invalid bank number', 'Invalid branch number'],
+                    customerCode: '',
+                    settlementDate: '2017-08-09',
+                    returnedDate: '',
+                    returnType: '',
+                    eftId: 0,
+                  },
+                ],
+              },
+            }
+          end
+
+          it 'returns the expected response' do
+            expect(reports.show(request_data)).to eq expected_response
+          end
         end
       end
     end

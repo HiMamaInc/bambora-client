@@ -7,6 +7,8 @@ module Bambora
     #
     # @see https://dev.na.bambora.com/docs/guides/batch_payment/report/
     class BatchReportResource
+      include Bambora::Bank::BatchReportMessages
+
       DEFAULT_REQUEST_PARAMS = {
         rpt_format: 'JSON',
         rpt_version: '2.0',
@@ -51,10 +53,19 @@ module Bambora
       #
       #  @params profile_data [Hash] with values as noted in the example.
       def show(report_data)
-        client.post(path: sub_path, body: batch_report_body(report_data))
+        add_messages_to_response(
+          client.post(path: sub_path, body: batch_report_body(report_data)),
+        )
       end
 
       private
+
+      def add_messages_to_response(response)
+        response.dig(:response, :record).map! do |record|
+          record.merge!(messages: record[:messageId].split(',').map { |id| MESSAGES[id] })
+        end
+        response
+      end
 
       def batch_report_body(request_data)
         DEFAULT_REQUEST_PARAMS.merge(request_data).merge(
