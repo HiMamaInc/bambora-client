@@ -188,6 +188,10 @@ Bug reports and pull requests are welcome on GitHub at <https://github.com/HiMam
 intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the
 [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
+Your contributions are important. For larger changes to the behaviour of this client, or when adding new pieces of
+functionality, please inform Bambora. You can get in touch with their
+[developer support](https://dev.na.bambora.com/docs/support/) for advice.
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
