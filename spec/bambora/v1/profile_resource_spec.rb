@@ -74,6 +74,33 @@ module Bambora
         end
       end
 
+      describe '#get' do
+        before do
+          stub_request(:get, "#{base_url}/v1/profiles/#{customer_code}")
+            .with(headers: headers)
+            .to_return(headers: response_headers, body: response_body.to_json.to_s)
+        end
+
+        let(:customer_code) { 'asdf1234' }
+        let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5' } }
+        let(:response_body) do
+          {
+            code: 1,
+            card: {},
+            billing: {},
+          }
+        end
+
+        it 'performs GET request for profile data' do
+          subject.get(customer_code: customer_code)
+
+          expect(
+            a_request(:get, "#{base_url}/v1/profiles/#{customer_code}")
+              .with(headers: headers),
+          ).to have_been_made.once
+        end
+      end
+
       describe '#delete' do
         let(:customer_code) { 'asdf1234' }
 

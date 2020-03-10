@@ -59,6 +59,45 @@ module Bambora
       end
 
       ##
+      # Get a Bambora payment profile given a customer code.
+      #
+      # @example
+      #
+      #   client = Bambora::Client.new(base_url: '...', merchant_id: '...')
+      #   profiles = client.profiles(api_key: '...')
+      #   customer_code = '02355E2e58Bf488EAB4EaFAD7083dB6A'
+      #
+      #   profiles.get(customer_code: customer_code)
+      #   # => {
+      #   #      :code => 1,
+      #   #      :message => "Operation Successful",
+      #   #      :customer_code => "02355E2e58Bf488EAB4EaFAD7083dB6A",
+      #   #      :status => "A",
+      #   #      :last_transaction => "1900-01-01T00:00:00",
+      #   #      :modified_date => "1900-01-01T00:00:00",
+      #   #      :card => { :name => "", :number => "", :card_type => "" },
+      #   #      :language => "en",
+      #   #      :velocity_group => "",
+      #   #      :profile_group => "",
+      #   #      :account_ref => "",
+      #   #      :billing =>
+      #   #        {
+      #   #          :name => "Harry Lewis",
+      #   #          :address_line1 => "",
+      #   #          :address_line2 => "",
+      #   #          :city => "",
+      #   #          :province => "",
+      #   #          :country => "",
+      #   #          :postal_code => "",
+      #   #          :phone_number => "",
+      #   #          :email_address => ""},
+      #   #      :custom => { :ref1 => "", :ref2 => "", :ref3 => "", :ref4 => "", :ref5 => "" }
+      #   #    }
+      def get(customer_code:)
+        client.get(path: "#{sub_path}/#{customer_code}", api_key: api_key)
+      end
+
+      ##
       # Delete a Bambora payment profile given a customer code.
       #
       # @example
