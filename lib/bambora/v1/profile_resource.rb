@@ -63,8 +63,8 @@ module Bambora
       #
       # @example
       #
-      #   client = Bambora::Client.new(base_url: '...', merchant_id: '...')
-      #   profiles = client.profiles(api_key: '...')
+      #   client = Bambora::Rest::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
+      #   profiles = Bambora::V1::ProfileResource(client: client)
       #   customer_code = '02355E2e58Bf488EAB4EaFAD7083dB6A'
       #
       #   profiles.get(customer_code: customer_code)
@@ -93,6 +93,10 @@ module Bambora
       #   #          :email_address => ""},
       #   #      :custom => { :ref1 => "", :ref2 => "", :ref3 => "", :ref4 => "", :ref5 => "" }
       #   #    }
+      #
+      # @param customer_code [String] A unique identifier for the associated payment profile.
+      #
+      # @return [Hash] Payment profile details.
       def get(customer_code:)
         client.get(path: "#{sub_path}/#{customer_code}", api_key: api_key)
       end
