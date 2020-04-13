@@ -223,6 +223,38 @@ module Bambora
             expect(reports.show(request_data)).to eq expected_response
           end
         end
+
+        context 'with nil records' do
+          let(:response_body) do
+            {
+              response: {
+                version: '1.0',
+                code: 1,
+                message: 'Report generated',
+                records: {
+                  total: 0,
+                },
+              },
+            }
+          end
+
+          let(:expected_response) do
+            {
+              response: {
+                version: '1.0',
+                code: 1,
+                message: 'Report generated',
+                records: {
+                  total: 0,
+                },
+              },
+            }
+          end
+
+          it 'returns the expected response' do
+            expect(reports.show(request_data)).to eq expected_response
+          end
+        end
       end
     end
   end
