@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bambora-client (0.1.0)
+    bambora-client (0.1.2)
       excon (< 1.0)
       faraday (< 1.0)
       gyoku (~> 1.0)
@@ -19,15 +19,15 @@ GEM
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     diff-lcs (1.3)
-    excon (0.71.0)
-    faraday (0.17.1)
+    excon (0.73.0)
+    faraday (0.17.3)
       multipart-post (>= 1.2, < 3)
     gyoku (1.3.1)
       builder (>= 2.1.2)
     hashdiff (1.0.0)
     jaro_winkler (1.5.3)
     method_source (0.9.2)
-    mime-types (3.3)
+    mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2019.1009)
     multipart-post (2.1.1)
