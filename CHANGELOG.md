@@ -1,6 +1,6 @@
 ## 0.1.3 (2020-04-30)
 
-- Ensure Batch Batch Report returns empty array `:record` in response at the very least
+- Ensure Batch Report returns empty array `:record` in response at the very least
 
 ## 0.1.2 (2020-04-14)
 
