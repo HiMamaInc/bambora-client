@@ -224,7 +224,7 @@ module Bambora
           end
         end
 
-        context 'with nil records' do
+        context 'with nil record' do
           let(:response_body) do
             {
               response: {
