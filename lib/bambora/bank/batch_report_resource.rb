@@ -62,7 +62,7 @@ module Bambora
 
       def add_messages_to_response(response)
         # bambora can return null or empty record results, don't decorate with messages
-        return response if response.dig(:response, :record).nil?
+        response.dig(:response)[:record] = [] if response.dig(:response, :record).nil?
 
         response.dig(:response, :record).map! do |record|
           record.merge!(messages: record[:messageId].split(',').map { |id| MESSAGES[id] })
