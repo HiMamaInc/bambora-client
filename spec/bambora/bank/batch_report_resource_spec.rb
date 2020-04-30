@@ -224,7 +224,7 @@ module Bambora
           end
         end
 
-        context 'with nil records' do
+        context 'with nil record' do
           let(:response_body) do
             {
               response: {
@@ -247,11 +247,12 @@ module Bambora
                 records: {
                   total: 0,
                 },
+                record: [],
               },
             }
           end
 
-          it 'returns the expected response' do
+          it 'ensures return contains an :record key' do
             expect(reports.show(request_data)).to eq expected_response
           end
         end

@@ -1,3 +1,7 @@
+## 0.1.3 (2020-04-30)
+
+- Ensure Batch Report returns empty array `:record` in response at the very least
+
 ## 0.1.2 (2020-04-14)
 
 - Fix nil record with Bank Batch Report returns
