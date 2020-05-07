@@ -223,6 +223,39 @@ module Bambora
             expect(reports.show(request_data)).to eq expected_response
           end
         end
+
+        context 'with nil record' do
+          let(:response_body) do
+            {
+              response: {
+                version: '1.0',
+                code: 1,
+                message: 'Report generated',
+                records: {
+                  total: 0,
+                },
+              },
+            }
+          end
+
+          let(:expected_response) do
+            {
+              response: {
+                version: '1.0',
+                code: 1,
+                message: 'Report generated',
+                records: {
+                  total: 0,
+                },
+                record: [],
+              },
+            }
+          end
+
+          it 'ensures return contains an :record key' do
+            expect(reports.show(request_data)).to eq expected_response
+          end
+        end
       end
     end
   end

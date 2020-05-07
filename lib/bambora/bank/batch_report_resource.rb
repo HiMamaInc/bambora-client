@@ -53,17 +53,28 @@ module Bambora
       #
       #  @params profile_data [Hash] with values as noted in the example.
       def show(report_data)
-        add_messages_to_response(
-          client.post(path: sub_path, body: batch_report_body(report_data)),
-        )
+        response = client.post(path: sub_path, body: batch_report_body(report_data))
+
+        response = ensure_record_key_exists(response)
+        response = add_messages_to_response(response)
+
+        response
       end
 
       private
+
+      def ensure_record_key_exists(response)
+        # bambora can return null or empty record results, fill it in for consistency
+        response.dig(:response)[:record] = [] if response.dig(:response, :record).nil?
+
+        response
+      end
 
       def add_messages_to_response(response)
         response.dig(:response, :record).map! do |record|
           record.merge!(messages: record[:messageId].split(',').map { |id| MESSAGES[id] })
         end
+
         response
       end
 
