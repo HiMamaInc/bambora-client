@@ -91,8 +91,7 @@ module Bambora
       #   #          :postal_code => "",
       #   #          :phone_number => "",
       #   #          :email_address => ""},
-      #   #      :custom => { :ref1 => "", :ref2 => "", :ref3 => "", :ref4 => "", :ref5 => "" }
-      #   #    }
+      #   #      :custom => { :ref1 => "", :ref2 => "", :ref3 => "", :ref4 => "", :ref5 => "" }}
       #
       # @param customer_code [String] A unique identifier for the associated payment profile.
       #
