@@ -10,3 +10,6 @@
 # rspec failure tracking
 .rspec_status
 bambora-client-*.gem
+
+# Ruby-specific files
+Gemfile.lock
