@@ -1,3 +1,7 @@
+## 0.2.0 (2020-05-11)
+
+- Add `Bambora::V1::ProfileResource#get` method
+
 ## 0.1.3 (2020-04-30)
 
 - Ensure Batch Report returns empty array `:record` in response at the very least
