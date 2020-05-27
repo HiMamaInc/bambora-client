@@ -102,7 +102,6 @@ module Bambora
       end
 
       describe '#update' do
-
         let(:customer_code) { 'asdf1234' }
         let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5' } }
         let(:data) do
@@ -123,7 +122,7 @@ module Bambora
               country: 'ca',
               postal_code: 'V8T4M3',
               phone_number: '25012312345',
-              email_address: 'bill@smith.com'
+              email_address: 'bill@smith.com',
             },
           }
         end
