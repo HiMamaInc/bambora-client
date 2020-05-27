@@ -1,3 +1,7 @@
+## 0.2.1 (2020-05-27)
+
+- Add `Bambora::V1::ProfileResource#update` method
+
 ## 0.2.0 (2020-05-11)
 
 - Add `Bambora::V1::ProfileResource#get` method

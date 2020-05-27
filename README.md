@@ -92,6 +92,31 @@ profiles.delete(customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A')
 #    }
 ```
 
+### Update a Profile
+
+```ruby
+profiles.update(
+  customer_code: '02355E2e58Bf488EAB4EaFAD7083dB6A',
+  payment_profile_data: {
+    language: 'en',
+    comments: 'hello',
+    card: {
+      name: 'Hup Podling',
+      number: '4030000010001234',
+      expiry_month: '12',
+      expiry_year: '23',
+      cvd: '123',
+    },
+  },
+)
+
+# => {
+#      :code => 1,
+#      :message => "Operation Successful",
+#      :customer_code => "02355E2e58Bf488EAB4EaFAD7083dB6A",
+#    }
+```
+
 ### Payments
 
 *Summary*: Process payments using Credit Card, Payment Profile, Legato Token, Cash, Cheque, Interac, Apple Pay, or

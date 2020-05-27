@@ -38,6 +38,10 @@ module Bambora
         end
       end
 
+      def put(path:, body:, headers:)
+        connection.put(path, body, headers)
+      end
+
       def connection
         @connection ||= Faraday.new(url: base_url) do |faraday|
           faraday.request :multipart
