@@ -106,6 +106,7 @@ module Bambora
       #
       #   client = Bambora::Rest::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
       #   profiles = Bambora::V1::ProfileResource(client: client)
+      #   customer_code = '02355E2e58Bf488EAB4EaFAD7083dB6A'
       #
       #   data = {
       #     billing: {
@@ -128,20 +129,15 @@ module Bambora
       #     },
       #   }
       #
-      #   profiles.update(
-      #     path: 'v1/profiles',
-      #     body: data,
-      #     api_key: '...'
-      #   )
+      #   profiles.update(customer_code: customer_code, payment_profile_data: data)
       #   # => {
       #   #      :code => 1,
       #   #      :message => "Operation Successful",
       #   #      :customer_code => "02355E2e58Bf488EAB4EaFAD7083dB6A",
       #   #    }
       #
-      # @param path [String] Indicating request path.
-      # @param body [Hash] Data to be sent in the body of the request.
-      # @param api_key [String] Indicating the API Key to be used with the request.
+      # @param customer_code [String] A unique identifier for the associated payment profile.
+      # @param data [Hash] Payment profile data to be sent in the body of the request.
       #
       # @return [Hash] Indicating success or failure of the operation.
       def update(customer_code:, payment_profile_data:)
