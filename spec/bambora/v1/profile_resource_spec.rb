@@ -101,6 +101,59 @@ module Bambora
         end
       end
 
+      describe '#update' do
+        let(:customer_code) { 'asdf1234' }
+        let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5' } }
+        let(:data) do
+          {
+            card: {
+              name: 'Hup Podling',
+              number: '4030000010001234',
+              expiry_month: '12',
+              expiry_year: '23',
+              cvd: '123',
+            },
+            billing: {
+              name: 'john doe',
+              address_line1: '123 main st',
+              address_line2: '111',
+              city: 'victoria',
+              province: 'bc',
+              country: 'ca',
+              postal_code: 'V8T4M3',
+              phone_number: '25012312345',
+              email_address: 'bill@smith.com',
+            },
+          }
+        end
+
+        let(:response_body) do
+          {
+            code: 1,
+            card: {},
+            billing: {},
+          }
+        end
+
+        before do
+          stub_request(:put, "#{base_url}/v1/profiles/#{customer_code}").with(
+            body: data.to_json.to_s,
+            headers: headers,
+          ).to_return(headers: response_headers, body: response_body.to_json.to_s)
+        end
+
+        it 'posts to the bambora api' do
+          subject.update(customer_code: customer_code, payment_profile_data: data)
+
+          expect(
+            a_request(:put, "#{base_url}/v1/profiles/#{customer_code}").with(
+              body: data.to_json.to_s,
+              headers: headers,
+            ),
+          ).to have_been_made.once
+        end
+      end
+
       describe '#delete' do
         let(:customer_code) { 'asdf1234' }
 

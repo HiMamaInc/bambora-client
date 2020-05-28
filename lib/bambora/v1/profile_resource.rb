@@ -54,8 +54,8 @@ module Bambora
       # @see https://dev.na.bambora.com/docs/guides/payment_profiles
       #
       # @return [Hash] Indicating success or failure of the operation.
-      def create(card_data)
-        client.post(path: sub_path, body: card_data, api_key: api_key)
+      def create(payment_profile_data)
+        client.post(path: sub_path, body: payment_profile_data, api_key: api_key)
       end
 
       ##
@@ -98,6 +98,50 @@ module Bambora
       # @return [Hash] Payment profile details.
       def get(customer_code:)
         client.get(path: "#{sub_path}/#{customer_code}", api_key: api_key)
+      end
+
+      # Make a PUT Request.
+      #
+      # @example
+      #
+      #   client = Bambora::Rest::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
+      #   profiles = Bambora::V1::ProfileResource(client: client)
+      #   customer_code = '02355E2e58Bf488EAB4EaFAD7083dB6A'
+      #
+      #   data = {
+      #     billing: {
+      #        name: "joh doe",
+      #        address_line1: "123 main st",
+      #        address_line2: "111",
+      #        city: "victoria",
+      #        province: "bc",
+      #        country: "ca",
+      #        postal_code: "V8T4M3",
+      #        phone_number: "25012312345",
+      #        email_address: "bill@smith.com"
+      #     },
+      #     card: {
+      #       name: 'Hup Podling',
+      #       number: '4030000010001234',
+      #       expiry_month: '12',
+      #       expiry_year: '23',
+      #       cvd: '123',
+      #     },
+      #   }
+      #
+      #   profiles.update(customer_code: customer_code, payment_profile_data: data)
+      #   # => {
+      #   #      :code => 1,
+      #   #      :message => "Operation Successful",
+      #   #      :customer_code => "02355E2e58Bf488EAB4EaFAD7083dB6A",
+      #   #    }
+      #
+      # @param customer_code [String] A unique identifier for the associated payment profile.
+      # @param data [Hash] Payment profile data to be sent in the body of the request.
+      #
+      # @return [Hash] Indicating success or failure of the operation.
+      def update(customer_code:, payment_profile_data:)
+        client.put(path: "#{@sub_path}/#{customer_code}", body: payment_profile_data, api_key: api_key)
       end
 
       ##
