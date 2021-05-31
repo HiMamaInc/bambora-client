@@ -180,7 +180,7 @@ module Bambora
       end
 
       describe '#get' do
-        let(:transaction_id) { 1000001 }
+        let(:transaction_id) { 1_000_001 }
         let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5' } }
 
         before do
