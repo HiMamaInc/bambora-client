@@ -50,6 +50,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rspec_junit_formatter', '~> 0.4.1'
-  spec.add_development_dependency 'rubocop', '~> 0.74.0'
+  spec.add_development_dependency 'rubocop', '0.74'
   spec.add_development_dependency 'webmock', '~> 3.7'
 end
