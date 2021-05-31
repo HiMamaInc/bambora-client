@@ -87,7 +87,7 @@ module Bambora
       #   payments = Bambora::V1::PaymentResource(client: client)
       #   payments.get(transaction_id: 1000341)
       #
-      # @param transaction_id [Integer] An integeridentifier for the associated transaction.
+      # @param transaction_id [Integer] An integer identifier for the associated transaction.
       #
       # @return [Hash] Transaction details.
       def get(transaction_id:)
