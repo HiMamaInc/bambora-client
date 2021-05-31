@@ -22,7 +22,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gem-
       - name: Setup ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
       - run: |
