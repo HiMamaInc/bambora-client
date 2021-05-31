@@ -178,6 +178,26 @@ module Bambora
           expect(subject.method(:make_payment_with_payment_profile)).to eq(subject.method(:create_with_payment_profile))
         end
       end
+
+      describe '#get' do
+        let(:transaction_id) { 1000001 }
+        let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5' } }
+
+        before do
+          stub_request(:get, "#{base_url}/v1/payments/#{transaction_id}")
+            .with(headers: headers)
+            .to_return(headers: response_headers, body: response_body.to_json.to_s)
+        end
+
+        it 'performs GET request for transaction data' do
+          subject.get(transaction_id: transaction_id)
+
+          expect(
+            a_request(:get, "#{base_url}/v1/payments/#{transaction_id}")
+              .with(headers: headers),
+          ).to have_been_made.once
+        end
+      end
     end
   end
 end
