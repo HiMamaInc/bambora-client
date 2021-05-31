@@ -77,6 +77,22 @@ module Bambora
       end
 
       alias make_payment_with_payment_profile create_with_payment_profile
+
+      # Retrieve the details of a previously attempted payment.
+      #
+      #
+      # @example
+      #
+      #   client = Bambora::Rest::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
+      #   payments = Bambora::V1::PaymentResource(client: client)
+      #   payments.get(transaction_id: 1000341)
+      #
+      # @param transaction_id [Integer] An integer identifier for the associated transaction.
+      #
+      # @return [Hash] Transaction details.
+      def get(transaction_id:)
+        client.get(path: "#{sub_path}/#{transaction_id}", api_key: api_key)
+      end
     end
   end
 end

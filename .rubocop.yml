@@ -40,9 +40,6 @@ Style/TrailingCommaInHashLiteral:
 Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: comma
 
-Layout/ParameterAlignment:
-  EnforcedStyle: with_fixed_indentation
-
 Layout/EmptyLineAfterMagicComment:
   Enabled: false
 

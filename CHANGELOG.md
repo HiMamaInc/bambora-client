@@ -1,3 +1,7 @@
+## 0.4.0 (2021-05-31)
+
+- Add `Bambora::V1::PaymentResource#get` method
+
 ## 0.3.0 (2020-05-27)
 
 - Add `Bambora::V1::ProfileResource#update` method
