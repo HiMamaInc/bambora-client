@@ -8,6 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Rubocop checks
-      uses: gimenete/rubocop-action@1.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: reviewdog/action-rubocop@v1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        rubocop_version: 0.74
