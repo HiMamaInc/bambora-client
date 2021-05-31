@@ -18,8 +18,6 @@ jobs:
           ${{ runner.os }}-gem-
     - name: Setup ruby
       uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: ${{ matrix.ruby }}
     - run: |
         gem install bundler
         bundle config path vendor/bundle
