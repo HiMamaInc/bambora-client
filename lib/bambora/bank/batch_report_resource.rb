@@ -82,7 +82,7 @@ module Bambora
         DEFAULT_REQUEST_PARAMS.merge(request_data).merge(
           merchant_id: client.merchant_id,
           pass_code: api_key,
-          sub_merchant_id: client.sub_merchant_id,
+          rpt_merchant_id: client.sub_merchant_id,
         )
       end
     end
