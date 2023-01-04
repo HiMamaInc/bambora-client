@@ -1,6 +1,6 @@
 ## 0.5.0 (2023-01-04)
 
-- Update to Ruby 2.6.6
+- Updating minimum Ruby version to Ruby 2.6.6
 
 ## 0.4.0 (2021-05-31)
 
