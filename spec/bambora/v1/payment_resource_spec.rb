@@ -179,6 +179,93 @@ module Bambora
         end
       end
 
+      describe '#return_payment' do
+        before(:each) do
+          stub_request(:post, "#{base_url}/v1/payments/#{transaction_id}/returns").with(
+            body: data.to_json.to_s,
+            headers: headers,
+          ).to_return(headers: response_headers, body: response_body.to_json.to_s)
+        end
+
+        let(:transaction_id) { 1_000_001 }
+        let(:data) do
+          {
+            amount: 50,
+          }
+        end
+
+        it "POST's to the Bambora API" do
+          subject.return_payment(transaction_id: transaction_id, amount: 50)
+
+          expect(
+            a_request(:post, "#{base_url}/v1/payments/#{transaction_id}/returns").with(
+              body: data.to_json.to_s,
+              headers: headers,
+            ),
+          ).to have_been_made.once
+        end
+      end
+
+      describe '#void' do
+        before(:each) do
+          stub_request(:post, "#{base_url}/v1/payments/#{transaction_id}/void").with(
+            body: data.to_json.to_s,
+            headers: headers,
+          ).to_return(headers: response_headers, body: response_body.to_json.to_s)
+        end
+
+        let(:transaction_id) { 1_000_001 }
+        let(:data) do
+          {
+            amount: 50,
+          }
+        end
+
+        it "POST's to the Bambora API" do
+          subject.void(transaction_id: transaction_id, amount: 50)
+
+          expect(
+            a_request(:post, "#{base_url}/v1/payments/#{transaction_id}/void").with(
+              body: data.to_json.to_s,
+              headers: headers,
+            ),
+          ).to have_been_made.once
+        end
+      end
+
+      describe '#void_payment' do
+        it 'is an alias of #void' do
+          expect(subject.method(:void_payment)).to eq(subject.method(:void))
+        end
+      end
+
+      describe '#complete_preauth' do
+        before(:each) do
+          stub_request(:post, "#{base_url}/v1/payments/#{transaction_id}/completions").with(
+            body: data.to_json.to_s,
+            headers: headers,
+          ).to_return(headers: response_headers, body: response_body.to_json.to_s)
+        end
+
+        let(:transaction_id) { 1_000_001 }
+        let(:data) do
+          {
+            amount: 50,
+          }
+        end
+
+        it "POST's to the Bambora API" do
+          subject.complete_preauth(transaction_id: transaction_id, amount: 50)
+
+          expect(
+            a_request(:post, "#{base_url}/v1/payments/#{transaction_id}/completions").with(
+              body: data.to_json.to_s,
+              headers: headers,
+            ),
+          ).to have_been_made.once
+        end
+      end
+
       describe '#get' do
         let(:transaction_id) { 1_000_001 }
         let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5' } }

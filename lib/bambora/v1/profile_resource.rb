@@ -49,7 +49,7 @@ module Bambora
       #   #      :customer_code => "02355E2e58Bf488EAB4EaFAD7083dB6A",
       #   #    }
       #
-      # @param card_data [Hash] All information relevant to making a payment.
+      # @param payment_profile_data [Hash] All information relevant to making a payment.
       #
       # @see https://dev.na.bambora.com/docs/guides/payment_profiles
       #
@@ -137,7 +137,7 @@ module Bambora
       #   #    }
       #
       # @param customer_code [String] A unique identifier for the associated payment profile.
-      # @param data [Hash] Payment profile data to be sent in the body of the request.
+      # @param payment_profile_data [Hash] Payment profile data to be sent in the body of the request.
       #
       # @return [Hash] Indicating success or failure of the operation.
       def update(customer_code:, payment_profile_data:)
@@ -165,6 +165,54 @@ module Bambora
       # @return [Hash] Indicating success or failure of the operation.
       def delete(customer_code:)
         client.delete(path: "#{@sub_path}/#{customer_code}", api_key: api_key)
+      end
+
+      # Add a card to the specified payment profile.
+      #
+      # @param customer_code [String] A unique identifier for the associated payment profile.
+      # @param data [Hash] Card data to be sent in the body of the request.
+      #
+      # @return [Hash] Indicating success or failure of the operation.
+      #
+      # @see https://dev.na.bambora.com/docs/guides/payment_profiles/#add-a-card
+      def add_profile_card(customer_code:, data:)
+        client.post(path: "#{sub_path}/#{customer_code}/cards", body: data, api_key: api_key)
+      end
+
+      # Get a list of cards associated with the specified payment profile.
+      #
+      # @param customer_code [String] A unique identifier for the associated payment profile.
+      #
+      # @return [Hash] Indicating success or failure of the operation.
+      #
+      # @see https://dev.na.bambora.com/docs/guides/payment_profiles/#retrieve-cards
+      def get_profile_cards(customer_code:)
+        client.get(path: "#{sub_path}/#{customer_code}/cards", api_key: api_key)
+      end
+
+      # Update the card expiry fields for a card in the given profile.
+      #
+      # @param customer_code [String] A unique identifier for the associated payment profile.
+      # @param card_id [Integer] The card id to update.
+      # @param data [Hash] Card data to be sent in the body of the request.
+      #
+      # @return [Hash] Indicating success or failure of the operation.
+      #
+      # @see https://dev.na.bambora.com/docs/guides/payment_profiles/#update-a-card
+      def update_profile_card(customer_code:, card_id:, data:)
+        client.put(path: "#{sub_path}/#{customer_code}/cards/#{card_id}", body: data, api_key: api_key)
+      end
+
+      # Delete a card from the specified payment profile.
+      #
+      # @param customer_code [String] A unique identifier for the associated payment profile.
+      # @param card_id [Integer] The card id to delete.
+      #
+      # @return [Hash] Indicating success or failure of the operation.
+      #
+      # @see https://dev.na.bambora.com/docs/guides/payment_profiles/#delete-a-card
+      def delete_profile_card(customer_code:, card_id:)
+        client.delete(path: "#{@sub_path}/#{customer_code}/cards/#{card_id}", api_key: api_key)
       end
     end
   end
