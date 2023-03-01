@@ -1,3 +1,14 @@
+## Unreleased
+
+- Add `Bambora::V1::PaymentResource#return_payment` method
+- Add `Bambora::V1::PaymentResource#void` method
+- Add `Bambora::V1::PaymentResource#complete_preauth` method
+
+- Add `Bambora::V1::ProfileResource#add_profile_card` method
+- Add `Bambora::V1::ProfileResource#get_profile_cards` method
+- Add `Bambora::V1::ProfileResource#update_profile_card` method
+- Add `Bambora::V1::ProfileResource#delete_profile_card` method
+
 ## 0.5.0 (2023-01-04)
 
 - Updating minimum Ruby version to Ruby 2.6.6
