@@ -2,7 +2,7 @@
 
 - Updating minimum Ruby version to Ruby 2.7.7
 - Add test support for Ruby 3.0
-- Update Faraday to 1.10.3
+- Update Faraday to 2.0.1
 
 ## 0.5.0 (2023-01-04)
 
