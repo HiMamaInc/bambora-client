@@ -13,7 +13,7 @@ module Bambora
     end
 
     def to_h
-      deep_transform_keys_in_object(parser.parse(response.body), &:to_sym)
+      deep_transform_keys_in_object(parser.parse(response.body.to_s), &:to_sym)
     rescue JSON::ParserError
       error_response
     end
@@ -33,8 +33,14 @@ module Bambora
       end
     end
 
+    # Faraday 1.0 fixed a bug where request/response bodies were indistinguishable.
+    # Our tests rely on this behaviour, and perhaps upstream clients do too.
+    # @SEE https://github.com/lostisland/faraday/pull/847
     def error_response
-      { status: response.status, body: response.body }
+      {
+        status: response.status,
+        body: response.body || response.env.request_body,
+      }
     end
 
     def parser
