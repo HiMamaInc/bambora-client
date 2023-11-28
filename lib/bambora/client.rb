@@ -72,6 +72,8 @@ module Bambora
         instance_variable_set("@#{key}", value)
       end
 
+      @sub_merchant_id = 'AllLive' if sub_merchant_id.nil?
+
       yield(self) if block_given?
     end
 
