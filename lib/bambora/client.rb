@@ -72,8 +72,6 @@ module Bambora
         instance_variable_set("@#{key}", value)
       end
 
-      @sub_merchant_id = 'AllLive' if sub_merchant_id.nil?
-
       yield(self) if block_given?
     end
 
@@ -165,7 +163,7 @@ module Bambora
     #
     # @param api_key [String] API key for the bank profiles endpoint.
     #
-    # @return [Bambora::Bank::PaymentProfileResource]
+    # @return [Bambora::Bank::BatchReportResource]
     def batch_reports(api_key:)
       @batch_reports = Bambora::Bank::BatchReportResource.new(
         client: xml_client,
