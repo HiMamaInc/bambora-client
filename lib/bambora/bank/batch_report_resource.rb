@@ -79,14 +79,11 @@ module Bambora
       end
 
       def batch_report_body(request_data)
-        additional_data = {
+        DEFAULT_REQUEST_PARAMS.merge(request_data).merge(
           merchant_id: client.merchant_id,
           pass_code: api_key,
-        }
-
-        params = DEFAULT_REQUEST_PARAMS.merge(additional_data).merge(request_data)
-
-        client.sub_merchant_id.nil? ? params : params.merge(sub_merchant_id: client.sub_merchant_id)
+          sub_merchant_id: client.sub_merchant_id,
+        ).compact
       end
     end
   end
