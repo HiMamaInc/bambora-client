@@ -7,7 +7,7 @@ module Bambora
     describe BatchReportResource do
       subject(:reports) { described_class.new(client: client, api_key: api_key) }
       subject(:reports_without_sub_merchant_id) do
-        described_class.new(client: client_withot_sub_merchant_id, api_key: api_key)
+        described_class.new(client: client_without_sub_merchant_id, api_key: api_key)
       end
 
       let(:api_key) { 'fakekey' }
@@ -99,7 +99,7 @@ module Bambora
         )
       end
 
-      let(:client_withot_sub_merchant_id) do
+      let(:client_without_sub_merchant_id) do
         instance_double(
           'Bambora::Rest::XMLClient',
           merchant_id: merchant_id,
@@ -185,7 +185,7 @@ module Bambora
 
           it 'sends `post` to the client with the correct data where the sub merchant id comes from elements' do
             reports_without_sub_merchant_id.show(request_data_with_rpt_merchant_id)
-            expect(client_withot_sub_merchant_id).to have_received(:post).with(posted_data_with_rpt_merchant_id)
+            expect(client_without_sub_merchant_id).to have_received(:post).with(posted_data_with_rpt_merchant_id)
           end
 
           it 'returns the expected response' do

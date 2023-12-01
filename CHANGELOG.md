@@ -1,3 +1,7 @@
+## Unreleased (2023-12-01)
+
+- Update `BatchReportResource#batch_report_body` to allow `sub merchant id` to be received from `Bambora::Client` or `elements`
+
 ## 0.6.0 (2023-05-02)
 
 - Updating minimum Ruby version to Ruby 2.7.7
