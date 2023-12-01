@@ -83,7 +83,7 @@ module Bambora
           merchant_id: client.merchant_id,
           pass_code: api_key,
           sub_merchant_id: client.sub_merchant_id,
-        )
+        ).compact
       end
     end
   end
