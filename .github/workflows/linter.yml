@@ -18,9 +18,7 @@ jobs:
           ${{ runner.os }}-gem-
     - name: Setup ruby
       uses: ruby/setup-ruby@v1
-    - run: |
-        gem install bundler
-        bundle config path vendor/bundle
-        bundle install --jobs 4 --retry 3
+    - name: Install dependencies
+      run: bundle install
     - name: Rubocop checks
       run: bundle exec rubocop
