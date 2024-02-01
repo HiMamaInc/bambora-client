@@ -12,6 +12,7 @@ require 'gyoku' # XML Builder
 require 'multiparty' # Multipart/mixed requests
 
 require 'bambora/client/version'
+require 'bambora/credentials'
 
 # Adapters
 require 'bambora/adapters/response'
