@@ -16,8 +16,8 @@ module Bambora
           #
           # @params params [Hash]
           def build(params)
-            params.each_with_object({}) do |(key, value), obj|
-              obj[transform_key(key)] = value
+            params.transform_keys do |key|
+              transform_key(key)
             end
           end
 

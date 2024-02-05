@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 3.0
 
 Metrics/ClassLength:
   Enabled: false
@@ -102,4 +102,7 @@ Security/YAMLLoad:
   Enabled: false
 
 Style/RegexpLiteral:
+  Enabled: false
+
+Naming/VariableNumber:
   Enabled: false

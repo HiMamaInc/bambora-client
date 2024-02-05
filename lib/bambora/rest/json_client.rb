@@ -30,7 +30,7 @@ module Bambora
       # @param api_key [String] Indicating the API Key to be used with the request.
       #
       # @return [Hash] Indicating success or failure of the operation.
-      def get(path:, params: nil, api_key:)
+      def get(path:, api_key:, params: nil)
         parse_response_body(
           super(path: path, params: params, headers: build_headers(api_key: api_key)),
         ).to_h
