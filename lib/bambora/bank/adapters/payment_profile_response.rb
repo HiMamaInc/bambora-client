@@ -13,8 +13,8 @@ module Bambora
         end
 
         def to_h
-          parsed_query_string.each_with_object({}) do |(key, val), obj|
-            obj[transform(key)] = val
+          parsed_query_string.transform_keys do |key|
+            transform(key)
           end
         end
 

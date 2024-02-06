@@ -56,16 +56,14 @@ module Bambora
         response = client.post(path: sub_path, body: batch_report_body(report_data))
 
         response = ensure_record_key_exists(response)
-        response = add_messages_to_response(response)
-
-        response
+        add_messages_to_response(response)
       end
 
       private
 
       def ensure_record_key_exists(response)
         # bambora can return null or empty record results, fill it in for consistency
-        response.dig(:response)[:record] = [] if response.dig(:response, :record).nil?
+        response[:response][:record] = [] if response.dig(:response, :record).nil?
 
         response
       end
