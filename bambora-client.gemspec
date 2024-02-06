@@ -6,8 +6,8 @@ require 'bambora/client/version'
 Gem::Specification.new do |spec|
   spec.name          = 'bambora-client'
   spec.version       = Bambora::Client::VERSION
-  spec.authors       = ['Cassidy K']
-  spec.email         = ['hello@cassidy.codes', 'tech@himama.com']
+  spec.authors       = ['HiMama']
+  spec.email         = ['tech@himama.com']
 
   spec.summary       = 'A thread-safe client for the Bambora/Beanstream API.'
   spec.description   = 'The official beanstream-ruby gem is not thread-safe. This thread-safe client works in '\
@@ -40,14 +40,14 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 3.0.5'
 
   spec.add_dependency 'faraday', '~> 2.0.1'
-  spec.add_dependency 'faraday-excon'
-  spec.add_dependency 'faraday-multipart'
+  spec.add_dependency 'faraday-excon', '~> 2.1.0'
+  spec.add_dependency 'faraday-multipart', '~> 1.0.0'
   spec.add_dependency 'gyoku', '~> 1.0'
   spec.add_dependency 'multiparty', '~> 0'
 
   spec.add_development_dependency 'bundler', '~> 2'
-  spec.add_development_dependency 'pry'
-  spec.add_development_dependency 'pry-byebug'
+  spec.add_development_dependency 'pry', '~> 0.14.0'
+  spec.add_development_dependency 'pry-byebug', '~> 3.8.0'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rspec_junit_formatter', '~> 0.4.1'
