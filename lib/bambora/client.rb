@@ -45,6 +45,7 @@ require 'bambora/v1/profile_resource'
 require 'bambora/bank/payment_profile_resource'
 require 'bambora/bank/batch_report_messages'
 require 'bambora/bank/batch_report_resource'
+require 'bambora/v1/reports/merchants'
 
 module Bambora
   ##
