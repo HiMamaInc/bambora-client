@@ -13,6 +13,7 @@ require 'multiparty' # Multipart/mixed requests
 
 require 'bambora/client/version'
 require 'bambora/credentials'
+require 'bambora/errors'
 
 # Adapters
 require 'bambora/adapters/response'
