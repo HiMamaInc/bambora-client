@@ -7,6 +7,8 @@ module Bambora
         def self.get(merchant_id, options = {})
           credentials = options[:credentials]
 
+          raise ArgumentError, "#{self}.get takes an integer argument" unless merchant_id.is_a?(Integer)
+
           response =
             Bambora::Rest::JSONClient
               .new(base_url: 'https://api.na.bambora.com', merchant_id: credentials.merchant_id)

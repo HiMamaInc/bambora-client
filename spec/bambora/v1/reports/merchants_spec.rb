@@ -2,7 +2,85 @@
 
 RSpec.describe Bambora::V1::Reports::Merchants do
   describe '.get' do
-    context 'when the API request is not authenticated' do
+    context 'when passing nil' do
+      it 'raises ArgumentError' do
+        credentials = Bambora::Credentials.new(
+          merchant_id: '372110000',
+          reporting_passcode: '28840CEB9H9D3DFC24A445B7461FD8FG',
+        )
+
+        expect { described_class.get(nil, credentials: credentials) }.to(
+          raise_error(ArgumentError),
+        )
+      end
+    end
+
+    context 'when passing a boolean' do
+      it 'raises ArgumentError' do
+        credentials = Bambora::Credentials.new(
+          merchant_id: '372110000',
+          reporting_passcode: '28840CEB9H9D3DFC24A445B7461FD8FG',
+        )
+
+        expect { described_class.get(true, credentials: credentials) }.to(
+          raise_error(ArgumentError),
+        )
+      end
+    end
+
+    context 'when passing a symbol' do
+      it 'raises ArgumentError' do
+        credentials = Bambora::Credentials.new(
+          merchant_id: '372110000',
+          reporting_passcode: '28840CEB9H9D3DFC24A445B7461FD8FG',
+        )
+
+        expect { described_class.get(:symbol, credentials: credentials) }.to(
+          raise_error(ArgumentError),
+        )
+      end
+    end
+
+    context 'when passing a number (float)' do
+      it 'raises ArgumentError' do
+        credentials = Bambora::Credentials.new(
+          merchant_id: '372110000',
+          reporting_passcode: '28840CEB9H9D3DFC24A445B7461FD8FG',
+        )
+
+        expect { described_class.get(1.0, credentials: credentials) }.to(
+          raise_error(ArgumentError),
+        )
+      end
+    end
+
+    context 'when passing an array' do
+      it 'raises ArgumentError' do
+        credentials = Bambora::Credentials.new(
+          merchant_id: '372110000',
+          reporting_passcode: '28840CEB9H9D3DFC24A445B7461FD8FG',
+        )
+
+        expect { described_class.get([], credentials: credentials) }.to(
+          raise_error(ArgumentError),
+        )
+      end
+    end
+
+    context 'when passing a hash' do
+      it 'raises ArgumentError' do
+        credentials = Bambora::Credentials.new(
+          merchant_id: '372110000',
+          reporting_passcode: '28840CEB9H9D3DFC24A445B7461FD8FG',
+        )
+
+        expect { described_class.get({}, credentials: credentials) }.to(
+          raise_error(ArgumentError),
+        )
+      end
+    end
+
+    context 'when passing a number (integer), but the API request is not authenticated' do
       it 'raises Bambora::InvalidAuthenticationError' do
         WebMock
           .stub_request(:get, 'https://api.na.bambora.com/v1/reports/merchants/372110001')
@@ -34,7 +112,7 @@ RSpec.describe Bambora::V1::Reports::Merchants do
       end
     end
 
-    context 'when the API request is invalid' do
+    context 'when passing a number (integer), but the API request is invalid' do
       it 'raises Bambora::InvalidRequestError' do
         WebMock
           .stub_request(:get, 'https://api.na.bambora.com/v1/reports/merchants/372110001')
@@ -64,7 +142,7 @@ RSpec.describe Bambora::V1::Reports::Merchants do
       end
     end
 
-    context 'when the API request is authenticated and valid' do
+    context 'when passing a number (integer), the API request is authenticated and valid' do
       it 'returns merchant data for the merchant' do
         WebMock
           .stub_request(:get, 'https://api.na.bambora.com/v1/reports/merchants/372110001')
