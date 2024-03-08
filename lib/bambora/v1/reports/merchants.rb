@@ -14,6 +14,8 @@ module Bambora
 
           raise InvalidAuthenticationError, response if response[:message] == 'Authentication failed'
 
+          raise InvalidRequestError, response if response == { Message: 'The request is invalid.' }
+
           response
         end
 
