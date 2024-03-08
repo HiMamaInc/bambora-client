@@ -7,17 +7,27 @@ module Bambora
         def self.get(merchant_id, options = {})
           credentials = options[:credentials]
 
-          Bambora::Rest::JSONClient
-            .new(base_url: 'https://api.na.bambora.com', merchant_id: credentials.merchant_id)
-            .get(path: "/v1/reports/merchants/#{merchant_id}", api_key: credentials.reporting_passcode)
+          response =
+            Bambora::Rest::JSONClient
+              .new(base_url: 'https://api.na.bambora.com', merchant_id: credentials.merchant_id)
+              .get(path: "/v1/reports/merchants/#{merchant_id}", api_key: credentials.reporting_passcode)
+
+          raise InvalidAuthenticationError, response if response[:message] == 'Authentication failed'
+
+          response
         end
 
         def self.get_all(options = {})
           credentials = options[:credentials]
 
-          Bambora::Rest::JSONClient
-            .new(base_url: 'https://api.na.bambora.com', merchant_id: credentials.merchant_id)
-            .get(path: '/v1/reports/merchants', api_key: credentials.reporting_passcode)
+          response =
+            Bambora::Rest::JSONClient
+              .new(base_url: 'https://api.na.bambora.com', merchant_id: credentials.merchant_id)
+              .get(path: '/v1/reports/merchants', api_key: credentials.reporting_passcode)
+
+          raise InvalidAuthenticationError, response if response[:message] == 'Authentication failed'
+
+          response
         end
       end
     end
