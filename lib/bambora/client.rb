@@ -13,6 +13,7 @@ require 'multiparty' # Multipart/mixed requests
 
 require 'bambora/client/version'
 require 'bambora/credentials'
+require 'bambora/errors'
 
 # Adapters
 require 'bambora/adapters/response'
@@ -45,6 +46,7 @@ require 'bambora/v1/profile_resource'
 require 'bambora/bank/payment_profile_resource'
 require 'bambora/bank/batch_report_messages'
 require 'bambora/bank/batch_report_resource'
+require 'bambora/v1/reports/merchants'
 
 module Bambora
   ##
